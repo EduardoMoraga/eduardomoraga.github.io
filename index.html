@@ -503,7 +503,7 @@ footer {
           <span class="chart-title" data-en="LATAM Merchandise Exports as % of GDP" data-es="Exportaciones de Mercancia LATAM como % del PIB">LATAM Merchandise Exports as % of GDP</span>
           <span class="chart-badge">OWID LIVE</span>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/merchandise-exports-gdp-cepii?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
+        <iframe src="https://ourworldindata.org/grapher/merchandise-exports-gdp-cepii?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1"></iframe>
         <div class="float-card c1">
           <div class="fc-label" data-en="Models Deployed" data-es="Modelos Desplegados">Models Deployed</div>
           <div class="fc-value fc-up">12+</div>
@@ -553,28 +553,28 @@ footer {
           <h3 data-en="Global Trade as Share of GDP" data-es="Comercio Global como % del PIB">Global Trade as Share of GDP</h3>
           <div class="owid-desc" data-en="How interconnected is the global economy?" data-es="Que tan interconectada esta la economia global?">How interconnected is the global economy?</div>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/trade-as-share-of-gdp?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA~USA" loading="lazy"></iframe>
+        <iframe src="https://ourworldindata.org/grapher/trade-as-share-of-gdp?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA~USA" loading="lazy" tabindex="-1"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
           <h3 data-en="GDP per Capita — LATAM" data-es="PIB per Capita — LATAM">GDP per Capita — LATAM</h3>
           <div class="owid-desc" data-en="Economic power of our key markets" data-es="Poder economico de nuestros mercados clave">Economic power of our key markets</div>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/gdp-per-capita-worldbank?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
+        <iframe src="https://ourworldindata.org/grapher/gdp-per-capita-worldbank?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
           <h3 data-en="Internet Users — LATAM" data-es="Usuarios de Internet — LATAM">Internet Users — LATAM</h3>
           <div class="owid-desc" data-en="Digital adoption driving e-commerce growth" data-es="Adopcion digital impulsando el crecimiento del e-commerce">Digital adoption driving e-commerce growth</div>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
+        <iframe src="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
           <h3 data-en="AI Research Publications" data-es="Publicaciones de Investigacion en IA">AI Research Publications</h3>
           <div class="owid-desc" data-en="The acceleration of AI across the world" data-es="La aceleracion de la IA en el mundo">The acceleration of AI across the world</div>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/annual-scholarly-publications-on-artificial-intelligence" loading="lazy"></iframe>
+        <iframe src="https://ourworldindata.org/grapher/annual-scholarly-publications-on-artificial-intelligence" loading="lazy" tabindex="-1"></iframe>
       </div>
     </div>
   </div>
@@ -850,6 +850,11 @@ footer {
 </footer>
 
 <script>
+// ── FORCE SCROLL TO TOP ON LOAD ──
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('load', () => window.scrollTo(0, 0));
+window.scrollTo(0, 0);
+
 // ── LANGUAGE TOGGLE ──
 let currentLang = 'en';
 const langToggle = document.getElementById('langToggle');
