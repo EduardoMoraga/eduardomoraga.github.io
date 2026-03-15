@@ -7,7 +7,6 @@
 <meta name="description" content="Eduardo Moraga - Economist, Data Scientist, and AI strategist transforming retail operations across LATAM.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
   --bg: #06090f;
@@ -72,10 +71,25 @@ nav {
 .nav-logo .dot { width:8px; height:8px; border-radius:50%; background:var(--accent);
   box-shadow:0 0 12px var(--accent); animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links { display:flex; gap:28px; list-style:none; align-items:center; }
 .nav-links a { color:var(--text2); font-size:0.85rem; font-weight:500;
   letter-spacing:0.3px; transition:color 0.2s; }
 .nav-links a:hover { color:var(--text); }
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  display:inline-flex; border-radius:20px; overflow:hidden;
+  border:1px solid var(--border2); background:var(--surface);
+  font-size:0.75rem; font-weight:700; cursor:pointer;
+}
+.lang-toggle span {
+  padding:6px 14px; transition:all 0.25s; color:var(--text3);
+  user-select:none;
+}
+.lang-toggle span.active {
+  background:var(--accent); color:var(--bg);
+}
+.lang-toggle span:hover:not(.active) { color:var(--text); }
 
 /* ── HERO ── */
 .hero {
@@ -132,12 +146,13 @@ nav {
 .chart-title { font-size:0.8rem; font-weight:600; color:var(--text2); }
 .chart-badge { font-size:0.7rem; padding:3px 10px; border-radius:12px;
   background:rgba(0,212,170,0.1); color:var(--accent); font-weight:600; }
+.hero-chart-card iframe { width:100%; height:280px; border:none; border-radius:8px; }
 
 /* Floating cards */
 .float-card {
   position:absolute; background:var(--surface2); border:1px solid var(--border);
   border-radius:12px; padding:14px 18px; box-shadow:0 8px 32px rgba(0,0,0,0.3);
-  animation:float 6s ease-in-out infinite;
+  animation:float 6s ease-in-out infinite; z-index:2;
 }
 @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
 .float-card.c1 { top:-20px; right:-20px; animation-delay:0s; }
@@ -183,26 +198,6 @@ section { padding:120px 0; position:relative; z-index:1; }
 .metric-label { font-size:0.8rem; color:var(--text3); margin-top:4px;
   text-transform:uppercase; letter-spacing:1px; font-weight:500; }
 
-/* ── LIVE DATA ── */
-.live-section { background:var(--bg2); border-top:1px solid var(--border); }
-.live-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-.live-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; padding:28px; position:relative; overflow:hidden;
-  transition:all 0.3s;
-}
-.live-card:hover { border-color:var(--accent); transform:translateY(-4px);
-  box-shadow:0 12px 40px rgba(0,0,0,0.3); }
-.live-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg, var(--accent), var(--blue));
-  opacity:0; transition:opacity 0.3s;
-}
-.live-card:hover::before { opacity:1; }
-.live-card h3 { font-size:1rem; font-weight:700; margin-bottom:4px; }
-.live-card .live-source { font-size:0.7rem; color:var(--text3); margin-bottom:16px; }
-.live-card canvas { width:100%!important; }
-
 /* ── OWID EMBEDS ── */
 .owid-section { background:var(--bg); }
 .owid-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -217,6 +212,116 @@ section { padding:120px 0; position:relative; z-index:1; }
 .owid-card h3 { font-size:0.95rem; font-weight:700; margin-bottom:4px; }
 .owid-card .owid-desc { font-size:0.78rem; color:var(--text3); }
 .owid-card iframe { width:100%; height:320px; border:none; }
+
+/* ── CASE STUDY ── */
+.case-study-section { background:var(--bg2); border-top:1px solid var(--border); }
+
+.callout-strip {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+  margin-bottom:56px;
+}
+.callout-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:24px; position:relative;
+  border-left:3px solid var(--accent);
+}
+.callout-box p { font-size:0.9rem; color:var(--text2); line-height:1.6; }
+.callout-box .callout-highlight { color:var(--accent); font-weight:700; }
+
+/* Mall bar chart cards */
+.mall-charts-grid {
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;
+  margin-bottom:56px;
+}
+.mall-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:20px; transition:all 0.3s;
+}
+.mall-card:hover { border-color:var(--accent); }
+.mall-card-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:12px;
+}
+.mall-card-header h4 { font-size:0.95rem; font-weight:700; }
+.mall-peak {
+  font-size:0.7rem; color:var(--accent); font-weight:600;
+  background:var(--accent-glow); padding:3px 10px; border-radius:10px;
+}
+.real-badge {
+  font-size:0.6rem; color:var(--orange); font-weight:700;
+  background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3);
+  padding:2px 8px; border-radius:8px; margin-left:6px;
+}
+.bar-row {
+  display:flex; align-items:center; gap:8px; margin-bottom:5px;
+}
+.bar-label {
+  font-size:0.72rem; color:var(--text3); width:32px; text-align:right;
+  flex-shrink:0; font-weight:600;
+}
+.bar-track {
+  flex:1; height:20px; background:var(--bg3); border-radius:4px;
+  overflow:hidden; position:relative;
+}
+.bar-fill {
+  height:100%; border-radius:4px; transition:width 0.8s ease;
+  display:flex; align-items:center; justify-content:flex-end;
+  padding-right:6px; font-size:0.65rem; font-weight:700;
+  color:rgba(255,255,255,0.9);
+}
+.bar-fill.sat { background:linear-gradient(90deg, var(--accent), #00f5c4); }
+.bar-fill.fri { background:rgba(0,212,170,0.5); }
+.bar-fill.normal { background:rgba(0,212,170,0.25); }
+.bar-fill.low { background:rgba(0,212,170,0.15); color:var(--text3); }
+
+/* Heatmap */
+.heatmap-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; padding:32px; overflow-x:auto;
+  margin-bottom:56px;
+}
+.heatmap-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
+.heatmap-card .hm-desc { font-size:0.8rem; color:var(--text3); margin-bottom:24px; }
+.hm-grid {
+  display:grid; grid-template-columns:150px repeat(12,1fr); gap:3px;
+  font-size:0.72rem;
+}
+.hm-corner { background:transparent; }
+.hm-hour-header { background:var(--bg3); color:var(--text2); font-weight:600;
+  text-align:center; padding:8px 2px; border-radius:6px; font-size:0.68rem; }
+.hm-mall { background:var(--bg3); color:var(--text); font-weight:600;
+  padding:10px 10px; border-radius:6px; display:flex; align-items:center;
+  font-size:0.72rem; }
+.hm-cell {
+  text-align:center; padding:8px 2px; border-radius:6px; font-weight:600;
+  font-size:0.68rem; transition:all 0.2s; cursor:default;
+  position:relative;
+}
+.hm-cell:hover { transform:scale(1.08); z-index:2; }
+.hm-cell .tooltip {
+  display:none; position:absolute; bottom:calc(100% + 6px); left:50%;
+  transform:translateX(-50%); background:var(--bg); border:1px solid var(--border);
+  border-radius:8px; padding:6px 10px; font-size:0.68rem; color:var(--text);
+  white-space:nowrap; z-index:10; pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,0.5);
+}
+.hm-cell:hover .tooltip { display:block; }
+
+/* Findings boxes */
+.findings-grid {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+}
+.finding-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:24px; text-align:center;
+}
+.finding-box .finding-icon {
+  font-size:1.8rem; margin-bottom:12px; color:var(--accent);
+}
+.finding-box p { font-size:0.88rem; color:var(--text2); line-height:1.6; }
+.finding-box .finding-stat {
+  font-size:1.6rem; font-weight:900; color:var(--accent); margin-bottom:8px;
+}
 
 /* ── PROJECTS ── */
 .projects-grid {
@@ -246,29 +351,6 @@ section { padding:120px 0; position:relative; z-index:1; }
   background:rgba(0,212,170,0.08); color:var(--accent); border:1px solid rgba(0,212,170,0.15);
 }
 
-/* ── HEATMAP DEMO ── */
-.heatmap-section { background:var(--bg2); border-top:1px solid var(--border); }
-.heatmap-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; padding:32px; overflow-x:auto;
-}
-.heatmap-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
-.heatmap-card .hm-desc { font-size:0.8rem; color:var(--text3); margin-bottom:24px; }
-.hm-grid {
-  display:grid; grid-template-columns:140px repeat(7,1fr); gap:3px;
-  font-size:0.78rem;
-}
-.hm-corner { background:transparent; }
-.hm-day-header { background:var(--bg3); color:var(--text2); font-weight:600;
-  text-align:center; padding:8px 4px; border-radius:6px; font-size:0.72rem; }
-.hm-mall { background:var(--bg3); color:var(--text); font-weight:600;
-  padding:10px 12px; border-radius:6px; display:flex; align-items:center; }
-.hm-cell {
-  text-align:center; padding:10px 4px; border-radius:6px; font-weight:600;
-  font-size:0.75rem; transition:all 0.2s; cursor:default;
-}
-.hm-cell:hover { transform:scale(1.05); }
-
 /* ── ARTICLES ── */
 .articles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .article-card {
@@ -290,6 +372,25 @@ section { padding:120px 0; position:relative; z-index:1; }
   font-size:0.72rem; color:var(--accent); font-weight:500;
   text-transform:uppercase; letter-spacing:0.5px;
 }
+
+/* ── REFERENCES ── */
+.references-section { background:var(--bg); }
+.references-grid {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+}
+.ref-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:24px; transition:all 0.3s;
+  display:block;
+}
+.ref-card:hover { border-color:var(--accent); transform:translateY(-4px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+.ref-card .ref-icon {
+  font-size:1.6rem; color:var(--accent); margin-bottom:14px;
+}
+.ref-card h4 { font-size:0.95rem; font-weight:700; margin-bottom:8px;
+  color:var(--text); line-height:1.4; }
+.ref-card p { font-size:0.82rem; color:var(--text3); line-height:1.6; }
 
 /* ── SKILLS ── */
 .skills-section { background:var(--bg2); border-top:1px solid var(--border); }
@@ -338,16 +439,21 @@ footer {
   .hero-visual { display:none; }
   .hero h1 { font-size:2.8rem; }
   .metrics-grid { grid-template-columns:repeat(2,1fr); }
-  .owid-grid, .projects-grid, .live-grid { grid-template-columns:1fr; }
+  .owid-grid, .projects-grid, .mall-charts-grid { grid-template-columns:1fr; }
   .articles-grid { grid-template-columns:1fr 1fr; }
   .skills-cols { grid-template-columns:1fr 1fr; }
+  .callout-strip { grid-template-columns:1fr; }
+  .findings-grid { grid-template-columns:1fr; }
+  .references-grid { grid-template-columns:1fr 1fr; }
+  .hm-grid { font-size:0.6rem; }
 }
 @media (max-width:640px) {
   .hero h1 { font-size:2.2rem; }
   .section-title { font-size:1.8rem; }
-  .articles-grid, .skills-cols { grid-template-columns:1fr; }
+  .articles-grid, .skills-cols, .references-grid { grid-template-columns:1fr; }
   .nav-links { display:none; }
   .footer-inner { flex-direction:column; gap:24px; text-align:center; }
+  .mall-charts-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -358,11 +464,17 @@ footer {
   <div class="nav-inner">
     <div class="nav-logo"><div class="dot"></div> Eduardo Moraga</div>
     <ul class="nav-links">
-      <li><a href="#data">Live Data</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#showcase">Showcase</a></li>
-      <li><a href="#articles">Articles</a></li>
+      <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
+      <li><a href="#showcase" data-en="Case Study" data-es="Caso de Estudio">Case Study</a></li>
+      <li><a href="#articles" data-en="Articles" data-es="Articulos">Articles</a></li>
+      <li><a href="#references" data-en="Research" data-es="Investigacion">Research</a></li>
       <li><a href="https://github.com/EduardoMoraga" target="_blank">GitHub</a></li>
+      <li>
+        <div class="lang-toggle" id="langToggle">
+          <span class="active" data-lang="en">EN</span>
+          <span data-lang="es">ES</span>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
@@ -372,30 +484,35 @@ footer {
   <div class="grid-bg"></div>
   <div class="container">
     <div class="hero-left">
-      <div class="hero-tag"><span class="pulse-dot"></span> Open to collaborate</div>
-      <h1>Turning retail<br>chaos into<br><span class="gradient">data-driven</span><br>decisions.</h1>
-      <p class="hero-desc">Economist. Data Scientist. AI strategist. I build ML models, AI agents, and BI systems that transform how trade marketing agencies operate across Latin America.</p>
+      <div class="hero-tag"><span class="pulse-dot"></span> <span data-en="Open to collaborate" data-es="Abierto a colaborar">Open to collaborate</span></div>
+      <h1>
+        <span data-en="Turning retail" data-es="Convirtiendo el caos">Turning retail</span><br>
+        <span data-en="chaos into" data-es="del retail en">chaos into</span><br>
+        <span class="gradient" data-en="data-driven" data-es="decisiones">data-driven</span><br>
+        <span data-en="decisions." data-es="basadas en datos.">decisions.</span>
+      </h1>
+      <p class="hero-desc" data-en="Economist. Data Scientist. AI strategist. I build ML models, AI agents, and BI systems that transform how trade marketing agencies operate across Latin America." data-es="Economista. Data Scientist. Estratega de IA. Construyo modelos ML, agentes IA y sistemas de BI que transforman la operacion de agencias de trade marketing en America Latina.">Economist. Data Scientist. AI strategist. I build ML models, AI agents, and BI systems that transform how trade marketing agencies operate across Latin America.</p>
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary"><i class="fab fa-github"></i> Explore Projects</a>
-        <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" class="btn btn-ghost"><i class="fab fa-linkedin"></i> Connect</a>
+        <a href="#projects" class="btn btn-primary"><i class="fab fa-github"></i> <span data-en="Explore Projects" data-es="Explorar Proyectos">Explore Projects</span></a>
+        <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" class="btn btn-ghost"><i class="fab fa-linkedin"></i> <span data-en="Connect" data-es="Conectar">Connect</span></a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-chart-card">
         <div class="chart-header">
-          <span class="chart-title">LATAM Retail E-Commerce Growth</span>
-          <span class="chart-badge">LIVE DATA</span>
+          <span class="chart-title" data-en="LATAM Merchandise Exports as % of GDP" data-es="Exportaciones de Mercancia LATAM como % del PIB">LATAM Merchandise Exports as % of GDP</span>
+          <span class="chart-badge">OWID LIVE</span>
         </div>
-        <canvas id="heroChart" height="220"></canvas>
+        <iframe src="https://ourworldindata.org/grapher/merchandise-exports-gdp-cepii?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
         <div class="float-card c1">
-          <div class="fc-label">Models Deployed</div>
+          <div class="fc-label" data-en="Models Deployed" data-es="Modelos Desplegados">Models Deployed</div>
           <div class="fc-value fc-up">12+</div>
-          <div class="fc-change fc-up">across 4 countries</div>
+          <div class="fc-change fc-up" data-en="across 4 countries" data-es="en 4 paises">across 4 countries</div>
         </div>
         <div class="float-card c2">
-          <div class="fc-label">Automation</div>
+          <div class="fc-label" data-en="Automation" data-es="Automatizacion">Automation</div>
           <div class="fc-value fc-purple">85%</div>
-          <div class="fc-change" style="color:var(--purple)">report time saved</div>
+          <div class="fc-change" style="color:var(--purple)" data-en="report time saved" data-es="ahorro en reportes">report time saved</div>
         </div>
       </div>
     </div>
@@ -407,86 +524,55 @@ footer {
   <div class="metrics-grid">
     <div class="metric-item reveal">
       <div class="metric-number" data-target="12">0</div>
-      <div class="metric-label">Years in Trade Marketing</div>
+      <div class="metric-label" data-en="Years in Trade Marketing" data-es="Anos en Trade Marketing">Years in Trade Marketing</div>
     </div>
     <div class="metric-item reveal">
       <div class="metric-number" data-target="17">0</div>
-      <div class="metric-label">Published Articles</div>
+      <div class="metric-label" data-en="Published Articles" data-es="Articulos Publicados">Published Articles</div>
     </div>
     <div class="metric-item reveal">
       <div class="metric-number" data-target="4">0</div>
-      <div class="metric-label">LATAM Countries</div>
+      <div class="metric-label" data-en="LATAM Countries" data-es="Paises LATAM">LATAM Countries</div>
     </div>
     <div class="metric-item reveal">
       <div class="metric-number" data-target="10">0</div>
-      <div class="metric-label">Open Source Projects</div>
+      <div class="metric-label" data-en="Open Source Projects" data-es="Proyectos Open Source">Open Source Projects</div>
     </div>
   </div>
 </div>
 
-<!-- LIVE DATA CHARTS -->
-<section id="data" class="live-section">
-  <div class="container">
-    <div class="section-label reveal">Real-time insights</div>
-    <h2 class="section-title reveal">Data that tells a story.</h2>
-    <p class="section-desc reveal">Interactive visualizations built with real datasets — the same approach I use to drive decisions in trade marketing operations.</p>
-    <div class="live-grid">
-      <div class="live-card reveal">
-        <h3>Market Basket: Product Associations</h3>
-        <div class="live-source">Source: 38K+ supermarket transactions</div>
-        <canvas id="basketChart" height="260"></canvas>
-      </div>
-      <div class="live-card reveal">
-        <h3>Employee Attrition: Risk Factors</h3>
-        <div class="live-source">Source: 15K employee records | AUC-ROC: 0.99</div>
-        <canvas id="attritionChart" height="260"></canvas>
-      </div>
-      <div class="live-card reveal">
-        <h3>Customer Segments: Profile Analysis</h3>
-        <div class="live-source">Source: Clustering with K-Means (K=5)</div>
-        <canvas id="clusterChart" height="260"></canvas>
-      </div>
-      <div class="live-card reveal">
-        <h3>AMZN Stock: Volatility & Returns</h3>
-        <div class="live-source">Source: 252 trading days (2021-2022)</div>
-        <canvas id="stockChart" height="260"></canvas>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- OUR WORLD IN DATA -->
 <section class="owid-section">
   <div class="container">
-    <div class="section-label reveal">Global Context</div>
-    <h2 class="section-title reveal">The macro view matters.</h2>
-    <p class="section-desc reveal">Understanding global trade flows and economic shifts is essential for strategic decisions in retail. These live charts from Our World in Data provide the context.</p>
+    <div class="section-label reveal" data-en="Global Context" data-es="Contexto Global">Global Context</div>
+    <h2 class="section-title reveal" data-en="The macro view matters." data-es="La vision macro importa.">The macro view matters.</h2>
+    <p class="section-desc reveal" data-en="Understanding global trade flows and economic shifts is essential for strategic decisions in retail. These live charts from Our World in Data provide the context." data-es="Entender los flujos comerciales globales y los cambios economicos es esencial para decisiones estrategicas en retail. Estos graficos en vivo de Our World in Data proveen el contexto.">Understanding global trade flows and economic shifts is essential for strategic decisions in retail. These live charts from Our World in Data provide the context.</p>
     <div class="owid-grid">
       <div class="owid-card reveal">
         <div class="owid-header">
-          <h3>Global Trade as Share of GDP</h3>
-          <div class="owid-desc">How interconnected is the global economy?</div>
+          <h3 data-en="Global Trade as Share of GDP" data-es="Comercio Global como % del PIB">Global Trade as Share of GDP</h3>
+          <div class="owid-desc" data-en="How interconnected is the global economy?" data-es="Que tan interconectada esta la economia global?">How interconnected is the global economy?</div>
         </div>
         <iframe src="https://ourworldindata.org/grapher/trade-as-share-of-gdp?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA~USA" loading="lazy"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
-          <h3>GDP per Capita — LATAM</h3>
-          <div class="owid-desc">Economic power of our key markets</div>
+          <h3 data-en="GDP per Capita — LATAM" data-es="PIB per Capita — LATAM">GDP per Capita — LATAM</h3>
+          <div class="owid-desc" data-en="Economic power of our key markets" data-es="Poder economico de nuestros mercados clave">Economic power of our key markets</div>
         </div>
         <iframe src="https://ourworldindata.org/grapher/gdp-per-capita-worldbank?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
-          <h3>Internet Users — LATAM</h3>
-          <div class="owid-desc">Digital adoption driving e-commerce growth</div>
+          <h3 data-en="Internet Users — LATAM" data-es="Usuarios de Internet — LATAM">Internet Users — LATAM</h3>
+          <div class="owid-desc" data-en="Digital adoption driving e-commerce growth" data-es="Adopcion digital impulsando el crecimiento del e-commerce">Digital adoption driving e-commerce growth</div>
         </div>
         <iframe src="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy"></iframe>
       </div>
       <div class="owid-card reveal">
         <div class="owid-header">
-          <h3>AI Research Publications</h3>
-          <div class="owid-desc">The acceleration of AI across the world</div>
+          <h3 data-en="AI Research Publications" data-es="Publicaciones de Investigacion en IA">AI Research Publications</h3>
+          <div class="owid-desc" data-en="The acceleration of AI across the world" data-es="La aceleracion de la IA en el mundo">The acceleration of AI across the world</div>
         </div>
         <iframe src="https://ourworldindata.org/grapher/annual-scholarly-publications-on-artificial-intelligence" loading="lazy"></iframe>
       </div>
@@ -494,66 +580,57 @@ footer {
   </div>
 </section>
 
-<!-- SHOWCASE: HEATMAP -->
-<section id="showcase" class="heatmap-section">
+<!-- CASE STUDY: MALL TRAFFIC -->
+<section id="showcase" class="case-study-section">
   <div class="container">
-    <div class="section-label reveal">Case Study</div>
-    <h2 class="section-title reveal">Optimizing field operations<br>with real data.</h2>
-    <p class="section-desc reveal">Mall traffic heatmap built for a trade marketing bid in Chile — using Google Maps API data to optimize promoter schedules. Saturday 15-18h generates 3-5x more impact.</p>
+    <div class="section-label reveal" data-en="Case Study" data-es="Caso de Estudio">Case Study</div>
+    <h2 class="section-title reveal" data-en="Optimizing field operations with real data." data-es="Optimizando operaciones de campo con datos reales.">Optimizing field operations with real data.</h2>
+    <p class="section-desc reveal" data-en="Mall traffic analysis built for a trade marketing bid in Chile — using Google Maps API data to optimize promoter schedules across 10 malls." data-es="Analisis de trafico en malls construido para una licitacion de trade marketing en Chile — usando datos de Google Maps API para optimizar agendas de promotores en 10 malls.">Mall traffic analysis built for a trade marketing bid in Chile — using Google Maps API data to optimize promoter schedules across 10 malls.</p>
+
+    <!-- Callout Strip -->
+    <div class="callout-strip reveal">
+      <div class="callout-box">
+        <p data-en="In <span class='callout-highlight'>ALL 10 malls</span> analyzed, Saturday is peak day — with traffic peaking between <span class='callout-highlight'>15:00-18:00h</span>" data-es="En los <span class='callout-highlight'>10 malls</span> analizados, el sabado es el dia peak — con trafico maximo entre las <span class='callout-highlight'>15:00-18:00h</span>">In <span class="callout-highlight">ALL 10 malls</span> analyzed, Saturday is peak day — with traffic peaking between <span class="callout-highlight">15:00-18:00h</span></p>
+      </div>
+      <div class="callout-box">
+        <p data-en="A promoter at <span class='callout-highlight'>Parque Arauco on Saturday 15-18h</span> generates 3-5x more impact than the same promoter on Tuesday at 11h" data-es="Un promotor en <span class='callout-highlight'>Parque Arauco un sabado 15-18h</span> genera 3-5x mas impacto que el mismo promotor un martes a las 11h">A promoter at <span class="callout-highlight">Parque Arauco on Saturday 15-18h</span> generates 3-5x more impact than the same promoter on Tuesday at 11h</p>
+      </div>
+      <div class="callout-box">
+        <p data-en="<span class='callout-highlight'>Smart schedule assignment</span> is a direct competitive advantage" data-es="La <span class='callout-highlight'>asignacion inteligente de turnos</span> es una ventaja competitiva directa"><span class="callout-highlight">Smart schedule assignment</span> is a direct competitive advantage</p>
+      </div>
+    </div>
+
+    <!-- 10 Mall Bar Charts -->
+    <h3 class="reveal" style="font-size:1.2rem; margin-bottom:24px;" data-en="Weekly Traffic by Mall (Relative Index, Saturday = 100)" data-es="Trafico Semanal por Mall (Indice Relativo, Sabado = 100)">Weekly Traffic by Mall (Relative Index, Saturday = 100)</h3>
+    <div class="mall-charts-grid" id="mallChartsGrid">
+      <!-- Generated by JS -->
+    </div>
+
+    <!-- Saturday Hourly Heatmap -->
     <div class="heatmap-card reveal">
-      <h3>Weekly Traffic Heatmap — Top Malls Chile</h3>
-      <div class="hm-desc">Relative foot traffic intensity by day. Used to optimize promoter coverage for Versuni Chile.</div>
-      <div class="hm-grid">
-        <div class="hm-corner"></div>
-        <div class="hm-day-header">Mon</div><div class="hm-day-header">Tue</div>
-        <div class="hm-day-header">Wed</div><div class="hm-day-header">Thu</div>
-        <div class="hm-day-header">Fri</div><div class="hm-day-header" style="color:var(--accent);">Sat</div>
-        <div class="hm-day-header">Sun</div>
+      <h3 data-en="Saturday Hourly Heatmap — All 10 Malls" data-es="Mapa de Calor Horario Sabado — Los 10 Malls">Saturday Hourly Heatmap — All 10 Malls</h3>
+      <div class="hm-desc" data-en="Traffic intensity by hour on Saturdays (10:00-21:00). Peak window highlighted." data-es="Intensidad de trafico por hora los sabados (10:00-21:00). Ventana peak resaltada.">Traffic intensity by hour on Saturdays (10:00-21:00). Peak window highlighted.</div>
+      <div class="hm-grid" id="heatmapGrid">
+        <!-- Generated by JS -->
+      </div>
+    </div>
 
-        <div class="hm-mall">Parque Arauco</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.15)">76</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.15)">76</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.2)">79</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.15)">76</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.35)">89</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.6);color:#fff;font-weight:800">100</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.12)">70</div>
-
-        <div class="hm-mall">Costanera Center</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.14)">75</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.14)">75</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.2)">79</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.14)">75</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.38)">90</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.6);color:#fff;font-weight:800">100</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.1)">68</div>
-
-        <div class="hm-mall">Plaza Vespucio</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.12)">73</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.12)">73</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.18)">78</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.12)">73</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.35)">89</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.6);color:#fff;font-weight:800">100</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.11)">69</div>
-
-        <div class="hm-mall">Mall Plaza Egana</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.13)">74</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.13)">74</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.19)">78</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.13)">74</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.36)">90</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.6);color:#fff;font-weight:800">100</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.1)">67</div>
-
-        <div class="hm-mall">Mall del Centro</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.17)">78</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.17)">78</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.22)">81</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.17)">78</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.32)">87</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.6);color:#fff;font-weight:800">100</div>
-        <div class="hm-cell" style="background:rgba(0,212,170,0.09)">65</div>
+    <!-- Key Findings -->
+    <div class="findings-grid reveal">
+      <div class="finding-box">
+        <div class="finding-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="finding-stat">30-43%</div>
+        <p data-en="Saturday traffic is 30-43% higher than Thursday (weakest day)" data-es="El trafico del sabado es 30-43% mayor que el jueves (dia mas debil)">Saturday traffic is 30-43% higher than Thursday (weakest day)</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-icon"><i class="fas fa-bullseye"></i></div>
+        <div class="finding-stat">15:00-18:00</div>
+        <p data-en="Peak window represents the highest ROI for promoter placement" data-es="La ventana peak representa el mayor ROI para ubicacion de promotores">Peak window represents the highest ROI for promoter placement</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-icon"><i class="fas fa-database"></i></div>
+        <div class="finding-stat">API + Cal</div>
+        <p data-en="Data source: Google Maps Places API + Chilean retail pattern calibration" data-es="Fuente: Google Maps Places API + calibracion de patrones retail chilenos">Data source: Google Maps Places API + Chilean retail pattern calibration</p>
       </div>
     </div>
   </div>
@@ -562,15 +639,15 @@ footer {
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Built with real data.<br>Designed for real decisions.</h2>
-    <p class="section-desc reveal">Each project solves a real business problem — from retail analytics to HR retention to financial forecasting.</p>
+    <div class="section-label reveal" data-en="Portfolio" data-es="Portafolio">Portfolio</div>
+    <h2 class="section-title reveal" data-en="Built with real data." data-es="Construido con datos reales.">Built with real data.<br><span data-en="Designed for real decisions." data-es="Disenado para decisiones reales.">Designed for real decisions.</span></h2>
+    <p class="section-desc reveal" data-en="Each project solves a real business problem — from retail analytics to HR retention to financial forecasting." data-es="Cada proyecto resuelve un problema de negocio real — desde analitica retail hasta retencion de RRHH y pronosticos financieros.">Each project solves a real business problem — from retail analytics to HR retention to financial forecasting.</p>
     <div class="projects-grid">
       <a href="https://github.com/EduardoMoraga/market-basket-analysis" target="_blank" class="project-card reveal">
         <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/market-basket-analysis/master/outputs/figures/network_graph.png" alt="Market Basket">
         <div class="project-body">
-          <h3>Market Basket Analysis <span class="arrow">-></span></h3>
-          <p>Association rule mining on 38K+ supermarket transactions. Apriori & FP-Growth algorithms revealing which products drive cross-purchases.</p>
+          <h3><span data-en="Market Basket Analysis" data-es="Analisis de Canasta de Compra">Market Basket Analysis</span> <span class="arrow">-></span></h3>
+          <p data-en="Association rule mining on 38K+ supermarket transactions. Apriori & FP-Growth algorithms revealing which products drive cross-purchases." data-es="Mineria de reglas de asociacion en 38K+ transacciones de supermercado. Algoritmos Apriori y FP-Growth revelando que productos impulsan compras cruzadas.">Association rule mining on 38K+ supermarket transactions. Apriori & FP-Growth algorithms revealing which products drive cross-purchases.</p>
           <div class="project-tags">
             <span class="tag-pill">Apriori</span><span class="tag-pill">FP-Growth</span><span class="tag-pill">NetworkX</span><span class="tag-pill">Trade Marketing</span>
           </div>
@@ -579,8 +656,8 @@ footer {
       <a href="https://github.com/EduardoMoraga/employee-attrition-predictor" target="_blank" class="project-card reveal">
         <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/employee-attrition-predictor/master/outputs/figures/model_evaluation.png" alt="Attrition">
         <div class="project-body">
-          <h3>Employee Attrition Predictor <span class="arrow">-></span></h3>
-          <p>XGBoost model achieving 0.99 AUC-ROC on 15K employee records. SHAP explanations make every prediction transparent for HR teams.</p>
+          <h3><span data-en="Employee Attrition Predictor" data-es="Predictor de Desercion Laboral">Employee Attrition Predictor</span> <span class="arrow">-></span></h3>
+          <p data-en="XGBoost model achieving 0.99 AUC-ROC on 15K employee records. SHAP explanations make every prediction transparent for HR teams." data-es="Modelo XGBoost con 0.99 AUC-ROC en 15K registros de empleados. Explicaciones SHAP hacen cada prediccion transparente para equipos de RRHH.">XGBoost model achieving 0.99 AUC-ROC on 15K employee records. SHAP explanations make every prediction transparent for HR teams.</p>
           <div class="project-tags">
             <span class="tag-pill">XGBoost</span><span class="tag-pill">SHAP</span><span class="tag-pill">HR Analytics</span>
           </div>
@@ -589,8 +666,8 @@ footer {
       <a href="https://github.com/EduardoMoraga/customer-segmentation" target="_blank" class="project-card reveal">
         <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/customer-segmentation/master/outputs/figures/clusters_visualization.png" alt="Clustering">
         <div class="project-body">
-          <h3>Customer Segmentation <span class="arrow">-></span></h3>
-          <p>K-Means & DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment based on purchase behavior.</p>
+          <h3><span data-en="Customer Segmentation" data-es="Segmentacion de Clientes">Customer Segmentation</span> <span class="arrow">-></span></h3>
+          <p data-en="K-Means & DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment based on purchase behavior." data-es="Clustering K-Means y DBSCAN con optimizacion de silueta. Recomendaciones de estrategia comercial por segmento basadas en comportamiento de compra.">K-Means & DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment based on purchase behavior.</p>
           <div class="project-tags">
             <span class="tag-pill">K-Means</span><span class="tag-pill">DBSCAN</span><span class="tag-pill">PCA</span><span class="tag-pill">Strategy</span>
           </div>
@@ -599,8 +676,8 @@ footer {
       <a href="https://github.com/EduardoMoraga/stock-price-forecasting" target="_blank" class="project-card reveal">
         <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/stock-price-forecasting/master/outputs/figures/eda_timeseries.png" alt="Forecasting">
         <div class="project-body">
-          <h3>Stock Price Forecasting <span class="arrow">-></span></h3>
-          <p>Comparing ARIMA, Prophet, and LSTM on Amazon stock data. Full time series decomposition, stationarity testing, and model benchmarking.</p>
+          <h3><span data-en="Stock Price Forecasting" data-es="Pronostico de Precios de Acciones">Stock Price Forecasting</span> <span class="arrow">-></span></h3>
+          <p data-en="Comparing ARIMA, Prophet, and LSTM on Amazon stock data. Full time series decomposition, stationarity testing, and model benchmarking." data-es="Comparando ARIMA, Prophet y LSTM con datos de acciones de Amazon. Descomposicion completa de series de tiempo, pruebas de estacionariedad y benchmarking de modelos.">Comparing ARIMA, Prophet, and LSTM on Amazon stock data. Full time series decomposition, stationarity testing, and model benchmarking.</p>
           <div class="project-tags">
             <span class="tag-pill">ARIMA</span><span class="tag-pill">Prophet</span><span class="tag-pill">LSTM</span><span class="tag-pill">TensorFlow</span>
           </div>
@@ -613,9 +690,9 @@ footer {
 <!-- ARTICLES -->
 <section id="articles" style="background:var(--bg2); border-top:1px solid var(--border);">
   <div class="container">
-    <div class="section-label reveal">Published Work</div>
-    <h2 class="section-title reveal">Ideas worth sharing.</h2>
-    <p class="section-desc reveal">Writing about behavioral economics, the human side of data, and the future of trade marketing at America Retail.</p>
+    <div class="section-label reveal" data-en="Published Work" data-es="Trabajo Publicado">Published Work</div>
+    <h2 class="section-title reveal" data-en="Ideas worth sharing." data-es="Ideas que vale la pena compartir.">Ideas worth sharing.</h2>
+    <p class="section-desc reveal" data-en="Writing about behavioral economics, the human side of data, and the future of trade marketing at America Retail." data-es="Escribiendo sobre economia conductual, el lado humano de los datos y el futuro del trade marketing en America Retail.">Writing about behavioral economics, the human side of data, and the future of trade marketing at America Retail.</p>
     <div class="articles-grid">
       <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
         <div class="article-num">01</div>
@@ -666,11 +743,52 @@ footer {
   </div>
 </section>
 
+<!-- RESEARCH & REFERENCES -->
+<section id="references" class="references-section">
+  <div class="container">
+    <div class="section-label reveal" data-en="Research & References" data-es="Investigacion y Referencias">Research & References</div>
+    <h2 class="section-title reveal" data-en="Built on academic foundations." data-es="Construido sobre bases academicas.">Built on academic foundations.</h2>
+    <p class="section-desc reveal" data-en="The methodologies behind every project are rooted in peer-reviewed research. Explore the academic landscape." data-es="Las metodologias detras de cada proyecto estan basadas en investigacion revisada por pares. Explora el panorama academico.">The methodologies behind every project are rooted in peer-reviewed research. Explore the academic landscape.</p>
+    <div class="references-grid">
+      <a href="https://scholar.google.com/scholar?q=retail+customer+behavior+analytics" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="Retail Customer Behavior Analytics" data-es="Analitica de Comportamiento del Cliente Retail">Retail Customer Behavior Analytics</h4>
+        <p data-en="Research on understanding shopping patterns, purchase drivers, and in-store behavior through data analysis and machine learning." data-es="Investigacion sobre patrones de compra, impulsores de compra y comportamiento en tienda mediante analisis de datos y machine learning.">Research on understanding shopping patterns, purchase drivers, and in-store behavior through data analysis and machine learning.</p>
+      </a>
+      <a href="https://scholar.google.com/scholar?q=market+basket+analysis+association+rules+retail" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="Market Basket Analysis Association Rules" data-es="Reglas de Asociacion en Analisis de Canasta">Market Basket Analysis Association Rules</h4>
+        <p data-en="Academic work on association rule mining algorithms like Apriori and FP-Growth for discovering product purchase relationships." data-es="Trabajo academico sobre algoritmos de mineria de reglas de asociacion como Apriori y FP-Growth para descubrir relaciones de compra entre productos.">Academic work on association rule mining algorithms like Apriori and FP-Growth for discovering product purchase relationships.</p>
+      </a>
+      <a href="https://scholar.google.com/scholar?q=AI+agents+trade+marketing+retail+optimization" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="AI Agents Applied to Trade Marketing" data-es="Agentes de IA Aplicados al Trade Marketing">AI Agents Applied to Trade Marketing</h4>
+        <p data-en="Emerging research on autonomous AI agents for retail optimization, field operations scheduling, and trade marketing automation." data-es="Investigacion emergente sobre agentes autonomos de IA para optimizacion retail, agendamiento de operaciones de campo y automatizacion de trade marketing.">Emerging research on autonomous AI agents for retail optimization, field operations scheduling, and trade marketing automation.</p>
+      </a>
+      <a href="https://scholar.google.com/scholar?q=employee+attrition+prediction+machine+learning" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="Employee Attrition Machine Learning" data-es="Machine Learning para Desercion Laboral">Employee Attrition Machine Learning</h4>
+        <p data-en="Studies on predicting employee turnover using gradient boosting, random forests, and explainable AI techniques like SHAP." data-es="Estudios sobre prediccion de rotacion de empleados usando gradient boosting, random forests y tecnicas de IA explicable como SHAP.">Studies on predicting employee turnover using gradient boosting, random forests, and explainable AI techniques like SHAP.</p>
+      </a>
+      <a href="https://scholar.google.com/scholar?q=customer+segmentation+clustering+retail" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="Customer Segmentation Clustering" data-es="Segmentacion de Clientes por Clustering">Customer Segmentation Clustering</h4>
+        <p data-en="Research on K-Means, DBSCAN, and hierarchical clustering methods for identifying distinct customer groups in retail." data-es="Investigacion sobre metodos K-Means, DBSCAN y clustering jerarquico para identificar grupos distintos de clientes en retail.">Research on K-Means, DBSCAN, and hierarchical clustering methods for identifying distinct customer groups in retail.</p>
+      </a>
+      <a href="https://scholar.google.com/scholar?q=time+series+forecasting+retail+demand" target="_blank" class="ref-card reveal">
+        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h4 data-en="Time Series Forecasting Retail" data-es="Pronostico de Series de Tiempo en Retail">Time Series Forecasting Retail</h4>
+        <p data-en="Academic foundations for ARIMA, Prophet, and LSTM approaches to demand forecasting and inventory optimization in retail." data-es="Bases academicas para enfoques ARIMA, Prophet y LSTM en pronostico de demanda y optimizacion de inventario en retail.">Academic foundations for ARIMA, Prophet, and LSTM approaches to demand forecasting and inventory optimization in retail.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section class="skills-section">
   <div class="container">
-    <div class="section-label reveal">Toolkit</div>
-    <h2 class="section-title reveal">Full-stack data professional.</h2>
+    <div class="section-label reveal" data-en="Toolkit" data-es="Herramientas">Toolkit</div>
+    <h2 class="section-title reveal" data-en="Full-stack data professional." data-es="Profesional de datos full-stack.">Full-stack data professional.</h2>
     <div class="skills-cols" style="margin-top:48px;">
       <div class="skill-col reveal">
         <h4>Data Science & ML</h4>
@@ -720,7 +838,7 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-quote">
-      "<span>The last mile of data is not a dashboard</span> — it's a decision."
+      "<span data-en="The last mile of data is not a dashboard" data-es="La ultima milla de los datos no es un dashboard">The last mile of data is not a dashboard</span> — <span data-en="it's a decision." data-es="es una decision.">it's a decision.</span>"
     </div>
     <div class="footer-links">
       <a href="https://github.com/EduardoMoraga" target="_blank"><i class="fab fa-github"></i></a>
@@ -728,10 +846,25 @@ footer {
       <a href="mailto:eduardo.moraga.o@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
-  <div class="footer-copy container">Eduardo Moraga &copy; 2025 — Built with data, designed with purpose.</div>
+  <div class="footer-copy container">Eduardo Moraga &copy; 2025 — <span data-en="Built with data, designed with purpose." data-es="Construido con datos, disenado con proposito.">Built with data, designed with purpose.</span></div>
 </footer>
 
 <script>
+// ── LANGUAGE TOGGLE ──
+let currentLang = 'en';
+const langToggle = document.getElementById('langToggle');
+langToggle.addEventListener('click', function(e) {
+  const span = e.target.closest('span[data-lang]');
+  if (!span || span.dataset.lang === currentLang) return;
+  currentLang = span.dataset.lang;
+  langToggle.querySelectorAll('span').forEach(s => s.classList.remove('active'));
+  span.classList.add('active');
+  document.querySelectorAll('[data-en][data-es]').forEach(el => {
+    const text = el.getAttribute('data-' + currentLang);
+    if (text) el.innerHTML = text;
+  });
+});
+
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
@@ -757,119 +890,90 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold:0.5 });
 document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
-// ── HERO CHART ──
-new Chart(document.getElementById('heroChart'), {
-  type:'line',
-  data:{
-    labels:['2018','2019','2020','2021','2022','2023','2024','2025'],
-    datasets:[
-      { label:'Chile', data:[6.2,7.1,10.5,13.2,14.8,15.9,17.2,19.0],
-        borderColor:'#00d4aa', backgroundColor:'rgba(0,212,170,0.05)',
-        fill:true, tension:0.4, borderWidth:2, pointRadius:0 },
-      { label:'Argentina', data:[3.8,4.5,7.2,9.1,11.3,12.8,14.5,16.2],
-        borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.05)',
-        fill:true, tension:0.4, borderWidth:2, pointRadius:0 },
-      { label:'Mexico', data:[4.1,5.0,8.8,11.0,12.5,14.1,16.0,18.5],
-        borderColor:'#8b5cf6', backgroundColor:'rgba(139,92,246,0.05)',
-        fill:true, tension:0.4, borderWidth:2, pointRadius:0 }
-    ]
-  },
-  options:{
-    responsive:true,
-    plugins:{ legend:{ labels:{ color:'#8899ab', font:{size:11} } } },
-    scales:{
-      x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d',font:{size:10}} },
-      y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d',font:{size:10},callback:v=>v+'%'} }
-    },
-    interaction:{ intersect:false, mode:'index' }
-  }
+// ── MALL DATA ──
+const mallData = [
+  { name:'Parque Arauco', data:{Mon:76,Tue:76,Wed:79,Thu:76,Fri:89,Sat:100,Sun:70}, peak:'Sat 11-20h', real:false },
+  { name:'Costanera Center', data:{Mon:75,Tue:75,Wed:79,Thu:75,Fri:90,Sat:100,Sun:68}, peak:'Sat 12-20h', real:false },
+  { name:'Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:73,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h', real:false },
+  { name:'Plaza Oeste', data:{Mon:77,Tue:77,Wed:80,Thu:65,Fri:87,Sat:100,Sun:59}, peak:'Sat 11-20h', real:true },
+  { name:'Alto Las Condes', data:{Mon:78,Tue:78,Wed:78,Thu:59,Fri:89,Sat:100,Sun:79}, peak:'Sat 11-20h', real:true },
+  { name:'Plaza Norte', data:{Mon:76,Tue:76,Wed:80,Thu:69,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h', real:false },
+  { name:'Arauco Maipu', data:{Mon:75,Tue:75,Wed:80,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false },
+  { name:'Plaza Egana', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false },
+  { name:'Mall Plaza El Trebol', data:{Mon:73,Tue:73,Wed:76,Thu:64,Fri:88,Sat:100,Sun:62}, peak:'Sat 12-20h', real:false },
+  { name:'Mall Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false }
+];
+
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+function getBarClass(day, val) {
+  if (day === 'Sat') return 'sat';
+  if (day === 'Fri') return 'fri';
+  if (val < 70) return 'low';
+  return 'normal';
+}
+
+const mallGrid = document.getElementById('mallChartsGrid');
+mallData.forEach(mall => {
+  const card = document.createElement('div');
+  card.className = 'mall-card reveal';
+  let headerHTML = '<div class="mall-card-header"><h4>' + mall.name;
+  if (mall.real) headerHTML += '<span class="real-badge">REAL DATA</span>';
+  headerHTML += '</h4><span class="mall-peak">' + mall.peak + '</span></div>';
+  let barsHTML = '';
+  days.forEach(day => {
+    const val = mall.data[day];
+    const cls = getBarClass(day, val);
+    barsHTML += '<div class="bar-row">' +
+      '<span class="bar-label">' + day + '</span>' +
+      '<div class="bar-track"><div class="bar-fill ' + cls + '" style="width:' + val + '%">' + val + '</div></div>' +
+      '</div>';
+  });
+  card.innerHTML = headerHTML + barsHTML;
+  mallGrid.appendChild(card);
 });
 
-// ── BASKET CHART ──
-new Chart(document.getElementById('basketChart'), {
-  type:'bar',
-  data:{
-    labels:['whole milk','other vegetables','rolls/buns','soda','yogurt','root vegetables','tropical fruit','bottled water','sausage','citrus fruit'],
-    datasets:[{ label:'Frequency', data:[2502,1898,1716,1715,1334,1071,1032,933,924,812],
-      backgroundColor:'rgba(0,212,170,0.6)', borderColor:'rgba(0,212,170,0.8)', borderWidth:1, borderRadius:4 }]
-  },
-  options:{
-    indexAxis:'y', responsive:true,
-    plugins:{ legend:{display:false} },
-    scales:{
-      x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d'} },
-      y:{ grid:{display:false}, ticks:{color:'#8899ab',font:{size:11}} }
-    }
-  }
+// ── SATURDAY HOURLY HEATMAP ──
+const hours = ['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
+const heatmapData = [
+  { name:'Parque Arauco', vals:[60,75,85,90,92,95,98,100,95,85,65,40] },
+  { name:'Costanera Center', vals:[58,72,82,88,92,96,100,100,96,88,68,42] },
+  { name:'Plaza Vespucio', vals:[62,76,86,92,95,98,100,100,95,85,62,38] },
+  { name:'Plaza Oeste', vals:[65,78,86,90,92,95,98,100,96,86,65,40] },
+  { name:'Alto Las Condes', vals:[62,78,88,92,95,98,100,98,92,82,60,38] },
+  { name:'Plaza Norte', vals:[62,76,85,90,94,96,100,100,95,85,62,38] },
+  { name:'Arauco Maipu', vals:[62,76,85,90,94,96,98,100,95,85,62,38] },
+  { name:'Plaza Egana', vals:[62,76,85,90,92,95,98,100,95,85,62,38] },
+  { name:'Mall Plaza El Trebol', vals:[60,74,84,90,94,96,98,100,95,85,62,38] },
+  { name:'Mall Plaza Vespucio', vals:[62,76,85,90,92,95,98,100,95,85,62,38] }
+];
+
+function heatColor(v) {
+  if (v >= 90) return { bg:'rgba(0,212,170,0.75)', color:'#fff', fw:'800' };
+  if (v >= 75) return { bg:'rgba(0,212,170,0.5)', color:'#fff', fw:'600' };
+  if (v >= 50) return { bg:'rgba(0,212,170,0.3)', color:'#fff', fw:'600' };
+  return { bg:'rgba(0,212,170,0.12)', color:'var(--text3)', fw:'500' };
+}
+
+const hmGrid = document.getElementById('heatmapGrid');
+// Corner
+hmGrid.innerHTML = '<div class="hm-corner"></div>';
+// Hour headers
+hours.forEach(h => {
+  hmGrid.innerHTML += '<div class="hm-hour-header">' + h + '</div>';
+});
+// Rows
+heatmapData.forEach(mall => {
+  hmGrid.innerHTML += '<div class="hm-mall">' + mall.name + '</div>';
+  mall.vals.forEach((v, i) => {
+    const c = heatColor(v);
+    hmGrid.innerHTML += '<div class="hm-cell" style="background:' + c.bg + ';color:' + c.color + ';font-weight:' + c.fw + '">' +
+      v + '%<span class="tooltip">' + mall.name + ' — ' + hours[i] + ' — ' + v + '%</span></div>';
+  });
 });
 
-// ── ATTRITION CHART ──
-new Chart(document.getElementById('attritionChart'), {
-  type:'radar',
-  data:{
-    labels:['Satisfaction','Evaluation','Projects','Hours/mo','Tenure','Salary','Promotion'],
-    datasets:[
-      { label:'Stayed', data:[0.67,0.72,3.8,199,3.4,0.6,0.03],
-        borderColor:'#00d4aa', backgroundColor:'rgba(0,212,170,0.1)', pointBackgroundColor:'#00d4aa' },
-      { label:'Left', data:[0.44,0.72,3.9,207,3.9,0.4,0.01],
-        borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,0.1)', pointBackgroundColor:'#ef4444' }
-    ]
-  },
-  options:{
-    responsive:true,
-    plugins:{ legend:{ labels:{color:'#8899ab'} } },
-    scales:{ r:{ grid:{color:'rgba(255,255,255,0.06)'}, ticks:{display:false},
-      pointLabels:{color:'#8899ab',font:{size:10}} } }
-  }
-});
-
-// ── CLUSTER CHART ──
-const clusterColors = ['#00d4aa','#3b82f6','#8b5cf6','#f59e0b','#ef4444'];
-new Chart(document.getElementById('clusterChart'), {
-  type:'scatter',
-  data:{
-    datasets: [0,1,2,3,4].map(i => ({
-      label:'Segment '+(i+1),
-      data: Array.from({length:20}, () => ({
-        x: [60,100,40,120,80][i] + (Math.random()-0.5)*50,
-        y: [0.7,0.3,0.8,0.2,0.5][i] + (Math.random()-0.5)*0.3
-      })),
-      backgroundColor: clusterColors[i]+'88',
-      borderColor: clusterColors[i],
-      pointRadius:5
-    }))
-  },
-  options:{
-    responsive:true,
-    plugins:{ legend:{ labels:{color:'#8899ab',font:{size:10}} } },
-    scales:{
-      x:{ title:{display:true,text:'Income',color:'#5a6b7d'},
-        grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d'} },
-      y:{ title:{display:true,text:'Spending Index',color:'#5a6b7d'},
-        grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d'} }
-    }
-  }
-});
-
-// ── STOCK CHART ──
-const stockData = [178.7,177.5,178.7,179.3,181.9,182.8,185.0,181.3,181.5,183.1,186.1,185.5,184.3,182.0,176.2,174.5,177.0,175.6,172.3,168.8,166.4,170.6,172.5,170.2,167.8,165.1,160.3,157.2,155.8,158.4,162.1,164.0,160.2,155.8,152.3,148.7,145.2,142.1,139.8,137.5,135.2,133.8,130.5,128.2,125.8,123.4,120.1,118.5,115.2,113.6,111.8,110.4,110.6,113.6];
-new Chart(document.getElementById('stockChart'), {
-  type:'line',
-  data:{
-    labels: stockData.map((_,i) => i%10===0 ? 'Day '+i : ''),
-    datasets:[{ label:'AMZN Close ($)', data:stockData,
-      borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.08)',
-      fill:true, tension:0.3, borderWidth:2, pointRadius:0 }]
-  },
-  options:{
-    responsive:true,
-    plugins:{ legend:{ labels:{color:'#8899ab'} } },
-    scales:{
-      x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d',maxTicksLimit:6} },
-      y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#5a6b7d',callback:v=>'$'+v} }
-    }
-  }
-});
+// Re-observe new reveal elements
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
