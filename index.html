@@ -585,7 +585,7 @@ footer {
   <div class="container">
     <div class="section-label reveal" data-en="Case Study" data-es="Caso de Estudio">Case Study</div>
     <h2 class="section-title reveal" data-en="Optimizing field operations with real data." data-es="Optimizando operaciones de campo con datos reales.">Optimizing field operations with real data.</h2>
-    <p class="section-desc reveal" data-en="Mall traffic analysis built for a trade marketing bid in Chile — using Google Maps API data to optimize promoter schedules across 10 malls." data-es="Analisis de trafico en malls construido para una licitacion de trade marketing en Chile — usando datos de Google Maps API para optimizar agendas de promotores en 10 malls.">Mall traffic analysis built for a trade marketing bid in Chile — using Google Maps API data to optimize promoter schedules across 10 malls.</p>
+    <p class="section-desc reveal" data-en="Mall traffic analysis using Google Maps API data to optimize promoter schedules across 10 malls in Chile." data-es="Analisis de trafico en malls usando datos de Google Maps API para optimizar agendas de promotores en 10 malls de Chile.">Mall traffic analysis using Google Maps API data to optimize promoter schedules across 10 malls in Chile.</p>
 
     <!-- Callout Strip -->
     <div class="callout-strip reveal">
@@ -892,16 +892,16 @@ document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe
 
 // ── MALL DATA ──
 const mallData = [
-  { name:'Parque Arauco', data:{Mon:76,Tue:76,Wed:79,Thu:76,Fri:89,Sat:100,Sun:70}, peak:'Sat 11-20h', real:false },
-  { name:'Costanera Center', data:{Mon:75,Tue:75,Wed:79,Thu:75,Fri:90,Sat:100,Sun:68}, peak:'Sat 12-20h', real:false },
-  { name:'Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:73,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h', real:false },
-  { name:'Plaza Oeste', data:{Mon:77,Tue:77,Wed:80,Thu:65,Fri:87,Sat:100,Sun:59}, peak:'Sat 11-20h', real:true },
-  { name:'Alto Las Condes', data:{Mon:78,Tue:78,Wed:78,Thu:59,Fri:89,Sat:100,Sun:79}, peak:'Sat 11-20h', real:true },
-  { name:'Plaza Norte', data:{Mon:76,Tue:76,Wed:80,Thu:69,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h', real:false },
-  { name:'Arauco Maipu', data:{Mon:75,Tue:75,Wed:80,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false },
-  { name:'Plaza Egana', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false },
-  { name:'Mall Plaza El Trebol', data:{Mon:73,Tue:73,Wed:76,Thu:64,Fri:88,Sat:100,Sun:62}, peak:'Sat 12-20h', real:false },
-  { name:'Mall Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h', real:false }
+  { name:'Parque Arauco', data:{Mon:76,Tue:76,Wed:79,Thu:76,Fri:89,Sat:100,Sun:70}, peak:'Sat 11-20h' },
+  { name:'Costanera Center', data:{Mon:75,Tue:75,Wed:79,Thu:75,Fri:90,Sat:100,Sun:68}, peak:'Sat 12-20h' },
+  { name:'Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:73,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h' },
+  { name:'Plaza Oeste', data:{Mon:77,Tue:77,Wed:80,Thu:65,Fri:87,Sat:100,Sun:59}, peak:'Sat 11-20h' },
+  { name:'Alto Las Condes', data:{Mon:78,Tue:78,Wed:78,Thu:59,Fri:89,Sat:100,Sun:79}, peak:'Sat 11-20h' },
+  { name:'Plaza Norte', data:{Mon:76,Tue:76,Wed:80,Thu:69,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h' },
+  { name:'Arauco Maipu', data:{Mon:75,Tue:75,Wed:80,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' },
+  { name:'Plaza Egana', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' },
+  { name:'Mall Plaza El Trebol', data:{Mon:73,Tue:73,Wed:76,Thu:64,Fri:88,Sat:100,Sun:62}, peak:'Sat 12-20h' },
+  { name:'Mall Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' }
 ];
 
 const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -918,7 +918,7 @@ mallData.forEach(mall => {
   const card = document.createElement('div');
   card.className = 'mall-card reveal';
   let headerHTML = '<div class="mall-card-header"><h4>' + mall.name;
-  if (mall.real) headerHTML += '<span class="real-badge">REAL DATA</span>';
+  headerHTML += '<span class="real-badge">Google Maps API</span>';
   headerHTML += '</h4><span class="mall-peak">' + mall.peak + '</span></div>';
   let barsHTML = '';
   days.forEach(day => {
