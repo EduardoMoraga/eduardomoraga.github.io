@@ -642,6 +642,57 @@ footer {
     <div class="section-label reveal" data-en="Portfolio" data-es="Portafolio">Portfolio</div>
     <h2 class="section-title reveal" data-en="Built with real data." data-es="Construido con datos reales.">Built with real data.<br><span data-en="Designed for real decisions." data-es="Disenado para decisiones reales.">Designed for real decisions.</span></h2>
     <p class="section-desc reveal" data-en="Each project solves a real business problem — from retail analytics to HR retention to financial forecasting." data-es="Cada proyecto resuelve un problema de negocio real — desde analitica retail hasta retencion de RRHH y pronosticos financieros.">Each project solves a real business problem — from retail analytics to HR retention to financial forecasting.</p>
+
+    <!-- PRODUCTION APPS (Live demos) -->
+    <h3 class="reveal" style="color:var(--accent); font-size:1rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px;">
+      <span data-en="Live Applications" data-es="Aplicaciones en Vivo">Live Applications</span>
+    </h3>
+    <div class="projects-grid">
+      <a href="https://latam-economic-dashboard-5ianvbjdquf2urrutmbhoy.streamlit.app/" target="_blank" class="project-card reveal">
+        <div class="project-body" style="padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
+            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">World Bank API</span>
+          </div>
+          <h3><span data-en="LATAM Economic Dashboard" data-es="Dashboard Economico LATAM">LATAM Economic Dashboard</span> <span class="arrow">-></span></h3>
+          <p data-en="End-to-end ETL pipeline: World Bank API → SQLite → ML forecasting for 6 LATAM countries. 7 economic indicators with 5-year predictions using Linear Regression, Exponential Smoothing, and Random Forest." data-es="Pipeline ETL de punta a punta: World Bank API → SQLite → ML forecasting para 6 paises LATAM. 7 indicadores economicos con predicciones a 5 anos usando Regresion Lineal, Suavizado Exponencial y Random Forest.">End-to-end ETL pipeline: World Bank API → SQLite → ML forecasting for 6 LATAM countries. 7 economic indicators with 5-year predictions using Linear Regression, Exponential Smoothing, and Random Forest.</p>
+          <div class="project-tags">
+            <span class="tag-pill">ETL</span><span class="tag-pill">World Bank API</span><span class="tag-pill">scikit-learn</span><span class="tag-pill">SQLite</span><span class="tag-pill">Streamlit</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://stock-price-predictor-vr5aubmeapze59cho3rnkd.streamlit.app/" target="_blank" class="project-card reveal">
+        <div class="project-body" style="padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
+            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">Yahoo Finance</span>
+          </div>
+          <h3><span data-en="Stock Price Predictor" data-es="Predictor de Precios de Acciones">Stock Price Predictor</span> <span class="arrow">-></span></h3>
+          <p data-en="ML-powered stock analysis: 20+ technical indicators (RSI, MACD, Bollinger), Random Forest & Gradient Boosting classifiers, backtesting engine with Sharpe ratio. Real data from Yahoo Finance." data-es="Analisis bursatil con ML: 20+ indicadores tecnicos (RSI, MACD, Bollinger), clasificadores Random Forest y Gradient Boosting, motor de backtesting con ratio Sharpe. Datos reales de Yahoo Finance.">ML-powered stock analysis: 20+ technical indicators (RSI, MACD, Bollinger), Random Forest & Gradient Boosting classifiers, backtesting engine with Sharpe ratio. Real data from Yahoo Finance.</p>
+          <div class="project-tags">
+            <span class="tag-pill">yfinance</span><span class="tag-pill">scikit-learn</span><span class="tag-pill">Backtesting</span><span class="tag-pill">Plotly</span><span class="tag-pill">Streamlit</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://retail-price-tracker-2zmycjminl99dbvp8sevpn.streamlit.app/" target="_blank" class="project-card reveal">
+        <div class="project-body" style="padding-top:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
+            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">Trade Marketing</span>
+          </div>
+          <h3><span data-en="Retail Price Tracker" data-es="Monitor de Precios Retail">Retail Price Tracker</span> <span class="arrow">-></span></h3>
+          <p data-en="Competitive pricing intelligence for LATAM retail. Full ETL pipeline, 4-method anomaly detection ensemble (Z-Score, IQR, Isolation Forest), price gap heatmaps, and auto-generated market insights for 20 products across 5 retailers." data-es="Inteligencia competitiva de precios para retail LATAM. Pipeline ETL completo, ensemble de 4 metodos de deteccion de anomalias (Z-Score, IQR, Isolation Forest), heatmaps de brecha de precios e insights automaticos para 20 productos en 5 retailers.">Competitive pricing intelligence for LATAM retail. Full ETL pipeline, 4-method anomaly detection ensemble (Z-Score, IQR, Isolation Forest), price gap heatmaps, and auto-generated market insights for 20 products across 5 retailers.</p>
+          <div class="project-tags">
+            <span class="tag-pill">Anomaly Detection</span><span class="tag-pill">ETL</span><span class="tag-pill">Isolation Forest</span><span class="tag-pill">SQLite</span><span class="tag-pill">Streamlit</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- DATA SCIENCE FUNDAMENTALS -->
+    <h3 class="reveal" style="color:var(--text2); font-size:1rem; text-transform:uppercase; letter-spacing:2px; margin:40px 0 20px;">
+      <span data-en="Data Science Fundamentals" data-es="Fundamentos de Data Science">Data Science Fundamentals</span>
+    </h3>
     <div class="projects-grid">
       <a href="https://github.com/EduardoMoraga/market-basket-analysis" target="_blank" class="project-card reveal">
         <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/market-basket-analysis/master/outputs/figures/network_graph.png" alt="Market Basket">
