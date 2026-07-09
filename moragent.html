@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Moragent — AI Agent Studio para Claude Code. Diseñá, aprendé y operá proyectos de IA agéntica, guiado paso a paso. Open source, por Rugol." />
+<title>Moragent — AI Agent Studio · Rugol</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{--ink:#16140F;--graphite:#1E1B17;--panel:#26231D;--panel2:#2D2922;--bone:#EAE4D7;--grey:#9A9489;--line:rgba(234,228,215,.1);--bermellon:#DD4524;--sky:#7FA6C9;--petrol:#6FAE97;--gold:#E0A33E;--violet:#A492E6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--bone);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bermellon);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--bermellon)}
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(22,20,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:600;font-size:19px;color:var(--bone)}
+  .brand svg{height:27px;width:auto}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--grey);transition:.2s}
+  .nav-links a:hover,.nav-links a.on{color:var(--bone)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--bermellon);color:#fff;padding:11px 20px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--bermellon);transition:.2s}
+  .btn:hover{background:#c63d1f}
+  .btn.ghost{background:transparent;color:var(--bone);border-color:rgba(234,228,215,.4)}
+  .btn.ghost:hover{background:var(--bone);color:var(--ink)}
+  .btn svg{width:16px;height:16px}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+  header.hero{position:relative;overflow:hidden;padding:150px 0 70px}
+  .hero .vl{position:absolute;top:0;bottom:0;width:1px;background:rgba(234,228,215,.1)}
+  .hero .badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);border:1px solid var(--line);padding:6px 13px;margin-bottom:22px}
+  .hero h1{font-size:clamp(44px,7vw,90px);font-weight:700;letter-spacing:-.04em;line-height:.98}
+  .hero h1 .by{font-size:.32em;color:var(--grey);font-weight:500;letter-spacing:-.01em;vertical-align:super}
+  .hero p.lead{margin-top:24px;font-size:clamp(18px,2.3vw,23px);color:var(--grey);max-width:54ch}
+  .hero .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .sec-head{max-width:62ch;margin-bottom:34px}
+  .sec-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:12px}
+  .sec-head p{margin-top:14px;color:var(--grey);font-size:17px}
+  .lead-p{font-size:19px;color:var(--bone);max-width:64ch;line-height:1.6}
+  .lead-p b{color:var(--gold)}
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:820px){.feats{grid-template-columns:1fr}}
+  .feat{background:var(--panel);padding:28px 24px}
+  .feat .ic{width:38px;height:38px;display:grid;place-items:center;background:var(--panel2);margin-bottom:16px}
+  .feat .ic svg{width:19px;height:19px;color:var(--bermellon)}
+  .feat h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .feat p{color:var(--grey);font-size:14.5px;margin-top:8px}
+  .term{background:#100F0C;border:1px solid var(--line);overflow:hidden;margin-top:6px}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .term-bar i{width:11px;height:11px;border-radius:50%;background:#4a463e;display:block}.term-bar i:first-child{background:var(--bermellon)}
+  .term-bar span{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey)}
+  .term pre{margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:var(--bone);overflow-x:auto;white-space:pre}
+  .term .c{color:var(--grey)}.term .p{color:var(--petrol)}.term .a{color:var(--gold)}.term .b{color:var(--bermellon)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .stp{border-top:2px solid var(--bermellon);padding-top:16px}
+  .stp .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey)}
+  .stp h4{font-size:17px;font-weight:600;margin:8px 0 5px}.stp p{font-size:14px;color:var(--grey)}
+  .cta-block{text-align:center;padding:70px 0}
+  .cta-block h2{font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-.03em;max-width:20ch;margin:0 auto}
+  .cta-block p{color:var(--grey);margin:16px auto 0;max-width:50ch}
+  .cta-block .cta-row{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:38px 0;color:var(--grey);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer a{border-bottom:2px solid var(--bermellon)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 100 100"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#EAE4D7" stroke-width="3.6"><rect x="32" y="32" width="36" height="36"/><rect x="19" y="19" width="62" height="62"/><rect x="6" y="6" width="88" height="88"/></g></svg> rugol</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="moragent.html" class="on">Moragent</a>
+      <a href="rugol-os.html">Rugol OSS</a>
+      <a class="btn" href="https://github.com/EduardoMoraga/moragent" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="vl" style="left:66%"></span><span class="vl" style="left:73%"></span>
+  <div class="wrap">
+    <span class="badge"><i data-lucide="package-open"></i> Open source · Claude Code</span>
+    <h1>Moragent <span class="by">by Rugol</span></h1>
+    <p class="lead">AI Agent Studio para Claude Code. Diseñá, aprendé y desplegá proyectos de IA agéntica — guiado paso a paso, sin perderte en la jerga técnica.</p>
+    <div class="cta-row">
+      <a class="btn" href="#instalar"><i data-lucide="download"></i> Cómo instalar</a>
+      <a class="btn ghost" href="https://github.com/EduardoMoraga/moragent" target="_blank" rel="noopener"><i data-lucide="github"></i> Ver en GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Qué es</p><h2>El estudio para construir tu propia IA agéntica.</h2></div>
+    <p class="lead-p">Moragent es el <b>punto de entrada</b> a la IA agéntica sobre Claude Code: un menú guiado que te lleva de la idea al sistema funcionando. No empezás eligiendo un modelo ni escribiendo prompts: <b>describís qué querés resolver</b> y Moragent te arma los agentes, las skills y la memoria. Pensado para que alguien de negocio —no solo un dev— pueda crear, operar y mejorar sus propios agentes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Qué hace</p><h2>Todo el ciclo, en un solo menú.</h2></div>
+    <div class="feats">
+      <div class="feat"><div class="ic"><i data-lucide="folder-plus"></i></div><h3>Nuevo proyecto</h3><p>Describís tu idea en una frase y te recomienda la arquitectura: qué agentes reusar y cuáles crear.</p></div>
+      <div class="feat"><div class="ic"><i data-lucide="bot"></i></div><h3>Crear agentes</h3><p>Agentes especializados con rol, modelo y memoria propia. Sin boilerplate.</p></div>
+      <div class="feat"><div class="ic"><i data-lucide="wand-sparkles"></i></div><h3>Crear skills</h3><p>Procedimientos reutilizables (/comandos) que tus agentes ejecutan una y otra vez.</p></div>
+      <div class="feat"><div class="ic"><i data-lucide="layout-dashboard"></i></div><h3>Mi infraestructura</h3><p>Dashboard de todos tus agentes, skills y memorias en un vistazo.</p></div>
+      <div class="feat"><div class="ic"><i data-lucide="graduation-cap"></i></div><h3>Aprender</h3><p>Conceptos de IA agéntica (orquestación, contexto, automatización) explicados con analogías.</p></div>
+      <div class="feat"><div class="ic"><i data-lucide="shield-check"></i></div><h3>Verificar calidad</h3><p>Checklist antes de entregar: propuestas, reportes, dashboards o código.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Cómo se ve</p><h2>Un menú, no un manual.</h2></div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>claude · /moragent</span></div>
+<pre><span class="c">MORAGENT AI Agent Studio</span>
+<span class="c">========================</span>
+
+  <span class="a">1.</span> Nuevo proyecto     <span class="c">— Describe tu idea y te armo todo</span>
+  <span class="a">2.</span> Crear agente       <span class="c">— Agente especializado con rol y memoria</span>
+  <span class="a">3.</span> Crear skill        <span class="c">— Procedimiento reutilizable (/nombre)</span>
+  <span class="a">4.</span> Mi infraestructura <span class="c">— Dashboard de agentes, skills, memorias</span>
+  <span class="a">5.</span> Aprender           <span class="c">— Conceptos de IA agéntica con analogías</span>
+  <span class="a">6.</span> Verificar calidad  <span class="c">— Checklist antes de entregar</span>
+
+<span class="p">›</span> Escribe el número o describe qué quieres hacer.</pre>
+    </div>
+  </div>
+</section>
+
+<section id="instalar">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Instalación</p><h2>En marcha en 2 minutos.</h2><p>Requisitos: <span class="mono">Claude Code</span> y <span class="mono">Python 3.10+</span>.</p></div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>bash · macOS / Linux</span></div>
+<pre><span class="c"># 1 · Cloná el repo</span>
+git clone https://github.com/EduardoMoraga/moragent.git
+cd moragent
+
+<span class="c"># 2 · Instalá la dependencia (MCP)</span>
+python3 -m pip install "mcp[cli]"
+
+<span class="c"># 3 · Abrí Claude Code</span>
+claude
+
+<span class="c"># 4 · Lanzá el estudio</span>
+<span class="p">›</span> <span class="b">/moragent</span>
+
+<span class="c"># Windows: python -m pip install "mcp[cli]"  ·  setx PYTHON_CMD python  ·  claude</span></pre>
+    </div>
+    <p style="color:var(--grey);font-size:13.5px;margin-top:16px">Moragent es un <b style="color:var(--bone)">servidor MCP</b> con 11 herramientas, accesibles desde el menú <span class="mono">/moragent</span>. Licencia MIT.</p>
+    <div class="steps">
+      <div class="stp"><div class="k">01</div><h4>Describí tu idea</h4><p>Una frase: "asistente de soporte", "pipeline de ventas", "reportes semanales".</p></div>
+      <div class="stp"><div class="k">02</div><h4>Moragent arma todo</h4><p>Agentes, skills y memoria, recomendando qué reusar y qué crear.</p></div>
+      <div class="stp"><div class="k">03</div><h4>Operá y mejorá</h4><p>Ejecutás, ves resultados y enriquecés tus agentes con lo aprendido.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-block">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center">Open source</p>
+    <h2>Construido para que cualquiera cree su IA agéntica.</h2>
+    <p>Moragent es parte del ecosistema Rugol. Gratis, abierto, y la base con la que construimos los agentes de nuestros clientes.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/EduardoMoraga/moragent" target="_blank" rel="noopener"><i data-lucide="github"></i> Ver el repo</a>
+      <a class="btn ghost" href="rugol-os.html">Conocé Rugol OSS →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html" style="font-size:16px"><svg viewBox="0 0 100 100" style="height:22px;width:auto"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#EAE4D7" stroke-width="3.6"><rect x="32" y="32" width="36" height="36"/><rect x="19" y="19" width="62" height="62"/><rect x="6" y="6" width="88" height="88"/></g></svg> rugol</a>
+    <div>© 2026 Rugol · Lo humano, elevado a lo exponencial. · <a href="index.html">Inicio</a></div>
+  </div>
+</footer>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>try{lucide.createIcons();}catch(e){}</script>
+</body>
+</html>

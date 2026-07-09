@@ -1,1229 +1,894 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Eduardo Moraga | Trade Marketing × Data Science × AI | Portfolio</title>
-<meta name="description" content="Eduardo Moraga - Economist, Data Scientist, and AI strategist transforming retail operations across LATAM.">
-<meta name="author" content="Eduardo Moraga Ortega">
-<meta name="keywords" content="Eduardo Moraga, Trade Marketing, Data Science, Business Intelligence, AI, Machine Learning, LATAM, Chile, Python, Power BI">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://eduardomoraga.github.io/">
-<link rel="alternate" hreflang="en" href="https://eduardomoraga.github.io/">
-<link rel="alternate" hreflang="es" href="https://eduardomoraga.github.io/">
-<!-- Open Graph -->
-<meta property="og:title" content="Eduardo Moraga | Trade Marketing × Data Science × AI">
-<meta property="og:description" content="Economist, Data Scientist, and AI strategist transforming retail operations across LATAM with ML models, AI agents, and BI systems.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://eduardomoraga.github.io/">
-<meta property="og:image" content="https://ourworldindata.org/grapher/exports/merchandise-exports-gdp-cepii.svg?v=1&tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA">
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eduardo Moraga | Trade Marketing × Data Science × AI">
-<meta name="twitter:description" content="Economist, Data Scientist, and AI strategist transforming retail operations across LATAM.">
-<!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300d4aa'/></svg>">
-<!-- Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Eduardo Moraga Ortega",
-  "jobTitle": "Country Representative & Business Intelligence Lead",
-  "worksFor": { "@type": "Organization", "name": "Increxa" },
-  "url": "https://eduardomoraga.github.io",
-  "sameAs": [
-    "https://www.linkedin.com/in/eduardomoragaortega/",
-    "https://github.com/EduardoMoraga"
-  ],
-  "description": "Economist, Data Scientist, and AI strategist with 15+ years transforming retail operations across LATAM with ML models, AI agents, and BI systems.",
-  "knowsAbout": ["Trade Marketing", "Data Science", "Business Intelligence", "Machine Learning", "AI Agents", "Python", "Power BI", "Retail Analytics", "LATAM Markets"],
-  "alumniOf": { "@type": "EducationalOrganization", "name": "Universidad de Chile" }
-}
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Eduardo Moraga — Economista y Data Scientist. AI + Business Intelligence + Marketing, con lente de economía conductual. Demos en vivo: BI, brand tracking, agentes." />
+<title>Eduardo Moraga — AI · Business Intelligence · Marketing</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-:root {
-  --bg: #06090f;
-  --bg2: #0c1117;
-  --bg3: #111820;
-  --surface: #151c27;
-  --surface2: #1a2332;
-  --border: #1e2a3a;
-  --border2: #253344;
-  --text: #e8edf5;
-  --text2: #8899ab;
-  --text3: #5a6b7d;
-  --accent: #00d4aa;
-  --accent2: #00b893;
-  --accent-glow: rgba(0,212,170,0.12);
-  --blue: #3b82f6;
-  --purple: #8b5cf6;
-  --orange: #f59e0b;
-  --red: #ef4444;
-  --font: 'Inter', -apple-system, system-ui, sans-serif;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:var(--font); background:var(--bg); color:var(--text); overflow-x:hidden; }
-a { color:var(--accent); text-decoration:none; transition:all 0.2s; }
-a:hover { color:#00f5c4; }
-::selection { background:var(--accent); color:var(--bg); }
-/* ── PAGE LOADER ── */
-.page-loader {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  background:var(--bg); z-index:9999;
-  display:flex; align-items:center; justify-content:center;
-  transition:opacity 0.5s, visibility 0.5s;
-}
-.page-loader.loaded { opacity:0; visibility:hidden; pointer-events:none; }
-.loader-dot {
-  width:12px; height:12px; border-radius:50%; background:var(--accent);
-  animation:loaderPulse 1s ease-in-out infinite;
-}
-@keyframes loaderPulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.5);opacity:0.4;} }
-/* ── NOISE TEXTURE ── */
-body::before {
-  content:''; position:fixed; top:0; left:0; width:100%; height:100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:0;
-}
-/* ── GRID BG ── */
-.grid-bg {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  background-image:
-    linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 20%, transparent 70%);
-  pointer-events:none;
-}
-/* ── NAV ── */
-nav {
-  position:fixed; top:0; width:100%; z-index:100;
-  background:rgba(6,9,15,0.85); backdrop-filter:blur(20px) saturate(1.5);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner {
-  max-width:1200px; margin:0 auto; padding:0 32px;
-  display:flex; justify-content:space-between; align-items:center; height:64px;
-}
-.nav-logo {
-  font-weight:800; font-size:1.1rem; color:var(--text);
-  display:flex; align-items:center; gap:10px;
-}
-.nav-logo .dot { width:8px; height:8px; border-radius:50%; background:var(--accent);
-  box-shadow:0 0 12px var(--accent); animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-.nav-links { display:flex; gap:28px; list-style:none; align-items:center; }
-.nav-links a { color:var(--text2); font-size:0.85rem; font-weight:500;
-  letter-spacing:0.3px; transition:color 0.2s; }
-.nav-links a:hover { color:var(--text); }
-.nav-links a.nav-active { color:var(--accent); }
-/* Hamburger */
-.hamburger {
-  display:none; background:none; border:none; cursor:pointer; padding:8px;
-  flex-direction:column; gap:5px; z-index:101;
-}
-.hamburger span {
-  display:block; width:22px; height:2px; background:var(--text);
-  border-radius:2px; transition:all 0.3s;
-}
-.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-/* ── LANG TOGGLE ── */
-.lang-toggle {
-  display:inline-flex; border-radius:20px; overflow:hidden;
-  border:1px solid var(--border2); background:var(--surface);
-  font-size:0.75rem; font-weight:700; cursor:pointer;
-}
-.lang-toggle span {
-  padding:6px 14px; transition:all 0.25s; color:var(--text3);
-  user-select:none;
-}
-.lang-toggle span.active {
-  background:var(--accent); color:var(--bg);
-}
-.lang-toggle span:hover:not(.active) { color:var(--text); }
-/* ── HERO ── */
-.hero {
-  min-height:100vh; display:flex; align-items:center;
-  padding:100px 0 80px; position:relative; overflow:hidden;
-}
-.hero .container { max-width:1200px; margin:0 auto; padding:0 32px;
-  display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-.hero-tag {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:6px 16px; border-radius:24px;
-  background:var(--accent-glow); border:1px solid rgba(0,212,170,0.2);
-  font-size:0.8rem; font-weight:500; color:var(--accent);
-  margin-bottom:28px;
-}
-.hero-tag .pulse-dot { width:6px; height:6px; border-radius:50%;
-  background:var(--accent); animation:pulse 2s infinite; }
-.hero h1 { font-size:3.8rem; font-weight:900; line-height:1.05;
-  letter-spacing:-2px; margin-bottom:24px; }
-.hero h1 .gradient {
-  background:linear-gradient(135deg, var(--accent) 0%, #3b82f6 50%, #8b5cf6 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero-desc { font-size:1.15rem; color:var(--text2); line-height:1.7;
-  margin-bottom:36px; max-width:480px; }
-.hero-buttons { display:flex; gap:14px; flex-wrap:wrap; }
-.btn {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:14px 28px; border-radius:10px; font-weight:600;
-  font-size:0.9rem; transition:all 0.3s; border:none; cursor:pointer;
-}
-.btn-primary { background:var(--accent); color:var(--bg);
-  box-shadow:0 0 30px rgba(0,212,170,0.2); }
-.btn-primary:hover { background:#00f5c4; color:var(--bg);
-  box-shadow:0 0 40px rgba(0,212,170,0.35); transform:translateY(-2px); }
-.btn-ghost { background:transparent; color:var(--text);
-  border:1px solid var(--border2); }
-.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
-/* Hero Visual */
-.hero-visual { position:relative; }
-.hero-chart-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; padding:24px; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,0.4);
-}
-.hero-chart-card::before {
-  content:''; position:absolute; top:-1px; left:20%; right:20%;
-  height:2px; background:linear-gradient(90deg, transparent, var(--accent), transparent);
-}
-.chart-header { display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:16px; }
-.chart-title { font-size:0.8rem; font-weight:600; color:var(--text2); }
-.chart-badge { font-size:0.7rem; padding:3px 10px; border-radius:12px;
-  background:rgba(0,212,170,0.1); color:var(--accent); font-weight:600; }
-.hero-chart-card iframe { width:100%; height:280px; border:none; border-radius:8px; }
-/* Floating cards */
-.float-card {
-  position:absolute; background:var(--surface2); border:1px solid var(--border);
-  border-radius:12px; padding:14px 18px; box-shadow:0 8px 32px rgba(0,0,0,0.3);
-  animation:float 6s ease-in-out infinite; z-index:2;
-}
-@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
-.float-card.c1 { top:-20px; right:-20px; animation-delay:0s; }
-.float-card.c2 { bottom:40px; left:-30px; animation-delay:2s; }
-.float-card .fc-label { font-size:0.65rem; color:var(--text3); text-transform:uppercase;
-  letter-spacing:1px; margin-bottom:4px; }
-.float-card .fc-value { font-size:1.4rem; font-weight:800; }
-.float-card .fc-change { font-size:0.75rem; font-weight:600; }
-.fc-up { color:var(--accent); }
-.fc-purple { color:var(--purple); }
-/* Mobile hero floating cards */
-.hero-mobile-cards { display:none; }
-/* ── SECTIONS ── */
-section { padding:120px 0; position:relative; z-index:1; }
-.container { max-width:1200px; margin:0 auto; padding:0 32px; }
-.section-label {
-  font-size:0.7rem; text-transform:uppercase; letter-spacing:3px;
-  color:var(--accent); font-weight:700; margin-bottom:12px;
-}
-.section-title {
-  font-size:2.6rem; font-weight:800; letter-spacing:-1px; margin-bottom:16px;
-}
-.section-desc {
-  font-size:1.05rem; color:var(--text2); max-width:560px; line-height:1.7;
-  margin-bottom:56px;
-}
-/* ── METRICS STRIP ── */
-.metrics-strip {
-  background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-  padding:48px 0; position:relative; z-index:1;
-}
-.metrics-grid {
-  max-width:1200px; margin:0 auto; padding:0 32px;
-  display:grid; grid-template-columns:repeat(4, 1fr); gap:32px;
-}
-.metric-item { text-align:center; }
-.metric-number {
-  font-size:3rem; font-weight:900; letter-spacing:-2px;
-  background:linear-gradient(135deg, var(--accent), var(--blue));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.metric-label { font-size:0.8rem; color:var(--text3); margin-top:4px;
-  text-transform:uppercase; letter-spacing:1px; font-weight:500; }
-/* ── TRUSTED BY ── */
-.trusted-strip {
-  padding:36px 0; position:relative; z-index:1;
-  border-bottom:1px solid var(--border);
-}
-.trusted-inner {
-  max-width:1200px; margin:0 auto; padding:0 32px; text-align:center;
-}
-.trusted-label {
-  font-size:0.65rem; text-transform:uppercase; letter-spacing:3px;
-  color:var(--text3); font-weight:600; margin-bottom:16px;
-}
-.trusted-logos {
-  display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:28px 40px;
-}
-.trusted-logos span {
-  font-size:0.8rem; font-weight:700; text-transform:uppercase;
-  letter-spacing:2px; color:var(--text3); opacity:0.5;
-  transition:opacity 0.3s;
-}
-.trusted-logos span:hover { opacity:0.8; }
-/* ── OWID EMBEDS ── */
-.owid-section { background:var(--bg); }
-.owid-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-.owid-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; overflow:hidden; transition:all 0.3s;
-}
-.owid-card:hover { border-color:var(--accent); }
-.owid-card .owid-header {
-  padding:20px 24px; border-bottom:1px solid var(--border);
-}
-.owid-card h3 { font-size:0.95rem; font-weight:700; margin-bottom:4px; }
-.owid-card .owid-desc { font-size:0.78rem; color:var(--text3); }
-.owid-card iframe { width:100%; height:320px; border:none; }
-/* ── CASE STUDY ── */
-.case-study-section { background:var(--bg2); border-top:1px solid var(--border); }
-.callout-strip {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
-  margin-bottom:56px;
-}
-.callout-box {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:24px; position:relative;
-  border-left:3px solid var(--accent);
-}
-.callout-box p { font-size:0.9rem; color:var(--text2); line-height:1.6; }
-.callout-box .callout-highlight { color:var(--accent); font-weight:700; }
-/* Mall bar chart cards */
-.mall-charts-grid {
-  display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;
-  margin-bottom:56px;
-}
-.mall-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:20px; transition:all 0.3s;
-}
-.mall-card:hover { border-color:var(--accent); }
-.mall-card-header {
-  display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:12px;
-}
-.mall-card-header h4 { font-size:0.95rem; font-weight:700; }
-.mall-peak {
-  font-size:0.7rem; color:var(--accent); font-weight:600;
-  background:var(--accent-glow); padding:3px 10px; border-radius:10px;
-}
-.real-badge {
-  font-size:0.6rem; color:var(--orange); font-weight:700;
-  background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3);
-  padding:2px 8px; border-radius:8px; margin-left:6px;
-}
-.bar-row {
-  display:flex; align-items:center; gap:8px; margin-bottom:5px;
-}
-.bar-label {
-  font-size:0.72rem; color:var(--text3); width:32px; text-align:right;
-  flex-shrink:0; font-weight:600;
-}
-.bar-track {
-  flex:1; height:20px; background:var(--bg3); border-radius:4px;
-  overflow:hidden; position:relative;
-}
-.bar-fill {
-  height:100%; border-radius:4px; transition:width 0.8s ease;
-  display:flex; align-items:center; justify-content:flex-end;
-  padding-right:6px; font-size:0.65rem; font-weight:700;
-  color:rgba(255,255,255,0.9);
-}
-.bar-fill.sat { background:linear-gradient(90deg, var(--accent), #00f5c4); }
-.bar-fill.fri { background:rgba(0,212,170,0.5); }
-.bar-fill.normal { background:rgba(0,212,170,0.25); }
-.bar-fill.low { background:rgba(0,212,170,0.15); color:var(--text3); }
-/* Heatmap */
-.heatmap-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; padding:32px; overflow-x:auto;
-  margin-bottom:56px;
-}
-.heatmap-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
-.heatmap-card .hm-desc { font-size:0.8rem; color:var(--text3); margin-bottom:24px; }
-.hm-grid {
-  display:grid; grid-template-columns:150px repeat(12,1fr); gap:3px;
-  font-size:0.72rem;
-}
-.hm-corner { background:transparent; }
-.hm-hour-header { background:var(--bg3); color:var(--text2); font-weight:600;
-  text-align:center; padding:8px 2px; border-radius:6px; font-size:0.68rem; }
-.hm-mall { background:var(--bg3); color:var(--text); font-weight:600;
-  padding:10px 10px; border-radius:6px; display:flex; align-items:center;
-  font-size:0.72rem; }
-.hm-cell {
-  text-align:center; padding:8px 2px; border-radius:6px; font-weight:600;
-  font-size:0.68rem; transition:all 0.2s; cursor:default;
-  position:relative;
-}
-.hm-cell:hover { transform:scale(1.08); z-index:2; }
-.hm-cell .tooltip {
-  display:none; position:absolute; bottom:calc(100% + 6px); left:50%;
-  transform:translateX(-50%); background:var(--bg); border:1px solid var(--border);
-  border-radius:8px; padding:6px 10px; font-size:0.68rem; color:var(--text);
-  white-space:nowrap; z-index:10; pointer-events:none;
-  box-shadow:0 4px 16px rgba(0,0,0,0.5);
-}
-.hm-cell:hover .tooltip { display:block; }
-/* Findings boxes */
-.findings-grid {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
-}
-.finding-box {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:24px; text-align:center;
-}
-.finding-box .finding-icon {
-  font-size:1.8rem; margin-bottom:12px; color:var(--accent);
-}
-.finding-box p { font-size:0.88rem; color:var(--text2); line-height:1.6; }
-.finding-box .finding-stat {
-  font-size:1.6rem; font-weight:900; color:var(--accent); margin-bottom:8px;
-}
-/* ── PROJECTS ── */
-.projects-grid {
-  display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
-}
-.project-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:16px; overflow:hidden; transition:all 0.3s;
-  display:block;
-}
-.project-card:hover { border-color:var(--accent); transform:translateY(-6px);
-  box-shadow:0 16px 48px rgba(0,0,0,0.3); }
-.project-img {
-  width:100%; height:200px; object-fit:cover; border-bottom:1px solid var(--border);
-  background:var(--bg3);
-}
-.project-body { padding:24px; }
-.project-card h3 { font-size:1.1rem; font-weight:700; margin-bottom:8px;
-  display:flex; align-items:center; gap:8px; }
-.project-card h3 .arrow { opacity:0; transition:all 0.3s; color:var(--accent); }
-.project-card:hover h3 .arrow { opacity:1; transform:translateX(4px); }
-.project-card p { color:var(--text2); font-size:0.88rem; line-height:1.6;
-  margin-bottom:16px; }
-.project-tags { display:flex; flex-wrap:wrap; gap:6px; }
-.tag-pill {
-  padding:4px 10px; border-radius:6px; font-size:0.7rem; font-weight:600;
-  background:rgba(0,212,170,0.08); color:var(--accent); border:1px solid rgba(0,212,170,0.15);
-}
-/* ── ARTICLES ── */
-.articles-header { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-.ar-badge {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:4px 14px; border-radius:20px; font-size:0.7rem; font-weight:700;
-  background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25);
-  color:var(--red); text-transform:uppercase; letter-spacing:0.5px;
-}
-.articles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.article-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:24px; transition:all 0.3s;
-  display:block; position:relative; overflow:hidden;
-}
-.article-card:hover { border-color:var(--accent); transform:translateY(-4px); }
-.article-card::before {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg, var(--accent), var(--blue), var(--purple));
-  opacity:0; transition:opacity 0.3s;
-}
-.article-card:hover::before { opacity:1; }
-.article-num { font-size:2.5rem; font-weight:900; color:var(--border2);
-  line-height:1; margin-bottom:12px; }
-.article-card h4 { font-size:0.95rem; font-weight:600; margin-bottom:8px; line-height:1.4; }
-.article-card .article-topic {
-  font-size:0.72rem; color:var(--accent); font-weight:500;
-  text-transform:uppercase; letter-spacing:0.5px;
-}
-/* ── REFERENCES ── */
-.references-section { background:var(--bg); }
-.references-grid {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
-}
-.ref-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:24px; transition:all 0.3s;
-  display:block;
-}
-.ref-card:hover { border-color:var(--accent); transform:translateY(-4px);
-  box-shadow:0 8px 32px rgba(0,0,0,0.3); }
-.ref-card .ref-icon {
-  font-size:1.6rem; color:var(--accent); margin-bottom:14px;
-}
-.ref-card h4 { font-size:0.95rem; font-weight:700; margin-bottom:8px;
-  color:var(--text); line-height:1.4; }
-.ref-card p { font-size:0.82rem; color:var(--text3); line-height:1.6; }
-/* ── SKILLS ── */
-.skills-section { background:var(--bg2); border-top:1px solid var(--border); }
-.skills-cols { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-.skill-col {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:14px; padding:24px;
-}
-.skill-col h4 {
-  font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;
-  color:var(--accent); font-weight:700; margin-bottom:16px;
-  padding-bottom:12px; border-bottom:1px solid var(--border);
-}
-.skill-col li {
-  list-style:none; padding:5px 0; color:var(--text2); font-size:0.85rem;
-  display:flex; align-items:center; gap:8px;
-}
-.skill-col li::before { content:"->"; color:var(--accent); font-size:0.75rem;
-  font-weight:700; font-family:monospace; }
-/* ── CTA SECTION ── */
-.cta-section {
-  padding:100px 0; position:relative; z-index:1;
-  background:var(--bg); border-top:1px solid var(--border);
-  text-align:center;
-}
-.cta-section h2 { font-size:2.4rem; font-weight:800; letter-spacing:-1px; margin-bottom:12px; }
-.cta-section .cta-desc { font-size:1.05rem; color:var(--text2); max-width:480px; margin:0 auto 36px; line-height:1.7; }
-.cta-buttons { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
-/* ── FOOTER ── */
-footer {
-  border-top:1px solid var(--border); padding:60px 0 40px;
-  background:var(--bg2);
-}
-.footer-inner {
-  max-width:1200px; margin:0 auto; padding:0 32px;
-  display:flex; justify-content:space-between; align-items:center;
-}
-.footer-quote { font-size:1.1rem; font-style:italic; color:var(--text2);
-  max-width:500px; line-height:1.6; }
-.footer-quote span { color:var(--accent); font-weight:600; }
-.footer-links { display:flex; gap:24px; }
-.footer-links a { color:var(--text3); font-size:1.4rem; transition:color 0.2s; }
-.footer-links a:hover { color:var(--accent); }
-.footer-copy { text-align:center; color:var(--text3); font-size:0.75rem;
-  margin-top:32px; padding-top:24px; border-top:1px solid var(--border); }
-/* ── BACK TO TOP ── */
-.back-to-top {
-  position:fixed; bottom:32px; right:32px; z-index:90;
-  width:44px; height:44px; border-radius:50%;
-  background:var(--accent); color:var(--bg);
-  border:none; cursor:pointer; font-size:1.1rem;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 4px 20px rgba(0,212,170,0.3);
-  opacity:0; visibility:hidden;
-  transition:opacity 0.3s, visibility 0.3s, transform 0.3s;
-}
-.back-to-top.visible { opacity:1; visibility:visible; }
-.back-to-top:hover { transform:translateY(-3px); background:#00f5c4; }
-/* ── SCROLL ANIMATIONS ── */
-.reveal { opacity:0; transform:translateY(40px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
-.reveal.visible { opacity:1; transform:translateY(0); }
-/* ── RESPONSIVE ── */
-@media (max-width:1024px) {
-  .hero .container { grid-template-columns:1fr; }
-  .hero-visual .hero-chart-card { display:none; }
-  .hero-mobile-cards {
-    display:flex; gap:16px; margin-top:24px; justify-content:flex-start;
+  :root{
+    --ink:#16140F; --paper:#F4F1EA; --card:#FBF9F4; --smoke:#6E6A60;
+    --grey:#928D83; --graphite:#2B2925; --bone:#EAE4D7; --line:#DED8CA;
+    --bermellon:#DD4524; --petrol:#34463E; --sky:#5E7891;
   }
-  .hero-mobile-cards .float-card {
-    position:relative; top:auto; left:auto; right:auto; bottom:auto;
-    animation:float 6s ease-in-out infinite;
-  }
-  .hero h1 { font-size:2.8rem; }
-  .metrics-grid { grid-template-columns:repeat(2,1fr); }
-  .owid-grid, .projects-grid, .mall-charts-grid { grid-template-columns:1fr; }
-  .articles-grid { grid-template-columns:1fr 1fr; }
-  .skills-cols { grid-template-columns:1fr 1fr; }
-  .callout-strip { grid-template-columns:1fr; }
-  .findings-grid { grid-template-columns:1fr; }
-  .references-grid { grid-template-columns:1fr 1fr; }
-  .hm-grid { font-size:0.6rem; }
-}
-@media (max-width:640px) {
-  .hero h1 { font-size:2.2rem; }
-  .section-title { font-size:1.8rem; }
-  .articles-grid, .skills-cols, .references-grid { grid-template-columns:1fr; }
-  .nav-links {
-    display:none; position:fixed; top:64px; left:0; right:0;
-    background:rgba(6,9,15,0.97); backdrop-filter:blur(20px);
-    flex-direction:column; padding:24px 32px; gap:20px;
-    border-bottom:1px solid var(--border);
-  }
-  .nav-links.mobile-open { display:flex; }
-  .hamburger { display:flex; }
-  .footer-inner { flex-direction:column; gap:24px; text-align:center; }
-  .mall-charts-grid { grid-template-columns:1fr; }
-  .hero-mobile-cards { flex-direction:column; gap:12px; }
-  .cta-section h2 { font-size:1.8rem; }
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 36px}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--smoke);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--bermellon);display:inline-block}
+
+  /* idioma */
+  .en{display:none !important}
+  body.lang-en .es{display:none !important}
+  body.lang-en .en{display:inline !important}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:70;background:rgba(244,241,234,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:700;font-size:17px;letter-spacing:-.02em}
+  .brand .sq{width:11px;height:11px;background:var(--bermellon);flex:none}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--smoke);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .lang{display:flex;border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11.5px}
+  .lang button{border:0;background:transparent;padding:6px 10px;cursor:pointer;color:var(--smoke);font-family:inherit;font-size:inherit}
+  .lang button.on{background:var(--ink);color:var(--paper)}
+  .btn{display:inline-block;background:var(--bermellon);color:#fff;padding:12px 22px;font-size:14px;font-weight:600;text-decoration:none;transition:transform .15s,background .2s;border:1.5px solid var(--bermellon)}
+  .btn:hover{transform:translateY(-1px);background:#c63d1f;border-color:#c63d1f}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  @media(max-width:960px){.nav-links a:not(.btn){display:none}}
+
+  /* HERO */
+  header.hero{position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;padding:130px 0 80px;border-bottom:1px solid var(--line)}
+  .hero .vl{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+  .hero .bigsq{position:absolute;right:7%;top:24%;width:clamp(100px,13vw,200px);aspect-ratio:1;background:var(--bermellon)}
+  .hero .midsq{position:absolute;right:calc(7% + 44px);top:calc(24% + clamp(100px,13vw,200px) + 26px);width:26px;height:26px;background:var(--petrol)}
+  @media(max-width:880px){.hero .bigsq{width:74px;top:auto;bottom:8%;right:8%}.hero .midsq{display:none}}
+  .hero .wrap{position:relative;z-index:2}
+  .hero h1{font-size:clamp(38px,5.4vw,70px);font-weight:700;letter-spacing:-.035em;line-height:1.04;margin-top:26px;max-width:17ch}
+  .hero h1 em{font-style:normal;color:var(--bermellon)}
+  .hero p.lead{margin-top:28px;font-size:clamp(16.5px,2vw,20px);color:var(--smoke);max-width:56ch}
+  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .boot{margin-top:30px;background:var(--ink);color:var(--bone);border:1px solid var(--ink);padding:16px 20px;max-width:600px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.85;min-height:132px;position:relative}
+  .hero .boot::before{content:"● ● ●";position:absolute;top:-1px;right:12px;font-size:8px;color:var(--bermellon);letter-spacing:3px;line-height:2.6}
+  .hero .boot pre{margin:0;font-family:inherit;white-space:pre-wrap;display:inline}
+  .hero .boot .p{color:var(--bermellon)}
+  .hero .boot .cursor{display:inline-block;width:8px;height:14px;background:var(--bermellon);animation:blink 1s steps(1) infinite;vertical-align:-2px;margin-left:2px}
+  @keyframes blink{50%{opacity:0}}
+
+  section{padding:84px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .sec-head{max-width:66ch;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(27px,4vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-top:16px}
+  .sec-head p{margin-top:15px;color:var(--smoke);font-size:16.5px}
+
+  /* NUMBERS */
+  .numbers{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--card)}
+  @media(max-width:760px){.numbers{grid-template-columns:repeat(2,1fr)}}
+  .num-item{padding:30px 26px;border-right:1px solid var(--line)}
+  .num-item:last-child{border-right:0}
+  @media(max-width:760px){.num-item:nth-child(2n){border-right:0}.num-item:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  .num-item .v{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--bermellon)}
+  .num-item .l{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--smoke);margin-top:13px}
+  .brands{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .brands span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--smoke);border:1px solid var(--line);background:var(--card);padding:7px 14px}
+
+  /* SOBRE MÍ */
+  .about{display:grid;grid-template-columns:1.25fr 1fr;gap:52px;align-items:center}
+  @media(max-width:800px){.about{grid-template-columns:1fr}}
+  .about p{color:var(--smoke);font-size:16.5px;margin-bottom:14px}
+  .about p b{color:var(--ink);font-weight:600}
+  .about .links{display:flex;gap:18px;margin-top:10px;font-size:14px;flex-wrap:wrap}
+  .about .links a{color:var(--ink);text-decoration:none;font-weight:600;border-bottom:2px solid var(--bermellon);padding-bottom:2px}
+  .panel{background:var(--card);border:1px solid var(--line);padding:8px 30px}
+  .panel .row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .panel .row:last-child{border:0}
+  .panel .row b{font-weight:600}
+  .panel .row span{color:var(--smoke);font-family:'JetBrains Mono',monospace;font-size:12.5px;text-align:right}
+
+  /* ===== LABZONE · demos en vivo (oscuro) ===== */
+  .lz{--lpanel:#26231D;--lpanel2:#2D2922;--lline:rgba(234,228,215,.09);--lgrey:#9A9489;--lsky:#7FA6C9;--lpetrol:#6FAE97;--lgold:#E0A33E;--lviolet:#A492E6;background:var(--ink);color:var(--bone)}
+  .lz section{border-top:1px solid var(--lline)}
+  .lz .sec-head h2{color:var(--bone);display:flex;align-items:center;gap:14px}
+  .lz .sec-head h2 svg{width:28px;height:28px;color:var(--bermellon)}
+  .lz .sec-head p{color:var(--lgrey)} .lz .eyebrow{color:var(--bermellon)}
+  .lz .console{background:#1E1B17;border:1px solid var(--lline);overflow:hidden;box-shadow:0 30px 70px -40px rgba(0,0,0,.8)}
+  .lz .console-bar{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--lline);font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--lgrey)}
+  .lz .console-bar .dots{display:flex;gap:6px}.lz .console-bar .dots i{width:10px;height:10px;border-radius:50%;background:#4a463e;display:block}
+  .lz .console-bar .dots i:nth-child(1){background:var(--bermellon)}
+  .lz .console-bar .live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;color:var(--bermellon)}
+  .lz .console-bar .live .dot{width:8px;height:8px;border-radius:50%;background:var(--bermellon);animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(221,69,36,.5)}70%{box-shadow:0 0 0 10px rgba(221,69,36,0)}100%{box-shadow:0 0 0 0 rgba(221,69,36,0)}}
+  .lz .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;padding:18px}
+  .lz .c2{grid-column:span 2}.lz .c3{grid-column:span 3}.lz .c4{grid-column:span 4}
+  @media(max-width:980px){.lz .dash{grid-template-columns:repeat(2,1fr)}.lz .c2,.lz .c3,.lz .c4{grid-column:span 2}}
+  @media(max-width:560px){.lz .dash{grid-template-columns:1fr}.lz .c2,.lz .c3,.lz .c4{grid-column:span 1}}
+  .lz .panel{background:var(--lpanel);border:1px solid var(--lline);padding:15px 16px;display:flex;flex-direction:column;min-width:0}
+  .lz .panel-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .lz .panel-h i,.lz .panel-h svg{width:15px;height:15px;color:var(--lgrey)}
+  .lz .panel-h .t{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--lgrey)}
+  .lz .panel-h .badge{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600}
+  .lz .badge.al{color:var(--bermellon)}.lz .badge.ok{color:var(--lpetrol)}
+  .lz .kpi{background:var(--lpanel);border:1px solid var(--lline);padding:16px;position:relative;overflow:hidden}
+  .lz .kpi .ic{position:absolute;top:13px;right:13px}.lz .kpi .ic svg{width:17px;height:17px;color:var(--lgrey)}
+  .lz .kpi .t{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--lgrey)}
+  .lz .kpi .v{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-top:7px;line-height:1}
+  .lz .kpi .d{font-family:'JetBrains Mono',monospace;font-size:12px;margin-top:6px;display:flex;align-items:center;gap:5px}
+  .lz .kpi .d svg{width:13px;height:13px}.lz .kpi .d.up{color:var(--lpetrol)}.lz .kpi .d.down{color:var(--bermellon)}
+  .lz .kpi .spark{margin-top:6px;height:38px}
+  .lz #map{height:300px;width:100%;background:#15140f;z-index:1}
+  .leaflet-container{background:#15140f;font-family:'JetBrains Mono',monospace}
+  .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#26231D;color:#EAE4D7;border:1px solid rgba(234,228,215,.12);border-radius:0}
+  .leaflet-popup-content{margin:11px 14px;font-size:12px;line-height:1.5}
+  .leaflet-popup-content .pos{color:#6FAE97}.leaflet-popup-content .neg{color:#DD4524}
+  .leaflet-control-attribution{background:rgba(0,0,0,.45)!important;color:#6f6a60!important;font-size:9px!important}
+  .leaflet-control-attribution a{color:#8a857a!important}.leaflet-bar a{background:#26231D;color:#EAE4D7;border-color:rgba(234,228,215,.12)}
+  .lz .feed{height:300px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:12px}
+  .lz .feed .row{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--lline);color:var(--lgrey);animation:slide .4s ease}
+  .lz .feed .row svg{width:14px;height:14px;flex:none;margin-top:2px}.lz .feed .row b{color:var(--bone);font-weight:500}
+  .lz .feed .row.al svg{color:var(--bermellon)}.lz .feed .row.ok svg{color:var(--lpetrol)}.lz .feed .row.info svg{color:var(--lsky)}
+  .lz .feed .row .tm{color:#6f6a60;flex:none}
+  @keyframes slide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .lz .sent-input{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+  .lz .sent-input input{flex:1;min-width:220px;padding:14px 16px;border:1px solid var(--lline);background:var(--lpanel);color:var(--bone);font-size:15px;font-family:inherit}
+  .lz .sent-input input:focus{outline:none;border-color:var(--bermellon)}
+  .lz .sent-grid{display:grid;grid-template-columns:340px 1fr;gap:13px}
+  @media(max-width:880px){.lz .sent-grid{grid-template-columns:1fr}}
+  .lz .scol{background:var(--lpanel);border:1px solid var(--lline);padding:20px}
+  .lz .sub-lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--lgrey);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .lz .sub-lab svg{width:14px;height:14px}
+  .lz #sentGauge{height:200px}.lz #sentTrend{height:110px;margin-top:4px}
+  .lz .dist{margin-top:14px}.lz .dist .row{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13px}
+  .lz .dist .row svg{width:15px;height:15px;flex:none}
+  .lz .dist .lab{width:62px;color:var(--lgrey);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .lz .dist .track{flex:1;height:8px;background:rgba(234,228,215,.08);overflow:hidden}
+  .lz .dist .fill{height:100%;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+  .lz .dist .pos{background:var(--lpetrol)}.lz .dist .neu{background:var(--lgrey)}.lz .dist .neg{background:var(--bermellon)}
+  .lz .topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .lz .topics span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--bone);border:1px solid var(--lline);padding:5px 11px;background:var(--lpanel2)}
+  .lz .mentions{display:flex;flex-direction:column;gap:10px;max-height:430px;overflow:hidden}
+  .lz .mention{border:1px solid var(--lline);background:var(--lpanel2);padding:12px 14px;animation:slide .4s ease}
+  .lz .mention .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .lz .mention .src{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lgrey)}
+  .lz .chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;color:#16140F;font-weight:700}
+  .lz .chip.pos{background:var(--lpetrol)}.lz .chip.neu{background:var(--lgrey)}.lz .chip.neg{background:var(--bermellon);color:#fff}
+  .lz .mention p{font-size:14px;color:var(--bone)}
+  .lz .arch{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--lgrey);border:1px dashed var(--lline);padding:12px 16px;overflow-x:auto;white-space:nowrap}
+  .lz .arch b{color:var(--bone);font-weight:500}.lz .arch i{color:var(--bermellon);font-style:normal}
+  .lz .agents{display:grid;grid-template-columns:1fr 380px;gap:13px}
+  @media(max-width:900px){.lz .agents{grid-template-columns:1fr}}
+  .lz .chat{background:var(--lpanel);border:1px solid var(--lline);display:flex;flex-direction:column;min-height:460px}
+  .lz .chat-head{padding:15px 18px;border-bottom:1px solid var(--lline);display:flex;align-items:center;gap:12px}
+  .lz .chat-head .av{width:34px;height:34px;background:var(--ink);display:grid;place-items:center}.lz .chat-head .av svg{width:20px;height:20px}
+  .lz .chat-head b{font-size:15px}.lz .chat-head .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lpetrol);margin-left:auto;display:flex;align-items:center;gap:6px}
+  .lz .chat-head .s .dot{width:7px;height:7px;border-radius:50%;background:var(--lpetrol)}
+  .lz .msgs{flex:1;padding:18px;display:flex;flex-direction:column;gap:11px;overflow-y:auto;max-height:380px}
+  .lz .bub{max-width:82%;padding:11px 15px;font-size:14.5px;line-height:1.45}
+  .lz .bub.bot{background:var(--lpanel2);border:1px solid var(--lline);align-self:flex-start}
+  .lz .bub.me{background:var(--bermellon);color:#fff;align-self:flex-end}.lz .bub.bot b{color:var(--bermellon)}
+  .lz .bub.bot a{color:var(--bermellon);font-weight:600}
+  .lz .quick{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 12px}
+  .lz .quick button{font-family:'JetBrains Mono',monospace;font-size:11.5px;border:1px solid var(--lline);background:var(--lpanel2);padding:7px 12px;cursor:pointer;color:var(--lgrey);transition:.2s}
+  .lz .quick button:hover{border-color:var(--bermellon);color:var(--bone)}
+  .lz .chat-in{display:flex;gap:8px;padding:13px 16px;border-top:1px solid var(--lline)}
+  .lz .chat-in input{flex:1;padding:11px 14px;border:1px solid var(--lline);font-size:14px;font-family:inherit;background:var(--lpanel2);color:var(--bone)}
+  .lz .chat-in input:focus{outline:none;border-color:var(--bermellon)}
+  .lz .chat-in .send{background:var(--bermellon);color:#fff;border:none;padding:0 16px;cursor:pointer;font-weight:600}
+  .lz .voice{background:#1E1B17;border:1px solid var(--lline);padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center}
+  .lz .voice .lab{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lgrey);text-transform:uppercase;letter-spacing:.1em}
+  .lz .voice h3{font-size:20px;font-weight:600;margin:8px 0 2px}.lz .voice .desc{font-size:13px;color:var(--lgrey);margin-bottom:18px}
+  .lz .orb{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;margin:6px 0 16px;background:radial-gradient(circle at 50% 40%,rgba(221,69,36,.22),transparent 70%);border:1px solid var(--lline)}
+  .lz .wave{display:flex;align-items:center;gap:4px;height:44px}.lz .wave i{width:5px;height:10px;background:var(--bermellon);border-radius:3px}
+  .lz .wave.active i{animation:eq .9s infinite ease-in-out}
+  .lz .wave.active i:nth-child(2){animation-delay:.1s}.lz .wave.active i:nth-child(3){animation-delay:.2s}.lz .wave.active i:nth-child(4){animation-delay:.3s}.lz .wave.active i:nth-child(5){animation-delay:.15s}.lz .wave.active i:nth-child(6){animation-delay:.25s}.lz .wave.active i:nth-child(7){animation-delay:.05s}
+  @keyframes eq{0%,100%{height:8px}50%{height:40px}}
+  .lz .setup-t{font-size:15px;font-weight:600;margin-top:2px}
+  .lz .setup-d{font-size:12px;color:var(--lgrey);max-width:30ch;margin-top:8px;line-height:1.55}.lz .setup-d .mono{color:var(--bone)}
+  .lz .convai-wrap{width:100%;display:flex;justify-content:center;align-items:center;min-height:120px}
+
+  /* CASE STUDY */
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:800px){.case{grid-template-columns:1fr}}
+  .finding{border:1px solid var(--line);background:var(--card);padding:28px;position:relative}
+  .finding .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--bermellon)}
+  .finding h3{font-size:19px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+  .finding p{color:var(--smoke);font-size:14.5px}
+  .case-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  @media(max-width:800px){.case-stats{grid-template-columns:1fr}}
+  .cstat{background:var(--graphite);color:var(--bone);padding:28px;position:relative;overflow:hidden}
+  .cstat .sq{position:absolute;right:20px;top:20px;width:14px;height:14px;background:var(--bermellon)}
+  .cstat .v{font-size:30px;font-weight:700;letter-spacing:-.03em;color:var(--bone)}
+  .cstat p{color:var(--grey);font-size:14px;margin-top:8px;max-width:44ch}
+
+  /* PROJECTS */
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(min-width:1100px){.projects{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:780px){.projects{grid-template-columns:1fr}}
+  .proj{border:1px solid var(--line);background:var(--card);padding:28px;transition:background .2s;text-decoration:none;display:block;position:relative}
+  .proj:hover{background:#fff}
+  .proj .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .proj .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--bermellon)}
+  .proj .live{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:#fff;background:var(--petrol);padding:4px 9px;flex:none}
+  .proj h3{font-size:19px;font-weight:600;margin:12px 0 8px;letter-spacing:-.01em}
+  .proj h3 .arrow{color:var(--bermellon)}
+  .proj p{color:var(--smoke);font-size:14.5px}
+  .proj .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+  .proj .tags span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--smoke);border:1px solid var(--line);padding:4px 9px}
+
+  /* LAB / PRODUCTOS */
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:900px){.products{grid-template-columns:1fr}}
+  .product{border:1px solid var(--line);background:var(--card);padding:30px;display:flex;flex-direction:column}
+  .product .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bermellon);text-transform:uppercase;letter-spacing:.1em}
+  .product h3{font-size:21px;font-weight:600;margin:12px 0 8px;letter-spacing:-.02em}
+  .product p{color:var(--smoke);font-size:15px;flex:1}
+  .product .lks{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .product .lk{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--bermellon);padding-bottom:2px}
+
+  /* ARTICLES */
+  .arts{border:1px solid var(--line);background:var(--card)}
+  .art{display:flex;align-items:baseline;gap:22px;padding:18px 28px;border-bottom:1px solid var(--line)}
+  .art:last-child{border-bottom:0}
+  .art .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--bermellon);flex:none;width:24px;margin-left:0}
+  .art b{font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .art span{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--grey);text-align:right;flex:none}
+  @media(max-width:640px){.art span{display:none}}
+  .note{margin-top:22px;font-size:14px;color:var(--smoke)}
+  .note a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--bermellon);font-weight:600}
+
+  /* TOOLKIT */
+  .kit{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:900px){.kit{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.kit{grid-template-columns:1fr}}
+  .kcol{background:var(--card);padding:28px 24px}
+  .kcol .sq{width:12px;height:12px;background:var(--bermellon);margin-bottom:16px}
+  .kcol:nth-child(2) .sq{background:var(--petrol)}
+  .kcol:nth-child(3) .sq{background:var(--sky)}
+  .kcol:nth-child(4) .sq{background:var(--grey)}
+  .kcol h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px}
+  .kcol li{list-style:none;font-size:13.5px;color:var(--smoke);padding:5px 0;border-bottom:1px solid var(--line)}
+  .kcol li:last-child{border-bottom:0}
+
+  /* QUOTE CANVAS */
+  .canvas{position:relative;background:var(--graphite);color:var(--bone);overflow:hidden;border:1px solid var(--ink)}
+  .canvas .vlc{position:absolute;top:0;bottom:0;width:2px;background:rgba(234,228,215,.3)}
+  .canvas .sq{position:absolute;width:64px;height:64px;background:var(--bermellon);right:9%;bottom:-18px}
+  .canvas .inner{position:relative;z-index:2;padding:clamp(44px,6vw,72px)}
+  .canvas blockquote{font-size:clamp(25px,3.6vw,42px);font-weight:600;letter-spacing:-.025em;line-height:1.16;max-width:24ch}
+  .canvas blockquote span{color:var(--bermellon)}
+  .canvas .who{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--grey)}
+  .canvas .bias-count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey);margin:14px 0 10px}
+  .canvas .bias-desc{margin-top:16px;color:#cfc9bc;max-width:58ch;font-size:17.5px;min-height:84px}
+  .canvas .bias-row{margin-top:26px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .canvas .bias-next{background:transparent;border:1.5px solid var(--bermellon);color:var(--bone);padding:12px 22px;font-weight:600;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;transition:.2s}
+  .canvas .bias-next:hover{background:var(--bermellon);color:#fff}
+  #biasName,.bias-desc{transition:opacity .25s}
+  .bias-fade #biasName,.bias-fade .bias-desc{opacity:0}
+
+  /* CONTACTO */
+  .cta{text-align:center}
+  .cta h2{font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.05;max-width:20ch;margin:0 auto}
+  .cta p{color:var(--smoke);margin:20px auto 0;max-width:48ch;font-size:16.5px}
+  .cta .cta-row{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--smoke);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer .lab{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px}
+  footer .lab svg{height:20px;width:auto}
+  footer .lab a{text-decoration:none;color:var(--smoke)}
+  footer .lab a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
-<!-- PAGE LOADER -->
-<div class="page-loader" id="pageLoader"><div class="loader-dot"></div></div>
-<!-- NAV -->
+
 <nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><div class="dot"></div> Eduardo Moraga</div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#projects" data-en="Projects" data-es="Proyectos" data-section="projects">Projects</a></li>
-      <li><a href="#showcase" data-en="Case Study" data-es="Caso de Estudio" data-section="showcase">Case Study</a></li>
-      <li><a href="#articles" data-en="Articles" data-es="Articulos" data-section="articles">Articles</a></li>
-      <li><a href="#references" data-en="Research" data-es="Investigacion" data-section="references">Research</a></li>
-      <li><a href="https://github.com/EduardoMoraga" target="_blank">GitHub</a></li>
-      <li>
-        <div class="lang-toggle" id="langToggle">
-          <span class="active" data-lang="en">EN</span>
-          <span data-lang="es">ES</span>
-        </div>
-      </li>
-    </ul>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="sq"></span>Eduardo Moraga</a>
+    <div class="nav-links">
+      <a href="#demos"><span class="es">Demos en vivo</span><span class="en">Live demos</span></a>
+      <a href="#proyectos"><span class="es">Proyectos</span><span class="en">Projects</span></a>
+      <a href="#lab">Lab</a>
+      <a href="#articulos"><span class="es">Artículos</span><span class="en">Articles</span></a>
+      <a href="https://github.com/EduardoMoraga" target="_blank" rel="noopener">GitHub</a>
+      <div class="lang"><button id="btn-es" class="on">ES</button><button id="btn-en">EN</button></div>
+      <a class="btn" href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </nav>
-<!-- HERO -->
-<section class="hero">
-  <div class="grid-bg"></div>
-  <div class="container">
-    <div class="hero-left">
-      <div class="hero-tag"><span class="pulse-dot"></span> <span data-en="Open to collaborate" data-es="Abierto a colaborar">Open to collaborate</span></div>
-      <h1>
-        <span data-en="Turning retail" data-es="Convirtiendo el caos">Turning retail</span><br>
-        <span data-en="chaos into" data-es="del retail en">chaos into</span><br>
-        <span class="gradient" data-en="data-driven" data-es="decisiones">data-driven</span><br>
-        <span data-en="decisions." data-es="basadas en datos.">decisions.</span>
-      </h1>
-      <p class="hero-desc" data-en="Economist. Data Scientist. AI strategist. I build ML models, AI agents, and BI systems that transform how trade marketing agencies operate across Latin America." data-es="Economista. Data Scientist. Estratega de IA. Construyo modelos ML, agentes IA y sistemas de BI que transforman la operacion de agencias de trade marketing en America Latina.">Economist. Data Scientist. AI strategist. I build ML models, AI agents, and BI systems that transform how trade marketing agencies operate across Latin America.</p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary"><i class="fab fa-github"></i> <span data-en="Explore Projects" data-es="Explorar Proyectos">Explore Projects</span></a>
-        <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" class="btn btn-ghost"><i class="fab fa-linkedin"></i> <span data-en="Connect" data-es="Conectar">Connect</span></a>
-      </div>
-      <!-- Mobile hero cards (shown on tablet/mobile instead of iframe) -->
-      <div class="hero-mobile-cards">
-        <div class="float-card">
-          <div class="fc-label" data-en="Models Deployed" data-es="Modelos Desplegados">Models Deployed</div>
-          <div class="fc-value fc-up">12+</div>
-          <div class="fc-change fc-up" data-en="across 4 countries" data-es="en 4 paises">across 4 countries</div>
-        </div>
-        <div class="float-card" style="animation-delay:2s;">
-          <div class="fc-label" data-en="Automation" data-es="Automatizacion">Automation</div>
-          <div class="fc-value fc-purple">85%</div>
-          <div class="fc-change" style="color:var(--purple)" data-en="report time saved" data-es="ahorro en reportes">report time saved</div>
-        </div>
-      </div>
+
+<header class="hero" id="top">
+  <span class="vl" style="left:64%"></span>
+  <span class="vl" style="left:71%"></span>
+  <div class="bigsq"></div>
+  <div class="midsq"></div>
+  <div class="wrap">
+    <p class="eyebrow"><span class="es">Economía · Ciencia de datos · Conducta del consumidor</span><span class="en">Economics · Data science · Consumer behavior</span></p>
+    <h1>AI <em>+</em> Business Intelligence <em>+</em> Marketing.</h1>
+    <p class="lead">
+      <span class="es">Tengo formación y experiencia en economía y ciencia de datos. Me obsesionan la <b>conducta del consumidor</b>, la economía conductual y los sesgos cognitivos — y llevo 15+ años aplicándolos desde la inteligencia de negocio y el marketing en Latinoamérica.</span>
+      <span class="en">Trained and seasoned in economics and data science. Obsessed with <b>consumer behavior</b>, behavioral economics, and cognitive biases — applying them for 15+ years through business intelligence and marketing across Latin America.</span>
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="#demos"><span class="es">▶ Ver demos en vivo</span><span class="en">▶ See live demos</span></a>
+      <a class="btn ghost" href="#sesgos"><span class="es">Museo de sesgos</span><span class="en">Bias museum</span></a>
     </div>
-    <div class="hero-visual">
-      <div class="hero-chart-card">
-        <div class="chart-header">
-          <span class="chart-title" data-en="LATAM Merchandise Exports as % of GDP" data-es="Exportaciones de Mercancia LATAM como % del PIB">LATAM Merchandise Exports as % of GDP</span>
-          <span class="chart-badge">OWID LIVE</span>
+    <div class="boot" id="boot" aria-hidden="true"><pre id="bootText"></pre><span class="cursor"></span></div>
+  </div>
+</header>
+
+<section id="trayectoria">
+  <div class="wrap">
+    <div class="numbers">
+      <div class="num-item"><div class="v">15+</div><div class="l"><span class="es">años en BI & marketing</span><span class="en">years in BI & marketing</span></div></div>
+      <div class="num-item"><div class="v">17+</div><div class="l"><span class="es">artículos publicados</span><span class="en">published articles</span></div></div>
+      <div class="num-item"><div class="v">4</div><div class="l"><span class="es">países · CL AR PE BO</span><span class="en">countries · CL AR PE BO</span></div></div>
+      <div class="num-item"><div class="v">12+</div><div class="l"><span class="es">modelos desplegados</span><span class="en">models deployed</span></div></div>
+    </div>
+    <div class="brands">
+      <span>Samsung</span><span>Microsoft</span><span>P&amp;G</span><span>Intel</span><span>LG</span><span>Apple</span><span>Asus</span><span>Whirlpool</span><span>Versuni (Philips)</span>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <p class="eyebrow"><span class="es">Sobre mí</span><span class="en">About</span></p>
+        <h2 style="font-size:clamp(26px,3.5vw,38px);font-weight:700;letter-spacing:-.03em;margin:16px 0">
+          <span class="es">Economista que programa. De la operación real.</span>
+          <span class="en">An economist who codes. From real operations.</span>
+        </h2>
+        <p><span class="es">Quince años en terreno — Chile, Argentina, Perú, Bolivia — me enseñaron cómo se ve el <b>caos operativo antes del dashboard</b>. Mi lente es la conducta: entender los atajos y sesgos con los que las personas decidimos de verdad, para construir sistemas que decidan mejor.</span><span class="en">Fifteen years in the field — Chile, Argentina, Peru, Bolivia — taught me what <b>operational chaos looks like before the dashboard</b>. My lens is behavior: understanding the shortcuts and biases behind how people actually decide, to build systems that decide better.</span></p>
+        <p><span class="es">La mirada de economista ordena todo: <b>costo, retorno, incentivos y comportamiento</b>. La IA no reemplaza personas — les devuelve el tiempo que se pierde en lo repetitivo.</span><span class="en">The economist's lens organizes everything: <b>cost, return, incentives, and behavior</b>. AI doesn't replace people — it gives them back the time lost to repetitive work.</span></p>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/EduardoMoraga" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" rel="noopener">América Retail</a>
         </div>
-        <iframe src="https://ourworldindata.org/grapher/merchandise-exports-gdp-cepii?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1" title="LATAM Merchandise Exports as percentage of GDP - Our World in Data"></iframe>
-        <div class="float-card c1">
-          <div class="fc-label" data-en="Models Deployed" data-es="Modelos Desplegados">Models Deployed</div>
-          <div class="fc-value fc-up">12+</div>
-          <div class="fc-change fc-up" data-en="across 4 countries" data-es="en 4 paises">across 4 countries</div>
-        </div>
-        <div class="float-card c2">
-          <div class="fc-label" data-en="Automation" data-es="Automatizacion">Automation</div>
-          <div class="fc-value fc-purple">85%</div>
-          <div class="fc-change" style="color:var(--purple)" data-en="report time saved" data-es="ahorro en reportes">report time saved</div>
-        </div>
+      </div>
+      <div class="panel">
+        <div class="row"><b><span class="es">Formación</span><span class="en">Education</span></b><span>MSc Economics · Mg Data Science</span></div>
+        <div class="row"><b><span class="es">Especialidad</span><span class="en">Focus</span></b><span>AI · BI · Marketing</span></div>
+        <div class="row"><b>Stack</b><span>Python · SQL · Power BI · Claude</span></div>
+        <div class="row"><b><span class="es">Intereses</span><span class="en">Interests</span></b><span><span class="es">Conducta · Sesgos · Decisiones</span><span class="en">Behavior · Biases · Decisions</span></span></div>
+        <div class="row"><b><span class="es">Base</span><span class="en">Based in</span></b><span>Santiago, Chile</span></div>
       </div>
     </div>
   </div>
 </section>
-<!-- METRICS -->
-<div class="metrics-strip">
-  <div class="metrics-grid">
-    <div class="metric-item reveal">
-      <div class="metric-number" data-target="12">0</div>
-      <div class="metric-label" data-en="Years in Trade Marketing" data-es="Anos en Trade Marketing">Years in Trade Marketing</div>
+
+<!-- ===== DEMOS EN VIVO ===== -->
+<div class="lz" id="demos">
+
+  <section id="dashboard">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="es">Demos en vivo · 01 · Business Intelligence</span><span class="en">Live demos · 01 · Business Intelligence</span></p>
+        <h2><i data-lucide="layout-dashboard"></i> <span class="es">No te lo cuento: te lo muestro.</span><span class="en">I don't tell you — I show you.</span></h2>
+        <p><span class="es">Un command center como los que construyo: mapa de la red, ingresos con forecast, cumplimiento de meta, carga por proceso, anomalías y eventos — todo vivo, acá en tu navegador.</span><span class="en">A command center like the ones I build: network map, revenue with forecast, goal attainment, process load, anomalies, and events — all live, right in your browser.</span></p>
+      </div>
+      <div class="console">
+        <div class="console-bar"><span class="dots"><i></i><i></i><i></i></span> edu · command-center <span class="live"><span class="dot"></span>LIVE</span></div>
+        <div class="dash">
+          <div class="kpi"><span class="ic"><i data-lucide="dollar-sign"></i></span><div class="t"><span class="es">Ventas hoy</span><span class="en">Sales today</span></div><div class="v" id="k-ventas">$0</div><div class="d up" id="d-ventas"><i data-lucide="arrow-up-right"></i> 0%</div><div class="spark" id="sp-ventas"></div></div>
+          <div class="kpi"><span class="ic"><i data-lucide="receipt"></i></span><div class="t">Tickets</div><div class="v" id="k-tickets">0</div><div class="d up" id="d-tickets"><i data-lucide="arrow-up-right"></i> 0%</div><div class="spark" id="sp-tickets"></div></div>
+          <div class="kpi"><span class="ic"><i data-lucide="target"></i></span><div class="t"><span class="es">Conversión</span><span class="en">Conversion</span></div><div class="v" id="k-conv">0%</div><div class="d up" id="d-conv"><i data-lucide="arrow-up-right"></i> 0%</div><div class="spark" id="sp-conv"></div></div>
+          <div class="kpi"><span class="ic"><i data-lucide="triangle-alert"></i></span><div class="t"><span class="es">Anomalías</span><span class="en">Anomalies</span></div><div class="v" id="k-anom" style="color:var(--bermellon)">0</div><div class="d down"><i data-lucide="activity"></i> <span class="es">detectadas</span><span class="en">detected</span></div><div class="spark" id="sp-anom"></div></div>
+          <div class="panel c3"><div class="panel-h"><i data-lucide="trending-up"></i><span class="t"><span class="es">Ingresos · real + forecast</span><span class="en">Revenue · actual + forecast</span></span><span class="badge ok" id="rev-badge">+0%</span></div><div id="areaChart"></div></div>
+          <div class="panel c1"><div class="panel-h"><i data-lucide="gauge"></i><span class="t"><span class="es">Meta mensual</span><span class="en">Monthly goal</span></span></div><div id="gaugeChart"></div></div>
+          <div class="panel c2"><div class="panel-h"><i data-lucide="map-pin"></i><span class="t"><span class="es">Red de operaciones · LATAM</span><span class="en">Operations network · LATAM</span></span><span class="badge" id="map-badge">8 <span class="es">ciudades</span><span class="en">cities</span></span></div><div id="map"></div></div>
+          <div class="panel c2"><div class="panel-h"><i data-lucide="bar-chart-3"></i><span class="t"><span class="es">Carga por proceso</span><span class="en">Load by process</span></span></div><div id="barChart"></div></div>
+          <div class="panel c3"><div class="panel-h"><i data-lucide="grid-3x3"></i><span class="t"><span class="es">Mapa de anomalías · proceso × área</span><span class="en">Anomaly map · process × area</span></span><span class="badge al" id="heat-badge">scan…</span></div><div id="heatChart"></div></div>
+          <div class="panel c1"><div class="panel-h"><i data-lucide="radio"></i><span class="t"><span class="es">Stream de eventos</span><span class="en">Event stream</span></span></div><div class="feed" id="feed"></div></div>
+        </div>
+      </div>
     </div>
-    <div class="metric-item reveal">
-      <div class="metric-number" data-target="17">0</div>
-      <div class="metric-label" data-en="Published Articles" data-es="Articulos Publicados">Published Articles</div>
+  </section>
+
+  <section id="voz-cliente">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="es">Demos en vivo · 02 · Brand Tracker</span><span class="en">Live demos · 02 · Brand Tracker</span></p>
+        <h2><i data-lucide="message-circle-heart"></i> <span class="es">Voz del cliente, medida y trazable.</span><span class="en">Voice of the customer, measured and traceable.</span></h2>
+        <p><span class="es">Escribí una marca y corré el análisis. Es la lógica de mi <b>Brand Tracker</b>: reviews reales → clasificación con IA sobre una taxonomía de experiencia de compra (9 aspectos) → métricas SQL donde cada cifra es trazable hasta la review original.</span><span class="en">Type a brand and run the analysis. This is the logic behind my <b>Brand Tracker</b>: real reviews → AI classification over a 9-aspect shopping-experience taxonomy → SQL metrics where every figure traces back to the original review.</span></p>
+      </div>
+      <div class="sent-input">
+        <input id="brandInput" type="text" placeholder="Escribí una marca (la tuya, un competidor…)" />
+        <button class="btn" id="analyzeBtn"><span class="es">Analizar</span><span class="en">Analyze</span></button>
+      </div>
+      <div class="sent-grid">
+        <div class="scol">
+          <div class="sub-lab"><i data-lucide="gauge"></i> <span class="es">Sentimiento neto</span><span class="en">Net sentiment</span></div>
+          <div id="sentGauge"></div>
+          <div class="sub-lab" style="margin-top:8px"><i data-lucide="trending-up"></i> <span class="es">Tendencia 14 días</span><span class="en">14-day trend</span></div>
+          <div id="sentTrend"></div>
+          <div class="dist">
+            <div class="row"><i data-lucide="smile" style="color:var(--lpetrol)"></i><span class="lab"><span class="es">Positivo</span><span class="en">Positive</span></span><span class="track"><span class="fill pos" data-f="pos"></span></span></div>
+            <div class="row"><i data-lucide="meh" style="color:var(--lgrey)"></i><span class="lab">Neutral</span><span class="track"><span class="fill neu" data-f="neu"></span></span></div>
+            <div class="row"><i data-lucide="frown" style="color:var(--bermellon)"></i><span class="lab"><span class="es">Negativo</span><span class="en">Negative</span></span><span class="track"><span class="fill neg" data-f="neg"></span></span></div>
+          </div>
+          <div class="sub-lab" style="margin-top:20px"><i data-lucide="hash"></i> <span class="es">Aspectos detectados · 9 dimensiones</span><span class="en">Detected aspects · 9 dimensions</span></div>
+          <div class="topics" id="topics"><span>—</span></div>
+        </div>
+        <div class="scol">
+          <div class="sub-lab"><i data-lucide="messages-square"></i> <span class="es">Reviews analizadas</span><span class="en">Reviews analyzed</span> · <span id="mentionCount">0</span></div>
+          <div class="mentions" id="mentions"></div>
+        </div>
+      </div>
+      <div class="arch"><b>Places API</b> → <i>ingesta determinística</i> → <b>Claude + JSON Schema</b> → <i>clasificación por aspecto</i> → <b>SQL scorecards</b> → <i>net sentiment · rankings · series de tiempo</i> <span class="es">· demo con datos sintéticos</span><span class="en">· demo runs on synthetic data</span></div>
     </div>
-    <div class="metric-item reveal">
-      <div class="metric-number" data-target="4">0</div>
-      <div class="metric-label" data-en="LATAM Countries" data-es="Paises LATAM">LATAM Countries</div>
+  </section>
+
+  <section id="agentes">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="es">Demos en vivo · 03 · Agentes</span><span class="en">Live demos · 03 · Agents</span></p>
+        <h2><i data-lucide="bot"></i> <span class="es">Mi agente te atiende — y me avisa.</span><span class="en">My agent takes over — and lets me know.</span></h2>
+        <p><span class="es"><b>Rugol</b> es mi agente: el puente entre vos y yo. Te cuenta lo que he hecho, te pone en contacto conmigo o me deja tu mensaje. Y podés hablarle de verdad — por voz (ElevenLabs).</span><span class="en"><b>Rugol</b> is my agent: the bridge between you and me. It tells you what I've done, connects you with me, or takes your message. And you can actually talk to it — by voice (ElevenLabs).</span></p>
+      </div>
+      <div class="agents">
+        <div class="chat">
+          <div class="chat-head">
+            <span class="av"><svg viewBox="0 0 100 100"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#EAE4D7" stroke-width="4"><rect x="30" y="30" width="40" height="40"/><rect x="14" y="14" width="72" height="72"/></g></svg></span>
+            <b>Rugol · <span class="es">agente de Edu</span><span class="en">Edu's agent</span></b>
+            <span class="s"><span class="dot"></span><span class="es">en línea</span><span class="en">online</span></span>
+          </div>
+          <div class="msgs" id="msgs"></div>
+          <div class="quick" id="quick">
+            <button data-q="¿Qué ha hecho Edu?" data-qen="What has Edu done?"><span class="es">¿Qué ha hecho Edu?</span><span class="en">What has Edu done?</span></button>
+            <button data-q="Quiero ponerme en contacto con Edu" data-qen="I want to get in touch with Edu"><span class="es">Ponerme en contacto</span><span class="en">Get in touch</span></button>
+            <button data-q="Quiero dejarle un mensaje" data-qen="I want to leave him a message"><span class="es">Dejarle un mensaje</span><span class="en">Leave a message</span></button>
+            <button data-q="¿Sobre qué escribe?" data-qen="What does he write about?"><span class="es">¿Sobre qué escribe?</span><span class="en">What does he write?</span></button>
+          </div>
+          <div class="chat-in">
+            <input id="chatInput" type="text" placeholder="Escribile a Rugol…" autocomplete="off" />
+            <button class="send" id="chatSend"><span class="es">Enviar</span><span class="en">Send</span></button>
+          </div>
+        </div>
+        <div class="voice">
+          <span class="lab"><span class="es">Agente de voz · ElevenLabs</span><span class="en">Voice agent · ElevenLabs</span></span>
+          <h3><span class="es">Hablá con Rugol</span><span class="en">Talk to Rugol</span></h3>
+          <p class="desc"><span class="es">El puente por voz entre vos y Edu</span><span class="en">The voice bridge between you and Edu</span></p>
+          <div id="convaiWrap" class="convai-wrap"><div id="convaiHost" data-agent-id="agent_7501kv27n5cked88m7vxntmcrp1x"></div></div>
+          <div id="convaiSetup">
+            <div class="orb"><div class="wave active"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <p class="setup-t"><span class="es">Agente de voz listo para conectar</span><span class="en">Voice agent ready to connect</span></p>
+            <p class="setup-d"><span class="es">Pegá tu <b>agent-id</b> de ElevenLabs en el código para activar la voz.</span><span class="en">Paste your ElevenLabs <b>agent-id</b> in the code to enable voice.</span></p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="metric-item reveal">
-      <div class="metric-number" data-target="10">0</div>
-      <div class="metric-label" data-en="Open Source Projects" data-es="Proyectos Open Source">Open Source Projects</div>
-    </div>
-  </div>
+  </section>
+
 </div>
-<!-- TRUSTED BY -->
-<div class="trusted-strip reveal">
-  <div class="trusted-inner">
-    <div class="trusted-label" data-en="Trusted by global brands" data-es="Confianza de marcas globales">Trusted by global brands</div>
-    <div class="trusted-logos">
-      <span>Samsung</span>
-      <span>Microsoft</span>
-      <span>P&amp;G</span>
-      <span>Intel</span>
-      <span>LG</span>
-      <span>Apple</span>
-      <span>Asus</span>
-      <span>Whirlpool</span>
-      <span>Versuni (Philips)</span>
-    </div>
-  </div>
-</div>
-<!-- OUR WORLD IN DATA -->
-<section class="owid-section">
-  <div class="container">
-    <div class="section-label reveal" data-en="Global Context" data-es="Contexto Global">Global Context</div>
-    <h2 class="section-title reveal" data-en="The macro view matters." data-es="La vision macro importa.">The macro view matters.</h2>
-    <p class="section-desc reveal" data-en="Understanding global trade flows and economic shifts is essential for strategic decisions in retail. These live charts from Our World in Data provide the context." data-es="Entender los flujos comerciales globales y los cambios economicos es esencial para decisiones estrategicas en retail. Estos graficos en vivo de Our World in Data proveen el contexto.">Understanding global trade flows and economic shifts is essential for strategic decisions in retail. These live charts from Our World in Data provide the context.</p>
-    <div class="owid-grid">
-      <div class="owid-card reveal">
-        <div class="owid-header">
-          <h3 data-en="Global Trade as Share of GDP" data-es="Comercio Global como % del PIB">Global Trade as Share of GDP</h3>
-          <div class="owid-desc" data-en="How interconnected is the global economy?" data-es="Que tan interconectada esta la economia global?">How interconnected is the global economy?</div>
-        </div>
-        <iframe src="https://ourworldindata.org/grapher/trade-as-share-of-gdp?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA~USA" loading="lazy" tabindex="-1" title="Trade as share of GDP for LATAM countries and USA"></iframe>
-      </div>
-      <div class="owid-card reveal">
-        <div class="owid-header">
-          <h3 data-en="GDP per Capita — LATAM" data-es="PIB per Capita — LATAM">GDP per Capita — LATAM</h3>
-          <div class="owid-desc" data-en="Economic power of our key markets" data-es="Poder economico de nuestros mercados clave">Economic power of our key markets</div>
-        </div>
-        <iframe src="https://ourworldindata.org/grapher/gdp-per-capita-worldbank?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1" title="GDP per capita for LATAM countries"></iframe>
-      </div>
-      <div class="owid-card reveal">
-        <div class="owid-header">
-          <h3 data-en="Internet Users — LATAM" data-es="Usuarios de Internet — LATAM">Internet Users — LATAM</h3>
-          <div class="owid-desc" data-en="Digital adoption driving e-commerce growth" data-es="Adopcion digital impulsando el crecimiento del e-commerce">Digital adoption driving e-commerce growth</div>
-        </div>
-        <iframe src="https://ourworldindata.org/grapher/share-of-individuals-using-the-internet?tab=chart&time=2000..latest&country=CHL~ARG~MEX~COL~BRA" loading="lazy" tabindex="-1" title="Internet users as share of population in LATAM"></iframe>
-      </div>
-      <div class="owid-card reveal">
-        <div class="owid-header">
-          <h3 data-en="AI Research Publications" data-es="Publicaciones de Investigacion en IA">AI Research Publications</h3>
-          <div class="owid-desc" data-en="The acceleration of AI across the world" data-es="La aceleracion de la IA en el mundo">The acceleration of AI across the world</div>
-        </div>
-        <iframe src="https://ourworldindata.org/grapher/annual-scholarly-publications-on-artificial-intelligence" loading="lazy" tabindex="-1" title="Annual scholarly publications on artificial intelligence"></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- CASE STUDY: MALL TRAFFIC -->
-<section id="showcase" class="case-study-section">
-  <div class="container">
-    <div class="section-label reveal" data-en="Case Study" data-es="Caso de Estudio">Case Study</div>
-    <h2 class="section-title reveal" data-en="Optimizing field operations with real data." data-es="Optimizando operaciones de campo con datos reales.">Optimizing field operations with real data.</h2>
-    <p class="section-desc reveal" data-en="Mall traffic analysis using Google Maps API data to optimize promoter schedules across 10 malls in Chile." data-es="Analisis de trafico en malls usando datos de Google Maps API para optimizar agendas de promotores en 10 malls de Chile.">Mall traffic analysis using Google Maps API data to optimize promoter schedules across 10 malls in Chile.</p>
 
-    <!-- Callout Strip -->
-    <div class="callout-strip reveal">
-      <div class="callout-box">
-        <p data-en="In <span class='callout-highlight'>ALL 10 malls</span> analyzed, Saturday is peak day — with traffic peaking between <span class='callout-highlight'>15:00-18:00h</span>" data-es="En los <span class='callout-highlight'>10 malls</span> analizados, el sabado es el dia peak — con trafico maximo entre las <span class='callout-highlight'>15:00-18:00h</span>">In <span class="callout-highlight">ALL 10 malls</span> analyzed, Saturday is peak day — with traffic peaking between <span class="callout-highlight">15:00-18:00h</span></p>
-      </div>
-      <div class="callout-box">
-        <p data-en="A promoter at <span class='callout-highlight'>Parque Arauco on Saturday 15-18h</span> generates 3-5x more impact than the same promoter on Tuesday at 11h" data-es="Un promotor en <span class='callout-highlight'>Parque Arauco un sabado 15-18h</span> genera 3-5x mas impacto que el mismo promotor un martes a las 11h">A promoter at <span class="callout-highlight">Parque Arauco on Saturday 15-18h</span> generates 3-5x more impact than the same promoter on Tuesday at 11h</p>
-      </div>
-      <div class="callout-box">
-        <p data-en="<span class='callout-highlight'>Smart schedule assignment</span> is a direct competitive advantage" data-es="La <span class='callout-highlight'>asignacion inteligente de turnos</span> es una ventaja competitiva directa"><span class="callout-highlight">Smart schedule assignment</span> is a direct competitive advantage</p>
-      </div>
+<section id="case">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Case study</p>
+      <h2><span class="es">Optimizar operaciones de campo con datos reales.</span><span class="en">Optimizing field operations with real data.</span></h2>
+      <p><span class="es">Análisis de tráfico de 10 malls en Chile con datos de Google Maps API, para optimizar la asignación de promotores.</span><span class="en">Mall traffic analysis using Google Maps API data to optimize promoter schedules across 10 malls in Chile.</span></p>
     </div>
+    <div class="case">
+      <div class="finding"><div class="k">01 · <span class="es">Hallazgo</span><span class="en">Finding</span></div><h3><span class="es">El sábado es el día peak en los 10 malls</span><span class="en">Saturday is peak day across all 10 malls</span></h3><p><span class="es">Con tráfico máximo entre 15:00 y 18:00 h — consistente en toda la muestra.</span><span class="en">Traffic peaks between 3–6 pm — consistent across the entire sample.</span></p></div>
+      <div class="finding"><div class="k">02 · <span class="es">Hallazgo</span><span class="en">Finding</span></div><h3><span class="es">El mismo promotor, 3–5× más impacto</span><span class="en">Same promoter, 3–5× the impact</span></h3><p><span class="es">Un promotor en Parque Arauco un sábado 15–18 h genera 3–5× más impacto que un martes a las 11 h.</span><span class="en">A promoter at Parque Arauco on Saturday 3–6 pm generates 3–5× more impact than the same promoter on Tuesday at 11 am.</span></p></div>
+    </div>
+    <div class="case-stats">
+      <div class="cstat"><span class="sq"></span><div class="v">30–43%</div><p><span class="es">más tráfico el sábado vs. el jueves (día más débil). La asignación inteligente de turnos es ventaja competitiva directa.</span><span class="en">higher Saturday traffic vs. Thursday (weakest day). Smart schedule assignment is a direct competitive advantage.</span></p></div>
+      <div class="cstat"><span class="sq"></span><div class="v">15:00–18:00</div><p><span class="es">la ventana peak concentra el mayor ROI de presencia en tienda. Fuente: Google Maps Places API + calibración retail Chile.</span><span class="en">the peak window concentrates the highest ROI for in-store presence. Source: Google Maps Places API + Chilean retail calibration.</span></p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 10 Mall Bar Charts -->
-    <h3 class="reveal" style="font-size:1.2rem; margin-bottom:24px;" data-en="Weekly Traffic by Mall (Relative Index, Saturday = 100)" data-es="Trafico Semanal por Mall (Indice Relativo, Sabado = 100)">Weekly Traffic by Mall (Relative Index, Saturday = 100)</h3>
-    <div class="mall-charts-grid" id="mallChartsGrid">
-      <!-- Generated by JS -->
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Portfolio</p>
+      <h2><span class="es">Construido con datos reales, para decisiones reales.</span><span class="en">Built with real data. Designed for real decisions.</span></h2>
+      <p><span class="es">Cada proyecto resuelve un problema de negocio concreto — de analítica retail a retención de talento y forecasting financiero. Código abierto en GitHub; tres corren en vivo.</span><span class="en">Each project solves a real business problem — from retail analytics to HR retention to financial forecasting. Open source on GitHub; three run live.</span></p>
     </div>
+    <div class="projects">
+      <a class="proj" href="https://latam-economic-dashboard-5ianvbjdquf2urrutmbhoy.streamlit.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="k">ETL · ML · World Bank API</span><span class="live">LIVE DEMO</span></div>
+        <h3>LATAM Economic Dashboard <span class="arrow">→</span></h3>
+        <p><span class="es">Pipeline end-to-end: World Bank API → SQLite → forecasting ML para 6 países LATAM. 7 indicadores con predicción a 5 años.</span><span class="en">End-to-end pipeline: World Bank API → SQLite → ML forecasting for 6 LATAM countries. 7 indicators with 5-year predictions.</span></p>
+        <div class="tags"><span>ETL</span><span>scikit-learn</span><span>SQLite</span><span>Streamlit</span></div>
+      </a>
+      <a class="proj" href="https://stock-price-predictor-vr5aubmeapze59cho3rnkd.streamlit.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="k">Finanzas · Yahoo Finance</span><span class="live">LIVE DEMO</span></div>
+        <h3>Stock Price Predictor <span class="arrow">→</span></h3>
+        <p><span class="es">20+ indicadores técnicos (RSI, MACD, Bollinger), clasificadores Random Forest y Gradient Boosting, motor de backtesting con Sharpe ratio.</span><span class="en">20+ technical indicators (RSI, MACD, Bollinger), Random Forest &amp; Gradient Boosting classifiers, backtesting engine with Sharpe ratio.</span></p>
+        <div class="tags"><span>yfinance</span><span>scikit-learn</span><span>Backtesting</span><span>Plotly</span></div>
+      </a>
+      <a class="proj" href="https://retail-price-tracker-2zmycjminl99dbvp8sevpn.streamlit.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="k">Trade Marketing · Pricing</span><span class="live">LIVE DEMO</span></div>
+        <h3>Retail Price Tracker <span class="arrow">→</span></h3>
+        <p><span class="es">Inteligencia de precios competitivos para retail LATAM: ensemble de 4 métodos de detección de anomalías, heatmaps de brechas e insights automáticos.</span><span class="en">Competitive pricing intelligence for LATAM retail: 4-method anomaly detection ensemble, price gap heatmaps, and auto-generated insights.</span></p>
+        <div class="tags"><span>Anomaly Detection</span><span>Isolation Forest</span><span>ETL</span><span>Streamlit</span></div>
+      </a>
+      <a class="proj" href="https://github.com/EduardoMoraga/market-basket-analysis" target="_blank" rel="noopener">
+        <div class="top"><span class="k">Retail · Association Rules</span></div>
+        <h3>Market Basket Analysis <span class="arrow">→</span></h3>
+        <p><span class="es">Minería de reglas de asociación sobre 38K+ transacciones de supermercado. Apriori y FP-Growth revelan qué productos impulsan compras cruzadas.</span><span class="en">Association rule mining on 38K+ supermarket transactions. Apriori &amp; FP-Growth reveal which products drive cross-purchases.</span></p>
+        <div class="tags"><span>Apriori</span><span>FP-Growth</span><span>NetworkX</span></div>
+      </a>
+      <a class="proj" href="https://github.com/EduardoMoraga/employee-attrition-predictor" target="_blank" rel="noopener">
+        <div class="top"><span class="k">RR.HH. · <span class="es">Predicción</span><span class="en">Prediction</span></span></div>
+        <h3>Employee Attrition Predictor <span class="arrow">→</span></h3>
+        <p><span class="es">Modelo XGBoost con 0.99 AUC-ROC sobre 15K registros. Explicaciones SHAP hacen cada predicción transparente para RR.HH.</span><span class="en">XGBoost model achieving 0.99 AUC-ROC on 15K records. SHAP explanations make every prediction transparent for HR teams.</span></p>
+        <div class="tags"><span>XGBoost</span><span>SHAP</span><span>HR Analytics</span></div>
+      </a>
+      <a class="proj" href="https://github.com/EduardoMoraga/customer-segmentation" target="_blank" rel="noopener">
+        <div class="top"><span class="k">Estrategia · Clustering</span></div>
+        <h3>Customer Segmentation <span class="arrow">→</span></h3>
+        <p><span class="es">Clustering K-Means y DBSCAN con optimización por silueta. Recomendaciones comerciales por segmento según comportamiento de compra.</span><span class="en">K-Means &amp; DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment.</span></p>
+        <div class="tags"><span>K-Means</span><span>DBSCAN</span><span>PCA</span></div>
+      </a>
+      <a class="proj" href="https://github.com/EduardoMoraga/stock-price-forecasting" target="_blank" rel="noopener">
+        <div class="top"><span class="k">Time Series</span></div>
+        <h3>Stock Price Forecasting <span class="arrow">→</span></h3>
+        <p><span class="es">ARIMA vs. Prophet vs. LSTM sobre datos de Amazon: descomposición completa, tests de estacionariedad y benchmarking de modelos.</span><span class="en">ARIMA vs. Prophet vs. LSTM on Amazon stock data: full decomposition, stationarity testing, and model benchmarking.</span></p>
+        <div class="tags"><span>ARIMA</span><span>Prophet</span><span>LSTM</span><span>TensorFlow</span></div>
+      </a>
+      <a class="proj" href="#voz-cliente">
+        <div class="top"><span class="k">IA · Voz del cliente</span><span class="live">DEMO ↑</span></div>
+        <h3>Brand Tracker <span class="arrow">→</span></h3>
+        <p><span class="es">Sistema de monitoreo de marca sobre reviews reales: ingesta determinística, clasificación con Claude por taxonomía de trade marketing y métricas SQL 100% trazables.</span><span class="en">Brand monitoring system over real reviews: deterministic ingestion, Claude classification over a trade marketing taxonomy, and fully traceable SQL metrics.</span></p>
+        <div class="tags"><span>Places API</span><span>Claude</span><span>Supabase</span><span>SQL</span></div>
+      </a>
+      <a class="proj" href="https://github.com/EduardoMoraga" target="_blank" rel="noopener">
+        <div class="top"><span class="k">GitHub</span></div>
+        <h3><span class="es">Todos los repositorios</span><span class="en">All repositories</span> <span class="arrow">→</span></h3>
+        <p><span class="es">Código, notebooks y documentación de todos los proyectos — abiertos y reproducibles.</span><span class="en">Code, notebooks, and documentation for every project — open and reproducible.</span></p>
+        <div class="tags"><span>Python</span><span>Open Source</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- Saturday Hourly Heatmap -->
-    <div class="heatmap-card reveal">
-      <h3 data-en="Saturday Hourly Heatmap — All 10 Malls" data-es="Mapa de Calor Horario Sabado — Los 10 Malls">Saturday Hourly Heatmap — All 10 Malls</h3>
-      <div class="hm-desc" data-en="Traffic intensity by hour on Saturdays (10:00-21:00). Peak window highlighted." data-es="Intensidad de trafico por hora los sabados (10:00-21:00). Ventana peak resaltada.">Traffic intensity by hour on Saturdays (10:00-21:00). Peak window highlighted.</div>
-      <div class="hm-grid" id="heatmapGrid">
-        <!-- Generated by JS -->
+<section id="lab">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Lab · Productos propios</span><span class="en">Lab · Own products</span></p>
+      <h2><span class="es">Construyo producto, no solo análisis.</span><span class="en">I build products, not just analyses.</span></h2>
+      <p><span class="es">Herramientas propias que ya operan en el mundo real — la mejor prueba de lo que sé hacer.</span><span class="en">Tools of my own that already run in the real world — the best proof of what I can build.</span></p>
+    </div>
+    <div class="products">
+      <div class="product">
+        <span class="tag">Open source · Claude Code</span>
+        <h3>Moragent</h3>
+        <p><span class="es">AI Agent Studio para Claude Code: un menú guiado para diseñar, crear y operar proyectos de IA agéntica — pensado para gente de negocio, no solo devs.</span><span class="en">AI Agent Studio for Claude Code: a guided menu to design, build, and operate agentic AI projects — made for business people, not just devs.</span></p>
+        <div class="lks">
+          <a class="lk" href="moragent.html"><span class="es">Conocé Moragent →</span><span class="en">Meet Moragent →</span></a>
+          <a class="lk" href="https://github.com/EduardoMoraga/moragent" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
+      <div class="product">
+        <span class="tag">Open source · <span class="es">Orquestación</span><span class="en">Orchestration</span></span>
+        <h3>Rugol OSS</h3>
+        <p><span class="es">Orquestador de agentes de IA: una sala de control local donde equipos de agentes Claude hacen el trabajo, te desafían y recuerdan lo aprendido. El ADN de mi laboratorio.</span><span class="en">AI agent orchestrator: a local control room where teams of Claude agents do the work, challenge you, and remember what they learn. My lab's DNA.</span></p>
+        <div class="lks">
+          <a class="lk" href="rugol-os.html"><span class="es">Conocé Rugol OSS →</span><span class="en">Meet Rugol OSS →</span></a>
+          <a class="lk" href="https://github.com/EduardoMoraga/rugol" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
+      <div class="product">
+        <span class="tag"><span class="es">Sistema en producción</span><span class="en">Production system</span></span>
+        <h3>Brand Tracker</h3>
+        <p><span class="es">Voz del cliente sobre reviews de Google: ingesta determinística separada del análisis IA, taxonomía de trade marketing y scorecards SQL donde cada cifra es trazable a la review original.</span><span class="en">Voice of the customer over Google reviews: deterministic ingestion separated from AI analysis, a trade marketing taxonomy, and SQL scorecards where every figure traces to the original review.</span></p>
+        <div class="lks">
+          <a class="lk" href="#voz-cliente"><span class="es">Ver la demo →</span><span class="en">See the demo →</span></a>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Key Findings -->
-    <div class="findings-grid reveal">
-      <div class="finding-box">
-        <div class="finding-icon"><i class="fas fa-chart-line"></i></div>
-        <div class="finding-stat">30-43%</div>
-        <p data-en="Saturday traffic is 30-43% higher than Thursday (weakest day)" data-es="El trafico del sabado es 30-43% mayor que el jueves (dia mas debil)">Saturday traffic is 30-43% higher than Thursday (weakest day)</p>
-      </div>
-      <div class="finding-box">
-        <div class="finding-icon"><i class="fas fa-bullseye"></i></div>
-        <div class="finding-stat">15:00-18:00</div>
-        <p data-en="Peak window represents the highest ROI for promoter placement" data-es="La ventana peak representa el mayor ROI para ubicacion de promotores">Peak window represents the highest ROI for promoter placement</p>
-      </div>
-      <div class="finding-box">
-        <div class="finding-icon"><i class="fas fa-database"></i></div>
-        <div class="finding-stat">API + Cal</div>
-        <p data-en="Data source: Google Maps Places API + Chilean retail pattern calibration" data-es="Fuente: Google Maps Places API + calibracion de patrones retail chilenos">Data source: Google Maps Places API + Chilean retail pattern calibration</p>
-      </div>
+<section id="articulos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Publicaciones</span><span class="en">Published work</span></p>
+      <h2><span class="es">Ideas que valen la pena compartir.</span><span class="en">Ideas worth sharing.</span></h2>
+      <p><span class="es">Escribo en América Retail sobre economía del comportamiento, sesgos cognitivos y el lado humano del dato.</span><span class="en">I write at América Retail about behavioral economics, cognitive biases, and the human side of data.</span></p>
     </div>
+    <div class="arts">
+      <div class="art"><span class="n">01</span><b>Trade Marketing como Ciencia de Campo</b><span>Trade MKT / Data Science</span></div>
+      <div class="art"><span class="n">02</span><b>La Última Milla de los Datos</b><span>BI / Decisions</span></div>
+      <div class="art"><span class="n">03</span><b>No Compramos Cosas, Compramos Diferencias</b><span>Behavioral Economics</span></div>
+      <div class="art"><span class="n">04</span><b>Del Caos Operativo al Modelo Funcional</b><span>Operations</span></div>
+      <div class="art"><span class="n">05</span><b>El Espejismo del Promedio</b><span>Statistics / Bias</span></div>
+      <div class="art"><span class="n">06</span><b>When the Algorithm Rules the Mind</b><span>AI Ethics</span></div>
+      <div class="art"><span class="n">07</span><b>La Trampa de Elegir</b><span>Choice Architecture</span></div>
+      <div class="art"><span class="n">08</span><b>Orquestar, No Ejecutar</b><span>AI Agents / Leadership</span></div>
+      <div class="art"><span class="n">09</span><b>Felicidad y Otras Formas de Medir lo Invisible</b><span>Economics / Philosophy</span></div>
+    </div>
+    <p class="note"><span class="es">17+ artículos publicados —</span><span class="en">17+ published articles —</span> <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" rel="noopener"><span class="es">leerlos en América Retail →</span><span class="en">read them at América Retail →</span></a></p>
   </div>
 </section>
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <div class="section-label reveal" data-en="Portfolio" data-es="Portafolio">Portfolio</div>
-    <h2 class="section-title reveal" data-en="Built with real data." data-es="Construido con datos reales.">Built with real data.<br><span data-en="Designed for real decisions." data-es="Disenado para decisiones reales.">Designed for real decisions.</span></h2>
-    <p class="section-desc reveal" data-en="Each project solves a real business problem — from retail analytics to HR retention to financial forecasting." data-es="Cada proyecto resuelve un problema de negocio real — desde analitica retail hasta retencion de RRHH y pronosticos financieros.">Each project solves a real business problem — from retail analytics to HR retention to financial forecasting.</p>
 
-    <!-- PRODUCTION APPS (Live demos) -->
-    <h3 class="reveal" style="color:var(--accent); font-size:1rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px;">
-      <span data-en="Live Applications" data-es="Aplicaciones en Vivo">Live Applications</span>
-    </h3>
-    <div class="projects-grid">
-      <a href="https://latam-economic-dashboard-5ianvbjdquf2urrutmbhoy.streamlit.app/" target="_blank" class="project-card reveal">
-        <div class="project-body" style="padding-top:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
-            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">World Bank API</span>
-          </div>
-          <h3><span data-en="LATAM Economic Dashboard" data-es="Dashboard Economico LATAM">LATAM Economic Dashboard</span> <span class="arrow">-></span></h3>
-          <p data-en="End-to-end ETL pipeline: World Bank API → SQLite → ML forecasting for 6 LATAM countries. 7 economic indicators with 5-year predictions using Linear Regression, Exponential Smoothing, and Random Forest." data-es="Pipeline ETL de punta a punta: World Bank API → SQLite → ML forecasting para 6 paises LATAM. 7 indicadores economicos con predicciones a 5 anos usando Regresion Lineal, Suavizado Exponencial y Random Forest.">End-to-end ETL pipeline: World Bank API → SQLite → ML forecasting for 6 LATAM countries. 7 economic indicators with 5-year predictions using Linear Regression, Exponential Smoothing, and Random Forest.</p>
-          <div class="project-tags">
-            <span class="tag-pill">ETL</span><span class="tag-pill">World Bank API</span><span class="tag-pill">scikit-learn</span><span class="tag-pill">SQLite</span><span class="tag-pill">Streamlit</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://stock-price-predictor-vr5aubmeapze59cho3rnkd.streamlit.app/" target="_blank" class="project-card reveal">
-        <div class="project-body" style="padding-top:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
-            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">Yahoo Finance</span>
-          </div>
-          <h3><span data-en="Stock Price Predictor" data-es="Predictor de Precios de Acciones">Stock Price Predictor</span> <span class="arrow">-></span></h3>
-          <p data-en="ML-powered stock analysis: 20+ technical indicators (RSI, MACD, Bollinger), Random Forest & Gradient Boosting classifiers, backtesting engine with Sharpe ratio. Real data from Yahoo Finance." data-es="Analisis bursatil con ML: 20+ indicadores tecnicos (RSI, MACD, Bollinger), clasificadores Random Forest y Gradient Boosting, motor de backtesting con ratio Sharpe. Datos reales de Yahoo Finance.">ML-powered stock analysis: 20+ technical indicators (RSI, MACD, Bollinger), Random Forest & Gradient Boosting classifiers, backtesting engine with Sharpe ratio. Real data from Yahoo Finance.</p>
-          <div class="project-tags">
-            <span class="tag-pill">yfinance</span><span class="tag-pill">scikit-learn</span><span class="tag-pill">Backtesting</span><span class="tag-pill">Plotly</span><span class="tag-pill">Streamlit</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://retail-price-tracker-2zmycjminl99dbvp8sevpn.streamlit.app/" target="_blank" class="project-card reveal">
-        <div class="project-body" style="padding-top:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="background:var(--accent); color:var(--bg); font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px;">Live Demo</span>
-            <span style="background:var(--surface2); color:var(--text2); font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:20px;">Trade Marketing</span>
-          </div>
-          <h3><span data-en="Retail Price Tracker" data-es="Monitor de Precios Retail">Retail Price Tracker</span> <span class="arrow">-></span></h3>
-          <p data-en="Competitive pricing intelligence for LATAM retail. Full ETL pipeline, 4-method anomaly detection ensemble (Z-Score, IQR, Isolation Forest), price gap heatmaps, and auto-generated market insights for 20 products across 5 retailers." data-es="Inteligencia competitiva de precios para retail LATAM. Pipeline ETL completo, ensemble de 4 metodos de deteccion de anomalias (Z-Score, IQR, Isolation Forest), heatmaps de brecha de precios e insights automaticos para 20 productos en 5 retailers.">Competitive pricing intelligence for LATAM retail. Full ETL pipeline, 4-method anomaly detection ensemble (Z-Score, IQR, Isolation Forest), price gap heatmaps, and auto-generated market insights for 20 products across 5 retailers.</p>
-          <div class="project-tags">
-            <span class="tag-pill">Anomaly Detection</span><span class="tag-pill">ETL</span><span class="tag-pill">Isolation Forest</span><span class="tag-pill">SQLite</span><span class="tag-pill">Streamlit</span>
-          </div>
-        </div>
-      </a>
+<section id="toolkit">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Toolkit</p>
+      <h2><span class="es">Del dato crudo a la decisión.</span><span class="en">From raw data to decision.</span></h2>
     </div>
+    <div class="kit">
+      <div class="kcol"><div class="sq"></div><h3>Data Science &amp; ML</h3><ul><li>Python (pandas, scikit-learn)</li><li>XGBoost · Random Forest · SHAP</li><li>K-Means, DBSCAN, PCA</li><li>ARIMA · Prophet · LSTM</li><li>Apriori · FP-Growth</li></ul></div>
+      <div class="kcol"><div class="sq"></div><h3>Business Intelligence</h3><ul><li>Power BI (DAX, Power Query)</li><li>SQL (PostgreSQL, SQL Server)</li><li><span class="es">Arquitectura de pipelines ETL</span><span class="en">ETL Pipeline Architecture</span></li><li>Streamlit · Supabase</li><li><span class="es">Reporting automatizado</span><span class="en">Automated Reporting</span></li></ul></div>
+      <div class="kcol"><div class="sq"></div><h3><span class="es">IA &amp; Automatización</span><span class="en">AI &amp; Automation</span></h3><ul><li><span class="es">Agentes de IA (Claude, GPT APIs)</span><span class="en">AI Agents (Claude, GPT APIs)</span></li><li>Claude Code &amp; Agent SDK</li><li><span class="es">Agentes de voz (ElevenLabs)</span><span class="en">Voice agents (ElevenLabs)</span></li><li>Web Scraping (Selenium, BS4)</li><li>LLM-powered Workflows</li></ul></div>
+      <div class="kcol"><div class="sq"></div><h3>Consumer &amp; Market Intelligence</h3><ul><li><span class="es">Conducta del consumidor</span><span class="en">Consumer behavior</span></li><li><span class="es">Brand tracking &amp; voz del cliente</span><span class="en">Brand tracking &amp; voice of customer</span></li><li>Pricing &amp; Promotion Analytics</li><li>Category Management</li><li>Retail LATAM (CL, AR, PE, BO)</li></ul></div>
+    </div>
+  </div>
+</section>
 
-    <!-- DATA SCIENCE FUNDAMENTALS -->
-    <h3 class="reveal" style="color:var(--text2); font-size:1rem; text-transform:uppercase; letter-spacing:2px; margin:40px 0 20px;">
-      <span data-en="Data Science Fundamentals" data-es="Fundamentos de Data Science">Data Science Fundamentals</span>
-    </h3>
-    <div class="projects-grid">
-      <a href="https://github.com/EduardoMoraga/market-basket-analysis" target="_blank" class="project-card reveal">
-        <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/market-basket-analysis/master/outputs/figures/network_graph.png" alt="Market Basket Analysis network graph showing product associations">
-        <div class="project-body">
-          <h3><span data-en="Market Basket Analysis" data-es="Analisis de Canasta de Compra">Market Basket Analysis</span> <span class="arrow">-></span></h3>
-          <p data-en="Association rule mining on 38K+ supermarket transactions. Apriori & FP-Growth algorithms revealing which products drive cross-purchases." data-es="Mineria de reglas de asociacion en 38K+ transacciones de supermercado. Algoritmos Apriori y FP-Growth revelando que productos impulsan compras cruzadas.">Association rule mining on 38K+ supermarket transactions. Apriori & FP-Growth algorithms revealing which products drive cross-purchases.</p>
-          <div class="project-tags">
-            <span class="tag-pill">Apriori</span><span class="tag-pill">FP-Growth</span><span class="tag-pill">NetworkX</span><span class="tag-pill">Trade Marketing</span>
-          </div>
+<section id="sesgos" style="padding:64px 0">
+  <div class="wrap">
+    <div class="canvas">
+      <span class="vlc" style="left:72%"></span>
+      <span class="vlc" style="left:78%"></span>
+      <span class="sq"></span>
+      <div class="inner">
+        <p class="eyebrow" style="color:var(--bone)"><span class="es">Museo de sesgos cognitivos</span><span class="en">Museum of cognitive biases</span></p>
+        <div class="bias-count" id="biasCount">01 / 12</div>
+        <blockquote id="biasName">Anclaje</blockquote>
+        <p class="bias-desc" id="biasDesc"></p>
+        <div class="bias-row">
+          <button class="bias-next" id="biasNext"><span class="es">Otro sesgo →</span><span class="en">Another bias →</span></button>
+          <span class="who"><span class="es">Los atajos con los que decidimos — el material de mis artículos.</span><span class="en">The shortcuts behind our decisions — the raw material of my articles.</span></span>
         </div>
-      </a>
-      <a href="https://github.com/EduardoMoraga/employee-attrition-predictor" target="_blank" class="project-card reveal">
-        <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/employee-attrition-predictor/master/outputs/figures/model_evaluation.png" alt="Employee attrition model evaluation metrics">
-        <div class="project-body">
-          <h3><span data-en="Employee Attrition Predictor" data-es="Predictor de Desercion Laboral">Employee Attrition Predictor</span> <span class="arrow">-></span></h3>
-          <p data-en="XGBoost model achieving 0.99 AUC-ROC on 15K employee records. SHAP explanations make every prediction transparent for HR teams." data-es="Modelo XGBoost con 0.99 AUC-ROC en 15K registros de empleados. Explicaciones SHAP hacen cada prediccion transparente para equipos de RRHH.">XGBoost model achieving 0.99 AUC-ROC on 15K employee records. SHAP explanations make every prediction transparent for HR teams.</p>
-          <div class="project-tags">
-            <span class="tag-pill">XGBoost</span><span class="tag-pill">SHAP</span><span class="tag-pill">HR Analytics</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://github.com/EduardoMoraga/customer-segmentation" target="_blank" class="project-card reveal">
-        <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/customer-segmentation/master/outputs/figures/clusters_visualization.png" alt="Customer segmentation cluster visualization">
-        <div class="project-body">
-          <h3><span data-en="Customer Segmentation" data-es="Segmentacion de Clientes">Customer Segmentation</span> <span class="arrow">-></span></h3>
-          <p data-en="K-Means & DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment based on purchase behavior." data-es="Clustering K-Means y DBSCAN con optimizacion de silueta. Recomendaciones de estrategia comercial por segmento basadas en comportamiento de compra.">K-Means & DBSCAN clustering with silhouette optimization. Commercial strategy recommendations per segment based on purchase behavior.</p>
-          <div class="project-tags">
-            <span class="tag-pill">K-Means</span><span class="tag-pill">DBSCAN</span><span class="tag-pill">PCA</span><span class="tag-pill">Strategy</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://github.com/EduardoMoraga/stock-price-forecasting" target="_blank" class="project-card reveal">
-        <img class="project-img" src="https://raw.githubusercontent.com/EduardoMoraga/stock-price-forecasting/master/outputs/figures/eda_timeseries.png" alt="Stock price time series forecasting chart">
-        <div class="project-body">
-          <h3><span data-en="Stock Price Forecasting" data-es="Pronostico de Precios de Acciones">Stock Price Forecasting</span> <span class="arrow">-></span></h3>
-          <p data-en="Comparing ARIMA, Prophet, and LSTM on Amazon stock data. Full time series decomposition, stationarity testing, and model benchmarking." data-es="Comparando ARIMA, Prophet y LSTM con datos de acciones de Amazon. Descomposicion completa de series de tiempo, pruebas de estacionariedad y benchmarking de modelos.">Comparing ARIMA, Prophet, and LSTM on Amazon stock data. Full time series decomposition, stationarity testing, and model benchmarking.</p>
-          <div class="project-tags">
-            <span class="tag-pill">ARIMA</span><span class="tag-pill">Prophet</span><span class="tag-pill">LSTM</span><span class="tag-pill">TensorFlow</span>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-<!-- ARTICLES -->
-<section id="articles" style="background:var(--bg2); border-top:1px solid var(--border);">
-  <div class="container">
-    <div class="section-label reveal" data-en="Published Work" data-es="Trabajo Publicado">Published Work</div>
-    <div class="articles-header">
-      <h2 class="section-title reveal" data-en="Ideas worth sharing." data-es="Ideas que vale la pena compartir." style="margin-bottom:0;">Ideas worth sharing.</h2>
-      <span class="ar-badge reveal"><i class="fas fa-newspaper"></i> America Retail</span>
-    </div>
-    <p class="section-desc reveal" data-en="Writing about behavioral economics, the human side of data, and the future of trade marketing at America Retail." data-es="Escribiendo sobre economia conductual, el lado humano de los datos y el futuro del trade marketing en America Retail.">Writing about behavioral economics, the human side of data, and the future of trade marketing at America Retail.</p>
-    <div class="articles-grid">
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">01</div>
-        <h4>Trade Marketing como Ciencia de Campo</h4>
-        <div class="article-topic">Trade Marketing / Data Science</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">02</div>
-        <h4>La Ultima Milla de los Datos</h4>
-        <div class="article-topic">Business Intelligence / Decisions</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">03</div>
-        <h4>No Compramos Cosas, Compramos Diferencias</h4>
-        <div class="article-topic">Behavioral Economics</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">04</div>
-        <h4>Del Caos Operativo al Modelo Funcional</h4>
-        <div class="article-topic">Operations / Trade Marketing</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">05</div>
-        <h4>El Espejismo del Promedio</h4>
-        <div class="article-topic">Statistics / Decision Bias</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">06</div>
-        <h4>When the Algorithm Rules the Mind</h4>
-        <div class="article-topic">AI Ethics / Cognitive Science</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">07</div>
-        <h4>La Trampa de Elegir</h4>
-        <div class="article-topic">Choice Architecture</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">08</div>
-        <h4>Orquestar, No Ejecutar</h4>
-        <div class="article-topic">AI Agents / Leadership</div>
-      </a>
-      <a href="https://americaretail-malls.com/?s=Eduardo+Moraga" target="_blank" class="article-card reveal">
-        <div class="article-num">09</div>
-        <h4>Felicidad y Otras Formas de Medir lo Invisible</h4>
-        <div class="article-topic">Economics / Philosophy</div>
-      </a>
-    </div>
-  </div>
-</section>
-<!-- RESEARCH & REFERENCES -->
-<section id="references" class="references-section">
-  <div class="container">
-    <div class="section-label reveal" data-en="Research & References" data-es="Investigacion y Referencias">Research & References</div>
-    <h2 class="section-title reveal" data-en="Built on academic foundations." data-es="Construido sobre bases academicas.">Built on academic foundations.</h2>
-    <p class="section-desc reveal" data-en="The methodologies behind every project are rooted in peer-reviewed research. Explore the academic landscape." data-es="Las metodologias detras de cada proyecto estan basadas en investigacion revisada por pares. Explora el panorama academico.">The methodologies behind every project are rooted in peer-reviewed research. Explore the academic landscape.</p>
-    <div class="references-grid">
-      <a href="https://scholar.google.com/scholar?q=retail+customer+behavior+analytics" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="Retail Customer Behavior Analytics" data-es="Analitica de Comportamiento del Cliente Retail">Retail Customer Behavior Analytics</h4>
-        <p data-en="Research on understanding shopping patterns, purchase drivers, and in-store behavior through data analysis and machine learning." data-es="Investigacion sobre patrones de compra, impulsores de compra y comportamiento en tienda mediante analisis de datos y machine learning.">Research on understanding shopping patterns, purchase drivers, and in-store behavior through data analysis and machine learning.</p>
-      </a>
-      <a href="https://scholar.google.com/scholar?q=market+basket+analysis+association+rules+retail" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="Market Basket Analysis Association Rules" data-es="Reglas de Asociacion en Analisis de Canasta">Market Basket Analysis Association Rules</h4>
-        <p data-en="Academic work on association rule mining algorithms like Apriori and FP-Growth for discovering product purchase relationships." data-es="Trabajo academico sobre algoritmos de mineria de reglas de asociacion como Apriori y FP-Growth para descubrir relaciones de compra entre productos.">Academic work on association rule mining algorithms like Apriori and FP-Growth for discovering product purchase relationships.</p>
-      </a>
-      <a href="https://scholar.google.com/scholar?q=AI+agents+trade+marketing+retail+optimization" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="AI Agents Applied to Trade Marketing" data-es="Agentes de IA Aplicados al Trade Marketing">AI Agents Applied to Trade Marketing</h4>
-        <p data-en="Emerging research on autonomous AI agents for retail optimization, field operations scheduling, and trade marketing automation." data-es="Investigacion emergente sobre agentes autonomos de IA para optimizacion retail, agendamiento de operaciones de campo y automatizacion de trade marketing.">Emerging research on autonomous AI agents for retail optimization, field operations scheduling, and trade marketing automation.</p>
-      </a>
-      <a href="https://scholar.google.com/scholar?q=employee+attrition+prediction+machine+learning" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="Employee Attrition Machine Learning" data-es="Machine Learning para Desercion Laboral">Employee Attrition Machine Learning</h4>
-        <p data-en="Studies on predicting employee turnover using gradient boosting, random forests, and explainable AI techniques like SHAP." data-es="Estudios sobre prediccion de rotacion de empleados usando gradient boosting, random forests y tecnicas de IA explicable como SHAP.">Studies on predicting employee turnover using gradient boosting, random forests, and explainable AI techniques like SHAP.</p>
-      </a>
-      <a href="https://scholar.google.com/scholar?q=customer+segmentation+clustering+retail" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="Customer Segmentation Clustering" data-es="Segmentacion de Clientes por Clustering">Customer Segmentation Clustering</h4>
-        <p data-en="Research on K-Means, DBSCAN, and hierarchical clustering methods for identifying distinct customer groups in retail." data-es="Investigacion sobre metodos K-Means, DBSCAN y clustering jerarquico para identificar grupos distintos de clientes en retail.">Research on K-Means, DBSCAN, and hierarchical clustering methods for identifying distinct customer groups in retail.</p>
-      </a>
-      <a href="https://scholar.google.com/scholar?q=time+series+forecasting+retail+demand" target="_blank" class="ref-card reveal">
-        <div class="ref-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h4 data-en="Time Series Forecasting Retail" data-es="Pronostico de Series de Tiempo en Retail">Time Series Forecasting Retail</h4>
-        <p data-en="Academic foundations for ARIMA, Prophet, and LSTM approaches to demand forecasting and inventory optimization in retail." data-es="Bases academicas para enfoques ARIMA, Prophet y LSTM en pronostico de demanda y optimizacion de inventario en retail.">Academic foundations for ARIMA, Prophet, and LSTM approaches to demand forecasting and inventory optimization in retail.</p>
-      </a>
-    </div>
-  </div>
-</section>
-<!-- SKILLS -->
-<section class="skills-section">
-  <div class="container">
-    <div class="section-label reveal" data-en="Toolkit" data-es="Herramientas">Toolkit</div>
-    <h2 class="section-title reveal" data-en="Full-stack data professional." data-es="Profesional de datos full-stack.">Full-stack data professional.</h2>
-    <div class="skills-cols" style="margin-top:48px;">
-      <div class="skill-col reveal">
-        <h4>Data Science & ML</h4>
-        <ul>
-          <li>Python (pandas, scikit-learn)</li>
-          <li>XGBoost / Random Forest / SHAP</li>
-          <li>K-Means, DBSCAN, PCA</li>
-          <li>Time Series (ARIMA, Prophet, LSTM)</li>
-          <li>Association Rules (Apriori, FP-Growth)</li>
-        </ul>
-      </div>
-      <div class="skill-col reveal">
-        <h4>Business Intelligence</h4>
-        <ul>
-          <li>Power BI (DAX, Power Query)</li>
-          <li>SQL (PostgreSQL, SQL Server)</li>
-          <li>ETL Pipeline Architecture</li>
-          <li>Streamlit Applications</li>
-          <li>Automated Reporting</li>
-        </ul>
-      </div>
-      <div class="skill-col reveal">
-        <h4>AI & Automation</h4>
-        <ul>
-          <li>AI Agents (Claude, GPT APIs)</li>
-          <li>LLM-powered Workflows</li>
-          <li>Web Scraping (Selenium, BS4)</li>
-          <li>Process Automation</li>
-          <li>Claude Code & Agent SDK</li>
-        </ul>
-      </div>
-      <div class="skill-col reveal">
-        <h4>Trade Marketing</h4>
-        <ul>
-          <li>Perfect Store / Availability</li>
-          <li>Category Management</li>
-          <li>Pricing & Promotion Analytics</li>
-          <li>Field Ops Optimization</li>
-          <li>LATAM Retail (CL, AR, MX, CO)</li>
-        </ul>
       </div>
     </div>
   </div>
 </section>
-<!-- CTA SECTION -->
-<section class="cta-section">
-  <div class="container">
-    <h2 class="reveal" data-en="Let's Connect" data-es="Conectemos">Let's Connect</h2>
-    <p class="cta-desc reveal" data-en="Looking for a data-driven partner to transform your trade marketing operations? Let's talk." data-es="Buscas un socio orientado a datos para transformar tus operaciones de trade marketing? Hablemos.">Looking for a data-driven partner to transform your trade marketing operations? Let's talk.</p>
-    <div class="cta-buttons reveal">
-      <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" class="btn btn-primary"><i class="fab fa-linkedin"></i> <span data-en="Connect on LinkedIn" data-es="Conectar en LinkedIn">Connect on LinkedIn</span></a>
-      <a href="mailto:eduardo.moraga.o@gmail.com" class="btn btn-ghost"><i class="fas fa-envelope"></i> <span data-en="Send Email" data-es="Enviar Email">Send Email</span></a>
-      <a href="https://github.com/EduardoMoraga" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> <span data-en="View GitHub" data-es="Ver GitHub">View GitHub</span></a>
+
+<section id="contacto" class="cta">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center;display:inline-flex"><span class="es">Contacto</span><span class="en">Contact</span></p>
+    <h2><span class="es">¿Conversamos de IA, datos y marketing?</span><span class="en">Shall we talk AI, data, and marketing?</span></h2>
+    <p><span class="es">Business intelligence, machine learning o agentes de IA aplicados a tu operación — con las personas en el centro.</span><span class="en">Business intelligence, machine learning, or AI agents applied to your operation — with people at the center.</span></p>
+    <div class="cta-row">
+      <a class="btn" href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="mailto:eduardo.moraga.o@gmail.com">Email</a>
+      <a class="btn ghost" href="https://github.com/EduardoMoraga" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </section>
-<!-- FOOTER -->
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-quote">
-      "<span data-en="The last mile of data is not a dashboard" data-es="La ultima milla de los datos no es un dashboard">The last mile of data is not a dashboard</span> — <span data-en="it's a decision." data-es="es una decision.">it's a decision.</span>"
-    </div>
-    <div class="footer-links">
-      <a href="https://github.com/EduardoMoraga" target="_blank" aria-label="GitHub profile"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/eduardomoragaortega/" target="_blank" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
-      <a href="mailto:eduardo.moraga.o@gmail.com" aria-label="Send email"><i class="fas fa-envelope"></i></a>
-    </div>
+  <div class="wrap">
+    <span>© <span id="yy">2026</span> Eduardo Moraga — <span class="es">hecho con datos, diseñado con propósito.</span><span class="en">built with data, designed with purpose.</span></span>
+    <span class="lab">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#16140F" stroke-width="4"><rect x="28" y="28" width="44" height="44"/><rect x="12" y="12" width="76" height="76"/></g></svg>
+      <span>rugol — <span class="es">mi laboratorio de IA</span><span class="en">my AI lab</span></span>
+    </span>
   </div>
-  <div class="footer-copy container">Eduardo Moraga &copy; <span id="copyrightYear"></span> — <span data-en="Built with data, designed with purpose." data-es="Construido con datos, disenado con proposito.">Built with data, designed with purpose.</span></div>
 </footer>
-<!-- BACK TO TOP -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <script>
-// ── PAGE LOADER ──
-window.addEventListener('load', function() {
-  document.getElementById('pageLoader').classList.add('loaded');
-});
+const $=(s,c=document)=>c.querySelector(s);
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const isEN=()=>document.body.classList.contains('lang-en');
+function onView(el,cb){if(!el)return;const o=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting){cb();o.disconnect();}})},{threshold:.12});o.observe(el);}
+function icons(){try{window.lucide&&lucide.createIcons();}catch(e){}}
+icons();
 
-// ── FORCE SCROLL TO TOP ON LOAD ──
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('load', function() { window.scrollTo(0, 0); });
-window.scrollTo(0, 0);
+/* ===== IDIOMA ===== */
+const setLang = l => {
+  document.body.classList.toggle('lang-en', l === 'en');
+  document.documentElement.lang = l;
+  document.getElementById('btn-es').classList.toggle('on', l === 'es');
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  const bi=$('#brandInput'); if(bi) bi.placeholder = l==='en' ? 'Type a brand (yours, a competitor…)' : 'Escribí una marca (la tuya, un competidor…)';
+  const ci=$('#chatInput'); if(ci) ci.placeholder = l==='en' ? 'Message Rugol…' : 'Escribile a Rugol…';
+  if(window.__boot) window.__boot();
+  if(window.__biasRefresh) window.__biasRefresh();
+  try { localStorage.setItem('lang', l); } catch(e) {}
+};
+document.getElementById('btn-es').onclick = () => setLang('es');
+document.getElementById('btn-en').onclick = () => setLang('en');
+try { const saved = localStorage.getItem('lang'); if (saved) setLang(saved); } catch(e) {}
+document.getElementById('yy').textContent = new Date().getFullYear();
 
-// ── DYNAMIC COPYRIGHT YEAR ──
-document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+/* ===== BOOT TERMINAL (hero) ===== */
+(function(){
+  const el=$('#bootText'); if(!el) return; let timer=null;
+  const LINES={
+    es:['<span class="p">edu@latam</span> ~ % whoami','economista · data scientist','<span class="p">edu@latam</span> ~ % intereses','conducta_del_consumidor · sesgos_cognitivos · decisiones','<span class="p">edu@latam</span> ~ % ./demos --en-vivo','3 demos corriendo en esta página ✓'],
+    en:['<span class="p">edu@latam</span> ~ % whoami','economist · data scientist','<span class="p">edu@latam</span> ~ % interests','consumer_behavior · cognitive_biases · decisions','<span class="p">edu@latam</span> ~ % ./demos --live','3 demos running on this page ✓']
+  };
+  function run(){
+    if(timer)clearInterval(timer);
+    const lines=LINES[isEN()?'en':'es'];const plain=lines.map(l=>l.replace(/<[^>]+>/g,''));
+    let li=0,ci=0;el.innerHTML='';let out='';
+    timer=setInterval(()=>{
+      if(li>=lines.length){clearInterval(timer);timer=null;return;}
+      ci++;
+      const done=plain.slice(0,li).map((_,i)=>lines[i]).join('\n');
+      const cur=plain[li].slice(0,ci);
+      el.innerHTML=(done?done+'\n':'')+(ci>=plain[li].length?lines[li]:cur);
+      if(ci>=plain[li].length){li++;ci=0;}
+    },26);
+  }
+  window.__boot=run;
+  onView($('#boot'),run);
+})();
 
-// ── HAMBURGER MENU ──
-var hamburger = document.getElementById('hamburgerBtn');
-var navLinks = document.getElementById('navLinks');
-hamburger.addEventListener('click', function() {
-  hamburger.classList.toggle('open');
-  navLinks.classList.toggle('mobile-open');
-});
-// Close menu on link click
-navLinks.querySelectorAll('a[href^="#"]').forEach(function(link) {
-  link.addEventListener('click', function() {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('mobile-open');
+/* ===== MUSEO DE SESGOS ===== */
+(function(){
+  const nm=$('#biasName'),ds=$('#biasDesc'),ct=$('#biasCount'),bt=$('#biasNext'); if(!nm) return;
+  const B={es:[
+    ['Anclaje','El primer precio que ves reordena todos los demás. Por eso el "antes $49.990" trabaja más que el descuento.'],
+    ['Aversión a la pérdida','Perder duele el doble de lo que alegra ganar. "Últimas unidades" vende más que "gran stock".'],
+    ['Efecto señuelo','El combo mediano no existe para venderse: existe para que el grande parezca obvio.'],
+    ['Prueba social','Cuando no sabemos qué elegir, elegimos lo que eligen otros. Las filas también son publicidad.'],
+    ['Sesgo de confirmación','No buscamos datos para decidir: buscamos datos para confirmar lo que ya decidimos. Los dashboards también sufren de esto.'],
+    ['Costo hundido','Seguimos invirtiendo en lo que ya perdimos para no admitir que lo perdimos. Los proyectos zombis viven de esto.'],
+    ['Efecto dotación','Lo que ya es "mío" vale más. Las pruebas gratis no regalan producto: regalan propiedad.'],
+    ['Descuento hiperbólico','Preferimos poco hoy a mucho mañana. Las cuotas sin interés son una máquina de fabricar presente.'],
+    ['Efecto halo','Una tienda limpia hace que el producto parezca mejor. Un dashboard lindo hace que el dato parezca verdad. Cuidado con ambos.'],
+    ['Paradoja de la elección','Más opciones, menos ventas. La góndola perfecta no es la más llena: es la más fácil de decidir.'],
+    ['Sesgo de supervivencia','Estudiamos las tiendas que funcionan y olvidamos las que cerraron. Los datos que faltan también son datos.'],
+    ['Efecto encuadre','"90% libre de grasa" y "10% grasa" son el mismo yogur — y no venden lo mismo. El contexto es parte del producto.']
+  ],en:[
+    ['Anchoring','The first price you see reorders all the others. That\'s why "was $49,990" works harder than the discount itself.'],
+    ['Loss aversion','Losing hurts twice as much as winning feels good. "Last units" sells more than "plenty in stock".'],
+    ['Decoy effect','The medium combo doesn\'t exist to be sold: it exists to make the large one look obvious.'],
+    ['Social proof','When we don\'t know what to choose, we choose what others chose. Queues are advertising too.'],
+    ['Confirmation bias','We don\'t look for data to decide — we look for data to confirm what we already decided. Dashboards suffer from this too.'],
+    ['Sunk cost','We keep investing in what we\'ve already lost so we don\'t have to admit we lost it. Zombie projects live off this.'],
+    ['Endowment effect','What\'s already "mine" is worth more. Free trials don\'t give away product: they give away ownership.'],
+    ['Hyperbolic discounting','We prefer a little today over a lot tomorrow. Interest-free installments are a machine for manufacturing "now".'],
+    ['Halo effect','A clean store makes the product look better. A beautiful dashboard makes the data look true. Beware of both.'],
+    ['Choice overload','More options, fewer sales. The perfect shelf isn\'t the fullest one — it\'s the easiest to decide on.'],
+    ['Survivorship bias','We study the stores that thrive and forget the ones that closed. Missing data is data too.'],
+    ['Framing effect','"90% fat-free" and "10% fat" are the same yogurt — and they don\'t sell the same. Context is part of the product.']
+  ]};
+  let order=[...Array(12).keys()].sort(()=>Math.random()-.5),pos=0;
+  function show(){
+    const set=B[isEN()?'en':'es'],i=order[pos%12],canvas=nm.closest('.canvas');
+    canvas.classList.add('bias-fade');
+    setTimeout(()=>{nm.textContent=set[i][0];ds.textContent=set[i][1];ct.textContent=String(pos%12+1).padStart(2,'0')+' / 12';canvas.classList.remove('bias-fade');},260);
+  }
+  window.__biasRefresh=show;
+  bt.addEventListener('click',()=>{pos++;show();});
+  show();
+})();
+
+const C={bone:'#EAE4D7',grey:'#9A9489',berm:'#DD4524',sky:'#7FA6C9',petrol:'#6FAE97',gold:'#E0A33E',violet:'#A492E6',grid:'rgba(234,228,215,.07)'};
+const AX=(typeof ApexCharts!=='undefined');
+function mk(el,opt){if(!AX||!el)return null;try{const c=new ApexCharts(el,opt);c.render();return c;}catch(e){return null;}}
+
+/* ===== DASHBOARD ===== */
+(function(){
+  const root=$('#dashboard'); if(!root) return; let charts={};
+  function sparkOpts(color,data){return{chart:{type:'area',height:38,sparkline:{enabled:true},animations:{enabled:true}},stroke:{curve:'smooth',width:2},colors:[color],fill:{type:'gradient',gradient:{opacityFrom:.5,opacityTo:0}},series:[{data:data}],tooltip:{enabled:false}};}
+  const series=()=>Array.from({length:20},()=>rnd(30,90));
+  function buildArea(){
+    const cats=Array.from({length:30},(_,i)=>i<24?('-'+(24-i)):'F'+(i-23));
+    const real=[];let v=58;for(let i=0;i<24;i++){v=Math.max(38,Math.min(82,v+rnd(-5,5)));real.push(+v.toFixed(1));}
+    const fc=Array(23).fill(null);let last=real[23];fc.push(last);for(let i=0;i<6;i++){last=Math.max(36,last+rnd(-2,6));fc.push(+last.toFixed(1));}
+    return mk($('#areaChart'),{chart:{type:'area',height:255,fontFamily:'Inter',background:'transparent',toolbar:{show:false},animations:{enabled:true,dynamicAnimation:{speed:700}}},theme:{mode:'dark'},colors:[C.sky,C.berm],dataLabels:{enabled:false},stroke:{curve:'smooth',width:[3,2],dashArray:[0,5]},fill:{type:'gradient',gradient:{opacityFrom:.35,opacityTo:0,stops:[0,95]}},grid:{borderColor:C.grid,strokeDashArray:3,padding:{left:6,right:6}},xaxis:{categories:cats,labels:{show:false},axisBorder:{show:false},axisTicks:{show:false},tooltip:{enabled:false}},yaxis:{labels:{style:{colors:C.grey,fontFamily:'JetBrains Mono'},formatter:v=>'$'+Math.round(v)+'K'}},legend:{show:true,labels:{colors:C.bone},fontFamily:'JetBrains Mono',fontSize:'11px',markers:{width:9,height:9,radius:0}},tooltip:{theme:'dark',x:{show:false}},series:[{name:'Real',data:real.concat(Array(6).fill(null))},{name:'Forecast',data:fc}]});
+  }
+  function buildGauge(){return mk($('#gaugeChart'),{chart:{type:'radialBar',height:255,background:'transparent',fontFamily:'Inter'},theme:{mode:'dark'},colors:[C.berm],plotOptions:{radialBar:{hollow:{size:'60%'},track:{background:'rgba(234,228,215,.09)'},dataLabels:{name:{color:C.grey,fontFamily:'JetBrains Mono',fontSize:'11px',offsetY:22},value:{color:C.bone,fontSize:'34px',fontWeight:700,offsetY:-12,formatter:v=>Math.round(v)+'%'}}}},stroke:{lineCap:'round'},fill:{type:'gradient',gradient:{shade:'dark',gradientToColors:[C.gold],stops:[0,100]}},labels:['Cumplimiento'],series:[72]});}
+  function buildBar(){return mk($('#barChart'),{chart:{type:'bar',height:255,background:'transparent',fontFamily:'Inter',toolbar:{show:false}},theme:{mode:'dark'},plotOptions:{bar:{borderRadius:3,columnWidth:'56%',distributed:true}},colors:[C.sky,C.petrol,C.berm,C.gold,C.violet,C.grey],dataLabels:{enabled:false},legend:{show:false},grid:{borderColor:C.grid,strokeDashArray:3},xaxis:{categories:['Reportes','Operaciones','Finanzas','Comercial','Soporte','Otros'],labels:{style:{colors:C.grey,fontFamily:'JetBrains Mono',fontSize:'10px'}},axisBorder:{show:false},axisTicks:{show:false}},yaxis:{labels:{style:{colors:C.grey}}},tooltip:{theme:'dark'},series:[{name:'Volumen',data:[44,55,41,37,22,18].map(x=>x+Math.round(rnd(-4,6)))}]});}
+  function heatData(){const rows=['T-01','T-02','T-03','T-04','T-05','T-06','T-07'];return rows.map(r=>({name:r,data:Array.from({length:11},(_,i)=>({x:'S'+(i+1),y:Math.round(Math.random()>.95?rnd(91,100):rnd(5,80))}))}));}
+  function buildHeat(){return mk($('#heatChart'),{chart:{type:'heatmap',height:255,background:'transparent',fontFamily:'Inter',toolbar:{show:false}},theme:{mode:'dark'},dataLabels:{enabled:false},colors:[C.berm],stroke:{colors:['#1E1B17'],width:2},plotOptions:{heatmap:{radius:1,enableShades:false,colorScale:{ranges:[{from:0,to:40,color:'#2c4456'},{from:41,to:70,color:'#3f6f5e'},{from:71,to:90,color:'#b88a2e'},{from:91,to:100,color:'#DD4524'}]}}},xaxis:{labels:{style:{colors:C.grey,fontFamily:'JetBrains Mono',fontSize:'9px'}},axisBorder:{show:false},axisTicks:{show:false}},yaxis:{labels:{style:{colors:C.grey,fontFamily:'JetBrains Mono',fontSize:'9px'}}},legend:{show:false},tooltip:{theme:'dark'},series:heatData()});}
+  let map,markers=[];
+  const cities=[{n:'Santiago',c:[-33.45,-70.66]},{n:'Buenos Aires',c:[-34.6,-58.38]},{n:'Lima',c:[-12.04,-77.04]},{n:'Bogotá',c:[4.71,-74.07]},{n:'CDMX',c:[19.43,-99.13]},{n:'São Paulo',c:[-23.55,-46.63]},{n:'Montevideo',c:[-34.9,-56.16]},{n:'Quito',c:[-0.18,-78.47]}];
+  function perfColor(v){return v<-3?C.berm:v<4?C.gold:C.petrol;}
+  function buildMap(){
+    if(typeof L==='undefined'||!$('#map'))return;
+    map=L.map('map',{zoomControl:true,scrollWheelZoom:false}).setView([-15,-64],3);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',subdomains:'abcd',maxZoom:10}).addTo(map);
+    cities.forEach(ci=>{const ventas=Math.round(rnd(40,320)),vr=+rnd(-9,14).toFixed(1),col=perfColor(vr);
+      const m=L.circleMarker(ci.c,{radius:6+ventas/40,color:col,weight:2,fillColor:col,fillOpacity:.35});
+      m.bindPopup('<b>'+ci.n+'</b><br>Ventas: $'+ventas+'K<br>Var: <span class="'+(vr<0?'neg':'pos')+'">'+(vr>0?'+':'')+vr+'%</span>');
+      m.addTo(map);markers.push({m:m,base:6+ventas/40});});
+    setTimeout(()=>{try{map.invalidateSize();}catch(e){}},250);
+  }
+  let pulse=0;
+  function animateMap(){pulse+=0.5;markers.forEach((o,i)=>{o.m.setRadius(o.base+Math.sin(pulse+i)*2.2);});}
+  const ev=[['ok','circle-check','Pipeline ETL','sincronizó 1.243 filas'],['info','brain','Forecast','recalculado · MAPE 4.2%'],['al','triangle-alert','Anomalía','valor fuera de rango detectado'],['info','message-square','Agente','respondió consulta en lenguaje natural'],['ok','file-check','Reporte','ejecutivo generado y enviado'],['al','package-x','Alerta','desvío proyectado en proceso 12'],['info','layers','Segmentación','recluster K-Means · 4 grupos'],['ok','shield-check','Validación','calidad de datos 99.1%']];
+  function tick(){const t=$('#feed');if(!t)return;const e=ev[Math.floor(Math.random()*ev.length)];const tm=new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});const d=document.createElement('div');d.className='row '+e[0];d.innerHTML='<i data-lucide="'+e[1]+'"></i><span class="tm">'+tm+'</span><span><b>'+e[2]+'</b> '+e[3]+'</span>';t.prepend(d);while(t.children.length>8)t.lastChild.remove();icons();}
+  const st={ventas:rnd(9,12)*1e3,tickets:rnd(230,300),conv:rnd(3.2,5),anom:1};const sp={};
+  function fmt(n){return '$'+Math.round(n).toLocaleString('es-CL');}
+  function setDelta(id,up){const el=$(id);if(!el)return;el.className='d '+(up?'up':'down');el.innerHTML='<i data-lucide="'+(up?'arrow-up-right':'arrow-down-right')+'"></i> '+Math.abs(rnd(.4,6)).toFixed(1)+'%';}
+  function stepKpi(){st.ventas=Math.max(6e3,st.ventas+rnd(-500,800));st.tickets=Math.max(160,st.tickets+rnd(-12,18));st.conv=Math.min(12,Math.max(1.8,st.conv+rnd(-.35,.45)));st.anom=Math.random()>.6?1:Math.random()>.7?2:0;$('#k-ventas').textContent=fmt(st.ventas);$('#k-tickets').textContent=Math.round(st.tickets).toLocaleString('es-CL');$('#k-conv').textContent=st.conv.toFixed(1)+'%';$('#k-anom').textContent=st.anom;setDelta('#d-ventas',Math.random()>.3);setDelta('#d-tickets',Math.random()>.4);setDelta('#d-conv',Math.random()>.45);['ventas','tickets','conv','anom'].forEach(k=>{if(sp[k])sp[k].updateSeries([{data:Array.from({length:20},()=>rnd(30,90))}]);});icons();}
+  onView(root,()=>{icons();sp.ventas=mk($('#sp-ventas'),sparkOpts(C.petrol,series()));sp.tickets=mk($('#sp-tickets'),sparkOpts(C.sky,series()));sp.conv=mk($('#sp-conv'),sparkOpts(C.gold,series()));sp.anom=mk($('#sp-anom'),sparkOpts(C.berm,series()));
+    charts.area=buildArea();charts.gauge=buildGauge();charts.bar=buildBar();charts.heat=buildHeat();buildMap();stepKpi();for(let i=0;i<5;i++)tick();
+    setInterval(()=>{stepKpi();if(charts.area){const real=[];let v=rnd(45,70);for(let i=0;i<24;i++){v=Math.max(38,Math.min(82,v+rnd(-5,5)));real.push(+v.toFixed(1));}const fc=Array(23).fill(null);let last=real[23];fc.push(last);for(let i=0;i<6;i++){last=Math.max(36,last+rnd(-2,6));fc.push(+last.toFixed(1));}charts.area.updateSeries([{name:'Real',data:real.concat(Array(6).fill(null))},{name:'Forecast',data:fc}]);const rb=$('#rev-badge');if(rb){const g=(rnd(-2,8)).toFixed(1);rb.textContent=(g>0?'+':'')+g+'%';rb.className='badge '+(g<0?'al':'ok');}}if(charts.bar)charts.bar.updateSeries([{data:[44,55,41,37,22,18].map(x=>x+Math.round(rnd(-6,8)))}]);if(charts.gauge)charts.gauge.updateSeries([Math.round(rnd(58,92))]);},2400);
+    setInterval(()=>{if(charts.heat){charts.heat.updateSeries(heatData());$('#heat-badge').textContent=(Math.random()>.5?'1 anomalía':'2 anomalías');}},4200);
+    setInterval(tick,2100);setInterval(animateMap,420);
   });
-});
+})();
 
-// ── LANGUAGE TOGGLE ──
-var currentLang = 'en';
-var langToggle = document.getElementById('langToggle');
-langToggle.addEventListener('click', function(e) {
-  var span = e.target.closest('span[data-lang]');
-  if (!span || span.dataset.lang === currentLang) return;
-  currentLang = span.dataset.lang;
-  langToggle.querySelectorAll('span').forEach(function(s) { s.classList.remove('active'); });
-  span.classList.add('active');
-  document.querySelectorAll('[data-en][data-es]').forEach(function(el) {
-    var text = el.getAttribute('data-' + currentLang);
-    if (text) el.innerHTML = text;
-  });
-});
+/* ===== BRAND TRACKER (sentimiento) ===== */
+(function(){
+  const sec=$('#voz-cliente'); if(!sec) return;
+  function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+  function mul(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  const POS=["Excelente atención, súper recomendable","Encontré todo lo que buscaba, tienda impecable","La calidad superó mis expectativas","Rápidos y muy profesionales","Buenos precios y promociones claras","Resolvieron mi problema en minutos"];
+  const NEU=["Cumple, nada del otro mundo","Está bien para el precio","Esperaba un poco más, pero funciona","Atención correcta, tiempos normales","Es lo que prometen, ni más ni menos"];
+  const NEG=["Demoraron demasiado en atenderme","No había stock del producto que fui a buscar","El precio no justifica la calidad","Tuve problemas y nadie me ayudó","Mucha fila y pocas cajas abiertas"];
+  const SRC=["Google Reviews","Google Reviews","Google Reviews","X/Twitter","Instagram","Prensa"];
+  const TOP=["disponibilidad","exhibición","atención","precios","variedad","postventa","calidad","infraestructura","esperas"];
+  let gauge,trend;
+  function ensureCharts(){
+    if(!gauge)gauge=mk($('#sentGauge'),{chart:{type:'radialBar',height:200,background:'transparent',fontFamily:'Inter'},theme:{mode:'dark'},colors:[C.petrol],plotOptions:{radialBar:{startAngle:-120,endAngle:120,hollow:{size:'58%'},track:{background:'rgba(234,228,215,.09)'},dataLabels:{name:{color:C.grey,fontFamily:'JetBrains Mono',fontSize:'11px',offsetY:20},value:{color:C.bone,fontSize:'30px',fontWeight:700,offsetY:-8,formatter:v=>{const n=Math.round(v/100*200-100);return (n>0?'+':'')+n;}}}}},stroke:{lineCap:'round'},labels:['Neto'],series:[60]});
+    if(!trend)trend=mk($('#sentTrend'),{chart:{type:'area',height:110,background:'transparent',sparkline:{enabled:true}},colors:[C.sky],stroke:{curve:'smooth',width:2},fill:{type:'gradient',gradient:{opacityFrom:.4,opacityTo:0}},series:[{name:'sent',data:[50,52,48,55,60,58,63]}],tooltip:{enabled:false}});
+  }
+  function analyze(brand){
+    brand=(brand||'tu marca').trim()||'tu marca';const r=mul(hash(brand.toLowerCase()));
+    let pos=Math.round(35+r()*45),neg=Math.round(8+r()*30);if(pos+neg>92)neg=92-pos;let neu=100-pos-neg;const net=Math.max(-100,Math.min(100,pos-neg));
+    ensureCharts();const col=net>20?C.petrol:net<-5?C.berm:C.grey;
+    if(gauge){gauge.updateOptions({colors:[col]});gauge.updateSeries([(net+100)/2]);}
+    if(trend){const base=50+net/3;const d=Array.from({length:14},(_,i)=>Math.round(Math.max(5,Math.min(95,base+Math.sin(i/2)*8+(r()-.5)*16))));trend.updateSeries([{data:d}]);}
+    $('[data-f="pos"]').style.width=pos+'%';$('[data-f="neu"]').style.width=neu+'%';$('[data-f="neg"]').style.width=neg+'%';
+    const tn=4+Math.floor(r()*4),tops=[...TOP].sort(()=>r()-.5).slice(0,tn);$('#topics').innerHTML=tops.map(t=>'<span>#'+t+'</span>').join('');
+    const box=$('#mentions');box.innerHTML='';let count=0;const total=6+Math.floor(r()*3);let i=0;
+    (function add(){if(i>=total)return;const dice=r();let kind,txt;if(dice<pos/100){kind='pos';txt=POS[Math.floor(r()*POS.length)];}else if(dice<(pos+neu)/100){kind='neu';txt=NEU[Math.floor(r()*NEU.length)];}else{kind='neg';txt=NEG[Math.floor(r()*NEG.length)];}const src=SRC[Math.floor(r()*SRC.length)];const lab=kind==='pos'?'POSITIVO':kind==='neu'?'NEUTRAL':'NEGATIVO';const el=document.createElement('div');el.className='mention';el.innerHTML='<div class="meta"><span class="src">'+src+' · sobre '+brand+'</span><span class="chip '+kind+'">'+lab+'</span></div><p>“'+txt+'”</p>';box.appendChild(el);count++;$('#mentionCount').textContent=count;i++;setTimeout(add,220);})();
+  }
+  $('#analyzeBtn').addEventListener('click',()=>analyze($('#brandInput').value));
+  $('#brandInput').addEventListener('keydown',e=>{if(e.key==='Enter')analyze(e.target.value);});
+  onView(sec,()=>{$('#brandInput').value='Café Andino';ensureCharts();setTimeout(()=>analyze('Café Andino'),300);});
+})();
 
-// ── SCROLL REVEAL ──
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { if(e.isIntersecting) { e.target.classList.add('visible'); }});
-}, { threshold:0.1 });
-document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-
-// ── NAV ACTIVE STATE (IntersectionObserver) ──
-var navSectionLinks = document.querySelectorAll('.nav-links a[data-section]');
-var sectionObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      var id = entry.target.id;
-      navSectionLinks.forEach(function(link) {
-        link.classList.toggle('nav-active', link.dataset.section === id);
-      });
+/* ===== CHAT (Rugol · agente de Edu) ===== */
+(function(){
+  const sec=$('#agentes'); if(!sec) return;const msgs=$('#msgs');
+  let awaitingMsg=false;
+  const MAIL='eduardo.moraga.o@gmail.com';
+  function reply(text){const t=text.toLowerCase();const en=isEN();
+    if(awaitingMsg){
+      awaitingMsg=false;
+      const subject=encodeURIComponent(en?'Message from your website':'Mensaje desde tu web');
+      const body=encodeURIComponent(text+'\n\n—\n'+(en?'Sent via Rugol, Edu\'s agent':'Enviado vía Rugol, el agente de Edu'));
+      setTimeout(()=>{try{window.location.href='mailto:'+MAIL+'?subject='+subject+'&body='+body;}catch(e){}},900);
+      return en?"Got it ✉️ — I'm opening your email app with the message ready for Edu. He reads everything. If it doesn't open, write to <b>"+MAIL+"</b>.":"Listo ✉️ — te abro el correo con el mensaje preparado para Edu. Él lee todo. Si no se abre, escribile a <b>"+MAIL+"</b>.";
     }
-  });
-}, { threshold:0.2, rootMargin:'-64px 0px -50% 0px' });
-document.querySelectorAll('section[id]').forEach(function(sec) { sectionObserver.observe(sec); });
+    if(/(mensaje|message|dejarle|leave him|recado|avis)/.test(t)){awaitingMsg=true;return en?"Sure. Type your message right here (your name + what you need) and I'll pass it on to Edu.":"Dale. Escribí tu mensaje acá mismo (tu nombre + qué necesitás) y yo se lo hago llegar a Edu.";}
+    if(/(contact|contrat|hire|reclut|linkedin|correo|email|mail|ponerme|get in touch|reach)/.test(t))return en?"Two fast lanes: <a href='https://www.linkedin.com/in/eduardomoragaortega/' target='_blank' rel='noopener'>LinkedIn</a> or <b>"+MAIL+"</b>. Or leave your message right here — just say <b>\"message\"</b> and I'll take it.":"Dos vías rápidas: <a href='https://www.linkedin.com/in/eduardomoragaortega/' target='_blank' rel='noopener'>LinkedIn</a> o <b>"+MAIL+"</b>. O dejale el mensaje acá mismo — decime <b>\"mensaje\"</b> y yo lo llevo.";
+    if(/(hola|buenas|buenos|hey|hello|hi |qué tal|que tal)/.test(t))return en?"Hi! I'm <b>Rugol</b>, Edu's agent — the bridge between you and him. I can tell you what he's done, connect you, or take him a message.":"¡Hola! Soy <b>Rugol</b>, el agente de Edu — el puente entre vos y él. Puedo contarte lo que ha hecho, ponerte en contacto o llevarle un mensaje.";
+    if(/(qué ha hecho|que ha hecho|what has|experien|trayec|carrera|career|cv|resume|hecho)/.test(t))return en?"Edu is an <b>economist and data scientist</b>. Path: BI consultant → Country Manager → <b>LATAM BI Manager</b> (12 yrs at Marco MKT) → <b>Head of BI</b> for Samsung at Cheil → today, BI Lead & Country Rep. 15+ years turning business intelligence and marketing into decisions, for brands like Samsung, Microsoft, P&G, Intel, LG and Apple.":"Edu es <b>economista y data scientist</b>. Trayectoria: consultor BI → Country Manager → <b>LATAM BI Manager</b> (12 años en Marco MKT) → <b>Head of BI</b> para Samsung en Cheil → hoy, BI Lead & Country Rep. 15+ años convirtiendo inteligencia de negocio y marketing en decisiones, para marcas como Samsung, Microsoft, P&G, Intel, LG y Apple.";
+    if(/(quién|quien|who|acerca|about|es edu)/.test(t))return en?"An <b>economist who codes</b>: trained in economics and data science, obsessed with <b>consumer behavior, behavioral economics, and cognitive biases</b>. Check the bias museum below 👇":"Un <b>economista que programa</b>: formación en economía y ciencia de datos, obsesionado con la <b>conducta del consumidor, la economía conductual y los sesgos cognitivos</b>. Mirá el museo de sesgos acá abajo 👇";
+    if(/(proyecto|project|portfolio|demo|built)/.test(t))return en?"Three demos run live on this very page (BI command center, Brand Tracker, and me). Plus 7 open-source projects on GitHub — forecasting, clustering, market basket, attrition — three with live Streamlit apps.":"En esta misma página corren tres demos en vivo (command center BI, Brand Tracker y yo). Además hay 7 proyectos open source en GitHub — forecasting, clustering, market basket, rotación — tres con apps Streamlit en vivo.";
+    if(/(brand|tracker|review|sentim|voz del cliente|reseñ)/.test(t))return en?"The <b>Brand Tracker</b> is Edu's production system: Google reviews → deterministic ingestion → Claude classification over a 9-aspect shopping-experience taxonomy → SQL scorecards. Every figure traces back to the original review. Demo 02, right above.":"El <b>Brand Tracker</b> es el sistema en producción de Edu: reviews de Google → ingesta determinística → clasificación con Claude sobre 9 aspectos de experiencia de compra → scorecards SQL. Cada cifra es trazable a la review original. Demo 02, acá arriba.";
+    if(/(escrib|artícul|articul|write|publica|américa|america retail|sesgo|bias)/.test(t))return en?"He's published <b>17+ articles at América Retail</b>: behavioral economics, cognitive biases, AI ethics, and the human side of data. A favorite: <i>\"We don't buy things — we buy differences.\"</i>":"Publicó <b>17+ artículos en América Retail</b>: economía conductual, sesgos cognitivos, ética de la IA y el lado humano del dato. Uno favorito: <i>\"No compramos cosas, compramos diferencias.\"</i>";
+    if(/(stack|tecnolog|technolog|herramient|tool|python|power bi)/.test(t))return en?"Core stack: <b>Python, SQL, Power BI</b>, Streamlit, Supabase — plus <b>Claude & Agent SDK</b> for AI agents, ElevenLabs for voice, and classic ML (XGBoost, Prophet, K-Means, SHAP).":"Stack central: <b>Python, SQL, Power BI</b>, Streamlit, Supabase — más <b>Claude & Agent SDK</b> para agentes de IA, ElevenLabs para voz, y ML clásico (XGBoost, Prophet, K-Means, SHAP).";
+    if(/(moragent|oss|open source)/.test(t))return en?"From Edu's lab: <b>Moragent</b> (AI Agent Studio for Claude Code) and <b>Rugol OSS</b> (a local control room for orchestrating Claude agent teams — I'm named after it). Both on GitHub, see the Lab section below.":"Del laboratorio de Edu: <b>Moragent</b> (AI Agent Studio para Claude Code) y <b>Rugol OSS</b> (sala de control local para orquestar equipos de agentes Claude — de ahí viene mi nombre). Ambos en GitHub, mirá la sección Lab.";
+    if(/(voz|voice|hablar|talk|eleven)/.test(t))return en?"Enable the <b>voice agent</b> on the right and we can actually talk — I can brief you on Edu or take your message, out loud.":"Activá el <b>agente de voz</b> de la derecha y hablamos de verdad — te cuento de Edu o tomo tu mensaje, en voz alta.";
+    if(/(gracias|thanks|genial|perfecto|excelente|great)/.test(t))return en?"My pleasure! Anything else, I'm right here — and Edu is one message away. 🚀":"¡A vos! Cualquier cosa acá estoy — y Edu queda a un mensaje de distancia. 🚀";
+    return en?"I can tell you <b>what Edu has done</b>, put you <b>in touch</b> with him, take him a <b>message</b>, or talk <b>articles & biases</b>. Where do we start?":"Puedo contarte <b>qué ha hecho Edu</b>, <b>ponerte en contacto</b>, llevarle un <b>mensaje</b>, o hablar de <b>artículos y sesgos</b>. ¿Por dónde empezamos?";
+  }
+  function bubble(cls,html){const b=document.createElement('div');b.className='bub '+cls;b.innerHTML=html;msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight;return b;}
+  function type(b,html){b.innerHTML='';let i=0;const tmp=document.createElement('div');tmp.innerHTML=html;const text=tmp.textContent;const it=setInterval(()=>{i+=2;b.textContent=text.slice(0,i);msgs.scrollTop=msgs.scrollHeight;if(i>=text.length){clearInterval(it);b.innerHTML=html;}},14);}
+  function send(text){text=(text||'').trim();if(!text)return;bubble('me',text.replace(/</g,'&lt;'));const b=bubble('bot','…');setTimeout(()=>type(b,reply(text)),420);}
+  $('#chatSend').addEventListener('click',()=>{send($('#chatInput').value);$('#chatInput').value='';});
+  $('#chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'){send(e.target.value);e.target.value='';}});
+  document.querySelectorAll('#quick button').forEach(b=>b.addEventListener('click',()=>send(isEN()&&b.dataset.qen?b.dataset.qen:b.dataset.q)));
+  onView(sec,()=>{const b=bubble('bot','…');setTimeout(()=>type(b,isEN()?"Hi 👋 I'm <b>Rugol</b>, Edu's agent. I can tell you what he's done, put you in touch with him, or take him your message. Where do we start?":"Hola 👋 Soy <b>Rugol</b>, el agente de Edu. Puedo contarte lo que ha hecho, ponerte en contacto con él o llevarle tu mensaje. ¿Por dónde empezamos?"),500);});
+})();
 
-// ── COUNTER ANIMATION ──
-var counterObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if(e.isIntersecting) {
-      var el = e.target;
-      var target = parseInt(el.dataset.target);
-      var current = 0;
-      var step = Math.ceil(target / 40);
-      var timer = setInterval(function() {
-        current += step;
-        if(current >= target) { current = target; clearInterval(timer); }
-        el.textContent = current + '+';
-      }, 40);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold:0.5 });
-document.querySelectorAll('[data-target]').forEach(function(el) { counterObserver.observe(el); });
-
-// ── BACK TO TOP ──
-var backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', function() {
-  backToTopBtn.classList.toggle('visible', window.scrollY > 500);
-});
-backToTopBtn.addEventListener('click', function() {
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
-
-// ── MALL DATA ──
-var mallData = [
-  { name:'Parque Arauco', data:{Mon:76,Tue:76,Wed:79,Thu:76,Fri:89,Sat:100,Sun:70}, peak:'Sat 11-20h' },
-  { name:'Costanera Center', data:{Mon:75,Tue:75,Wed:79,Thu:75,Fri:90,Sat:100,Sun:68}, peak:'Sat 12-20h' },
-  { name:'Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:73,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h' },
-  { name:'Plaza Oeste', data:{Mon:77,Tue:77,Wed:80,Thu:65,Fri:87,Sat:100,Sun:59}, peak:'Sat 11-20h' },
-  { name:'Alto Las Condes', data:{Mon:78,Tue:78,Wed:78,Thu:59,Fri:89,Sat:100,Sun:79}, peak:'Sat 11-20h' },
-  { name:'Plaza Norte', data:{Mon:76,Tue:76,Wed:80,Thu:69,Fri:89,Sat:100,Sun:69}, peak:'Sat 11-20h' },
-  { name:'Arauco Maipu', data:{Mon:75,Tue:75,Wed:80,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' },
-  { name:'Plaza Egana', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' },
-  { name:'Mall Plaza El Trebol', data:{Mon:73,Tue:73,Wed:76,Thu:64,Fri:88,Sat:100,Sun:62}, peak:'Sat 12-20h' },
-  { name:'Mall Plaza Vespucio', data:{Mon:73,Tue:73,Wed:78,Thu:66,Fri:87,Sat:100,Sun:67}, peak:'Sat 11-20h' }
-];
-
-var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-
-function getBarClass(day, val) {
-  if (day === 'Sat') return 'sat';
-  if (day === 'Fri') return 'fri';
-  if (val < 70) return 'low';
-  return 'normal';
-}
-
-var mallGrid = document.getElementById('mallChartsGrid');
-mallData.forEach(function(mall) {
-  var card = document.createElement('div');
-  card.className = 'mall-card reveal';
-  var headerHTML = '<div class="mall-card-header"><h4>' + mall.name;
-  headerHTML += '<span class="real-badge">Google Maps API</span>';
-  headerHTML += '</h4><span class="mall-peak">' + mall.peak + '</span></div>';
-  var barsHTML = '';
-  days.forEach(function(day) {
-    var val = mall.data[day];
-    var cls = getBarClass(day, val);
-    barsHTML += '<div class="bar-row">' +
-      '<span class="bar-label">' + day + '</span>' +
-      '<div class="bar-track"><div class="bar-fill ' + cls + '" style="width:' + val + '%">' + val + '</div></div>' +
-      '</div>';
-  });
-  card.innerHTML = headerHTML + barsHTML;
-  mallGrid.appendChild(card);
-});
-
-// ── SATURDAY HOURLY HEATMAP ──
-var hours = ['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
-var heatmapData = [
-  { name:'Parque Arauco', vals:[60,75,85,90,92,95,98,100,95,85,65,40] },
-  { name:'Costanera Center', vals:[58,72,82,88,92,96,100,100,96,88,68,42] },
-  { name:'Plaza Vespucio', vals:[62,76,86,92,95,98,100,100,95,85,62,38] },
-  { name:'Plaza Oeste', vals:[65,78,86,90,92,95,98,100,96,86,65,40] },
-  { name:'Alto Las Condes', vals:[62,78,88,92,95,98,100,98,92,82,60,38] },
-  { name:'Plaza Norte', vals:[62,76,85,90,94,96,100,100,95,85,62,38] },
-  { name:'Arauco Maipu', vals:[62,76,85,90,94,96,98,100,95,85,62,38] },
-  { name:'Plaza Egana', vals:[62,76,85,90,92,95,98,100,95,85,62,38] },
-  { name:'Mall Plaza El Trebol', vals:[60,74,84,90,94,96,98,100,95,85,62,38] },
-  { name:'Mall Plaza Vespucio', vals:[62,76,85,90,92,95,98,100,95,85,62,38] }
-];
-
-function heatColor(v) {
-  if (v >= 90) return { bg:'rgba(0,212,170,0.75)', color:'#fff', fw:'800' };
-  if (v >= 75) return { bg:'rgba(0,212,170,0.5)', color:'#fff', fw:'600' };
-  if (v >= 50) return { bg:'rgba(0,212,170,0.3)', color:'#fff', fw:'600' };
-  return { bg:'rgba(0,212,170,0.12)', color:'var(--text3)', fw:'500' };
-}
-
-var hmGrid = document.getElementById('heatmapGrid');
-hmGrid.innerHTML = '<div class="hm-corner"></div>';
-hours.forEach(function(h) {
-  hmGrid.innerHTML += '<div class="hm-hour-header">' + h + '</div>';
-});
-heatmapData.forEach(function(mall) {
-  hmGrid.innerHTML += '<div class="hm-mall">' + mall.name + '</div>';
-  mall.vals.forEach(function(v, i) {
-    var c = heatColor(v);
-    hmGrid.innerHTML += '<div class="hm-cell" style="background:' + c.bg + ';color:' + c.color + ';font-weight:' + c.fw + '">' +
-      v + '%<span class="tooltip">' + mall.name + ' — ' + hours[i] + ' — ' + v + '%</span></div>';
-  });
-});
-
-// Re-observe new reveal elements
-document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+/* ===== CONVAI WIDGET ===== */
+(function(){
+  const host=$('#convaiHost'); if(!host) return;
+  const id=host.getAttribute('data-agent-id');const setup=$('#convaiSetup'),wrap=$('#convaiWrap');
+  if(id && id!=='REEMPLAZAR_AGENT_ID'){const el=document.createElement('elevenlabs-convai');el.setAttribute('agent-id',id);document.body.appendChild(el);const s=document.createElement('script');s.src='https://unpkg.com/@elevenlabs/convai-widget-embed';s.async=true;s.type='text/javascript';document.body.appendChild(s);if(setup){var _t=setup.querySelector('.setup-t'),_d=setup.querySelector('.setup-d');if(_t)_t.textContent=isEN()?'Voice agent active':'Asistente de voz activo';if(_d)_d.innerHTML=isEN()?'Tap the button (bottom right) and talk. 🎙️':'Tocá el botón (abajo a la derecha) y conversá. 🎙️';}}
+  else{if(wrap)wrap.style.display='none';}
+})();
 </script>
 </body>
 </html>

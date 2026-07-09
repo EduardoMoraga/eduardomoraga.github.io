@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Rugol — orquestador de agentes IA open source. Una sala de control local donde equipos de agentes Claude hacen el trabajo, desafían tu pensamiento y recuerdan lo aprendido." />
+<title>Rugol OSS — Orquestador de agentes IA</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{--ink:#16140F;--graphite:#1E1B17;--panel:#26231D;--panel2:#2D2922;--bone:#EAE4D7;--grey:#9A9489;--line:rgba(234,228,215,.1);--bermellon:#DD4524;--sky:#7FA6C9;--petrol:#6FAE97;--gold:#E0A33E;--violet:#A492E6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--bone);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bermellon);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--bermellon)}
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(22,20,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:600;font-size:19px;color:var(--bone)}
+  .brand svg{height:27px;width:auto}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--grey);transition:.2s}
+  .nav-links a:hover,.nav-links a.on{color:var(--bone)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--bermellon);color:#fff;padding:11px 20px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--bermellon);transition:.2s}
+  .btn:hover{background:#c63d1f}
+  .btn.ghost{background:transparent;color:var(--bone);border-color:rgba(234,228,215,.4)}
+  .btn.ghost:hover{background:var(--bone);color:var(--ink)}
+  .btn svg{width:16px;height:16px}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+  header.hero{position:relative;overflow:hidden;padding:150px 0 70px}
+  .hero .vl{position:absolute;top:0;bottom:0;width:1px;background:rgba(234,228,215,.1)}
+  .hero .bigsq{position:absolute;right:7%;top:30%;width:clamp(90px,12vw,170px);aspect-ratio:1;background:var(--bermellon);pointer-events:none}
+  @media(max-width:820px){.hero .bigsq{display:none}}
+  .hero .badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);border:1px solid var(--line);padding:6px 13px;margin-bottom:22px}
+  .hero h1{font-size:clamp(44px,7vw,92px);font-weight:700;letter-spacing:-.04em;line-height:.98;max-width:14ch}
+  .hero p.lead{margin-top:24px;font-size:clamp(18px,2.3vw,23px);color:var(--grey);max-width:56ch}
+  .hero .note{margin-top:16px;font-size:14px;color:var(--grey);max-width:60ch;font-style:italic}
+  .hero .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .sec-head{max-width:64ch;margin-bottom:32px}
+  .sec-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:12px}
+  .sec-head p{margin-top:14px;color:var(--grey);font-size:17px}
+  .quote{font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.02em;line-height:1.25;max-width:24ch}
+  .quote span{color:var(--bermellon)}
+  table.cmp{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
+  table.cmp th,table.cmp td{text-align:left;padding:13px 16px;border:1px solid var(--line);vertical-align:top}
+  table.cmp th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);font-weight:500}
+  table.cmp td:first-child{color:var(--grey)} table.cmp td:last-child{color:var(--bone)}
+  table.cmp .h{color:var(--bermellon)!important;font-weight:600}
+  .concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:820px){.concepts{grid-template-columns:1fr}}
+  .con{background:var(--panel);padding:28px 24px}
+  .con .n{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--bermellon)}
+  .con h3{font-size:19px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+  .con p{color:var(--grey);font-size:14.5px}
+  .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:760px){.cases{grid-template-columns:1fr}}
+  .case{border:1px solid var(--line);background:var(--panel);padding:22px}
+  .case .ic{width:34px;height:34px;display:grid;place-items:center;background:var(--panel2);margin-bottom:12px}
+  .case .ic svg{width:18px;height:18px;color:var(--bermellon)}
+  .case h4{font-size:16px;font-weight:600}.case p{color:var(--grey);font-size:14px;margin-top:6px}
+  .term{background:#100F0C;border:1px solid var(--line);overflow:hidden;margin-top:6px}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .term-bar i{width:11px;height:11px;border-radius:50%;background:#4a463e;display:block}.term-bar i:first-child{background:var(--bermellon)}
+  .term-bar span{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--grey)}
+  .term pre{margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:var(--bone);overflow-x:auto;white-space:pre}
+  .term .c{color:var(--grey)}.term .p{color:var(--petrol)}.term .b{color:var(--bermellon)}
+  .stack{display:flex;gap:10px;flex-wrap:wrap}
+  .stack span{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--bone);border:1px solid var(--line);background:var(--panel);padding:9px 14px}
+  .cta-block{text-align:center;padding:70px 0;border-top:1px solid var(--line)}
+  .cta-block h2{font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-.03em;max-width:20ch;margin:0 auto}
+  .cta-block p{color:var(--grey);margin:16px auto 0;max-width:50ch}
+  .cta-block .cta-row{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:38px 0;color:var(--grey);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer a{border-bottom:2px solid var(--bermellon)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 100 100"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#EAE4D7" stroke-width="3.6"><rect x="32" y="32" width="36" height="36"/><rect x="19" y="19" width="62" height="62"/><rect x="6" y="6" width="88" height="88"/></g></svg> rugol</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="moragent.html">Moragent</a>
+      <a href="rugol-os.html" class="on">Rugol OSS</a>
+      <a class="btn" href="https://github.com/EduardoMoraga/rugol" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="vl" style="left:64%"></span><span class="vl" style="left:71%"></span>
+  <div class="bigsq"></div>
+  <div class="wrap">
+    <span class="badge"><i data-lucide="git-branch"></i> Open source · MIT</span>
+    <h1>Rugol, el orquestador.</h1>
+    <p class="lead">Una sala de control local donde tus equipos de agentes Claude hacen el trabajo, desafían tu pensamiento y recuerdan lo que aprendiste — para que decidas con un mejor proceso, no solo con más información.</p>
+    <p class="note">El proyecto open-source que le dio el nombre y el ADN al estudio Rugol.</p>
+    <div class="cta-row">
+      <a class="btn" href="#instalar"><i data-lucide="download"></i> Cómo instalar</a>
+      <a class="btn ghost" href="https://github.com/EduardoMoraga/rugol" target="_blank" rel="noopener"><i data-lucide="github"></i> Ver en GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">La idea</p>
+    <p class="quote" style="margin-top:16px">Las buenas decisiones no son cuestión de más información, sino de un <span>mejor proceso</span>.</p>
+    <p class="sec-head" style="margin-top:22px;color:var(--grey);font-size:17px">No pensás "qué agente creo". Pensás <b style="color:var(--bone)">qué querés resolver</b> — tu marca, tu pipeline de ventas, tu asistente. Cada proyecto se arma con su equipo de agentes, una misión escrita y reglas vivas. Los agentes trabajan y te desafían; vos te quedás con la decisión.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">El paradigma</p><h2>Project-first, no agente-suelto.</h2></div>
+    <table class="cmp">
+      <tr><th>Otras plataformas</th><th class="h">Rugol</th></tr>
+      <tr><td>Lista plana de agentes sueltos</td><td>Proyectos como departamentos con misión</td></tr>
+      <tr><td>Vos elegís el modelo (haiku/sonnet/opus)</td><td>Elegís el <b>tipo de tarea</b>; el sistema rutea el modelo</td></tr>
+      <tr><td>El agente actúa solo</td><td>Opcional: un abogado del diablo cuestiona antes de actuar</td></tr>
+      <tr><td>Memoria por agente, o ninguna</td><td>Lecciones vivas por proyecto que el equipo lee antes de cada tarea</td></tr>
+      <tr><td>Templates técnicos</td><td>Templates por objetivo real: "mi marca", "mi pipeline"</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Cómo funciona</p><h2>Tres conceptos. Eso es todo.</h2></div>
+    <div class="concepts">
+      <div class="con"><div class="n">01</div><h3>Proyecto = departamento</h3><p>Nombre, color, una misión escrita (el porqué) y un equipo de 1–5 agentes. Cada uno lee la misión antes de cada tarea — un ancla contra la deriva.</p></div>
+      <div class="con"><div class="n">02</div><h3>Lecciones vivas</h3><p>Cuando el equipo aprende algo (un sesgo, una regla de negocio), lo agregás como lección. La próxima vez, todos la leen. La memoria del proyecto crece sin perder contexto.</p></div>
+      <div class="con"><div class="n">03</div><h3>Tipo de tarea + abogado del diablo</h3><p>Heurística (rápido/barato), Pensar (modelo del agente) o Deliberar (opus). En decisiones importantes, una segunda voz cuestiona la respuesta. Vos decidís.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Por qué es distinto</p><h2>Economía conductual, hecha software.</h2><p>Diseñado por un economista, no solo por un dev. Tres principios encarnados en la herramienta:</p></div>
+    <div class="concepts">
+      <div class="con"><div class="n">Sistema 1 vs 2</div><h3>No pensás en modelos</h3><p>Elegís el esfuerzo de la decisión (rápida, pensada o deliberada); el sistema elige el modelo. (Kahneman)</p></div>
+      <div class="con"><div class="n">Ruido</div><h3>Una segunda perspectiva</h3><p>Antes de lo importante, el "abogado del diablo" cuestiona. Dos miradas reducen el ruido. (Kahneman/Sunstein)</p></div>
+      <div class="con"><div class="n">Sesgos</div><h3>Lo aprendido queda anclado</h3><p>Cada proyecto guarda sus lecciones; el equipo las lee siempre. Lo que aprendiste de la mala no se vuelve a perder.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Casos de uso</p><h2>Equipos de agentes para lo que importa.</h2></div>
+    <div class="cases">
+      <div class="case"><div class="ic"><i data-lucide="megaphone"></i></div><h4>Tu marca</h4><p>Arquitecto de marca + editor + analista. Lecciones tipo "cero hype" se inyectan en cada publicación.</p></div>
+      <div class="case"><div class="ic"><i data-lucide="trending-up"></i></div><h4>Tu pipeline de ventas</h4><p>Prospector + calificador + follow-up. Agenda diaria que no suelta ningún seguimiento activo.</p></div>
+      <div class="case"><div class="ic"><i data-lucide="sun"></i></div><h4>Tu asistente personal</h4><p>Brief de la mañana, triage de bandeja, captura de fin de día. El equipo invisible que ordena tu día.</p></div>
+      <div class="case"><div class="ic"><i data-lucide="gamepad-2"></i></div><h4>Educación</h4><p>Dos agentes generan un mini-juego HTML+JS para aprender un tema jugando. Doble click y a jugar — sin instalar nada.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="instalar">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Instalación</p><h2>Tu sala de control, local.</h2><p><b style="color:var(--bone)">Sin requisitos previos:</b> el instalador trae sus propios runtimes (Python vía uv + Node). Una línea y un wizard. Corre 100% local bajo <span class="mono">~/.rugol</span>.</p></div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>bash</span></div>
+<pre><span class="c"># 1 · Instalá (Mac / Linux)</span>
+curl -fsSL https://raw.githubusercontent.com/EduardoMoraga/rugol/main/installer/install.sh | bash
+
+<span class="c"># Windows (PowerShell):</span>
+<span class="c"># iwr -useb https://raw.githubusercontent.com/EduardoMoraga/rugol/main/installer/install.ps1 | iex</span>
+
+<span class="c"># 2 · Configurá (auth + modelo · el wizard te guía)</span>
+<span class="b">rugol setup</span>
+
+<span class="c"># 3 · Levantá core + dashboard (abre el navegador)</span>
+<span class="b">rugol up</span>
+
+<span class="c"># Dashboard en</span> <span class="p">http://localhost:3000</span></pre>
+    </div>
+    <div class="sec-head" style="margin-top:34px;margin-bottom:14px"><p class="eyebrow">Stack</p></div>
+    <div class="stack"><span>FastAPI</span><span>claude-agent-sdk</span><span>Next.js 15</span><span>Tailwind v4</span><span>SQLite</span><span>APScheduler</span><span>uv</span></div>
+    <p style="color:var(--grey);font-size:13.5px;margin-top:16px">Auth headless con tu plan <b style="color:var(--bone)">Claude Pro/Max</b> (sin costo por uso) o una API key dedicada. Nada tuyo sale de tu máquina. Licencia MIT.</p>
+  </div>
+</section>
+
+<div class="cta-block">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center">Open source</p>
+    <h2>Decidí con un mejor proceso.</h2>
+    <p>Rugol es libre y abierto. Es la herramienta con la que el estudio Rugol opera sus propios agentes — y la podés usar vos también.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/EduardoMoraga/rugol" target="_blank" rel="noopener"><i data-lucide="github"></i> Ver el repo</a>
+      <a class="btn ghost" href="moragent.html">Conocé Moragent →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html" style="font-size:16px"><svg viewBox="0 0 100 100" style="height:22px;width:auto"><rect x="43" y="43" width="14" height="14" fill="#DD4524"/><g fill="none" stroke="#EAE4D7" stroke-width="3.6"><rect x="32" y="32" width="36" height="36"/><rect x="19" y="19" width="62" height="62"/><rect x="6" y="6" width="88" height="88"/></g></svg> rugol</a>
+    <div>© 2026 Rugol · Lo humano, elevado a lo exponencial. · <a href="index.html">Inicio</a></div>
+  </div>
+</footer>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>try{lucide.createIcons();}catch(e){}</script>
+</body>
+</html>
