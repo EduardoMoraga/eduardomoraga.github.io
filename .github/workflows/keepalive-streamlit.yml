@@ -1,0 +1,25 @@
+name: Keep Streamlit apps awake
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # cada 6 horas (Streamlit hiberna a las ~12 h de inactividad)
+  workflow_dispatch: {}
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Visitar las apps
+        run: python .github/scripts/keepalive_streamlit.py
